@@ -1,0 +1,10 @@
+{
+  "name": "Explorá Salta",
+  "short_name": "Explorá Salta",
+  "start_url": "/es",
+  "display": "standalone",
+  "description": "Mapa interactivo y cultura viva de Salta.",
+  "background_color": "#EBD4B7",
+  "theme_color": "#7B2D26",
+  "icons": []
+}
