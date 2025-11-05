@@ -1,9 +1,22 @@
-import pois from '@/data/pois.json';
-import regiones from '@/data/regiones.json';
-import experiencias from '@/data/experiencias.json';
-import eventos from '@/data/eventos.json';
+import path from 'node:path';
+import { promises as fs } from 'node:fs';
+import type { POI, Region, Experiencia, Evento } from './schema';
 
-export async function getPOIs() { return pois; }
-export async function getRegiones() { return regiones; }
-export async function getExperiencias() { return experiencias; }
-export async function getEventos() { return eventos; }
+async function readJson<T = unknown>(rel: string): Promise<T> {
+  const abs = path.join(process.cwd(), rel);
+  const raw = await fs.readFile(abs, 'utf8');
+  return JSON.parse(raw) as T;
+}
+
+export async function getPOIs(): Promise<POI[]> {
+  return readJson<POI[]>('data/pois.json');
+}
+export async function getRegiones(): Promise<Region[]> {
+  return readJson<Region[]>('data/regiones.json');
+}
+export async function getExperiencias(): Promise<Experiencia[]> {
+  return readJson<Experiencia[]>('data/experiencias.json');
+}
+export async function getEventos(): Promise<Evento[]> {
+  return readJson<Evento[]>('data/eventos.json');
+}
