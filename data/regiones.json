@@ -1,0 +1,18 @@
+[
+  {
+    "id": "valles",
+    "name": { "es": "Valles Calchaquíes", "en": "Calchaquí Valleys" },
+    "intro": {
+      "es": "Paisajes rojizos, viñedos y pueblos históricos.",
+      "en": "Red landscapes, vineyards and historic towns."
+    }
+  },
+  {
+    "id": "ciudad",
+    "name": { "es": "Ciudad de Salta", "en": "City of Salta" },
+    "intro": {
+      "es": "Arquitectura colonial, museos y gastronomía.",
+      "en": "Colonial architecture, museums and food."
+    }
+  }
+]
