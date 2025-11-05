@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ruta-del-torrontes",
+    "title": { "es": "Ruta del Torrontés", "en": "Torrontés Route" },
+    "overview": {
+      "es": "Bodegas y miradores de Cafayate y Valles Calchaquíes.",
+      "en": "Wineries and lookouts around Cafayate."
+    },
+    "poiIds": ["quebrada-de-las-conchas"],
+    "durationHours": 8,
+    "difficulty": "easy",
+    "cover": "/images/branding/hero.jpg"
+  }
+]
