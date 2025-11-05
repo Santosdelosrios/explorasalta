@@ -1,6 +1,7 @@
 'use client';
 import {useEffect, useMemo, useRef} from 'react';
 import maplibregl, {Map} from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import type {POI} from '@/lib/schema';
 import {useSearchParams, useRouter} from 'next/navigation';
 import {parseMapQuery} from '@/lib/url';
