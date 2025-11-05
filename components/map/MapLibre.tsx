@@ -1,6 +1,7 @@
 'use client';
 import {useEffect, useMemo, useRef} from 'react';
 import maplibregl, {Map} from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import type {POI} from '@/lib/schema';
 import {useSearchParams, useRouter} from 'next/navigation';
 import {parseMapQuery} from '@/lib/url';
@@ -34,7 +35,7 @@ export default function MapLibre({pois, styleUrl}: Props) {
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style,
+      style: styleUrl ?? `https://api.maptiler.com/maps/streets-v2/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`,
       center: [query.lng ?? -65.423, query.lat ?? -24.787],
       zoom: query.z ?? 6,
       attributionControl: false
