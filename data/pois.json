@@ -1,0 +1,28 @@
+[
+  {
+    "id": "quebrada-de-las-conchas",
+    "title": { "es": "Quebrada de las Conchas", "en": "Quebrada de las Conchas" },
+    "summary": {
+      "es": "Formaciones rojizas sobre la RN68, entre Cafayate y Salta.",
+      "en": "Red rock formations along RN68, between Cafayate and Salta."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": { "lat": -25.6406, "lng": -65.918 },
+    "tags": ["paisaje", "geologia"],
+    "popularity": 95
+  },
+  {
+    "id": "cerro-san-bernardo",
+    "title": { "es": "Cerro San Bernardo", "en": "San Bernardo Hill" },
+    "summary": {
+      "es": "Mirador de la ciudad de Salta, acceso por teleférico o escalinatas.",
+      "en": "City viewpoint with cable car or stairs access."
+    },
+    "category": "mirador",
+    "region": "ciudad",
+    "coords": { "lat": -24.795, "lng": -65.411 },
+    "tags": ["vista", "urbano"],
+    "popularity": 88
+  }
+]
