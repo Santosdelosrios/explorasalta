@@ -1,0 +1,13 @@
+[
+  {
+    "id": "serenata-a-cafayate-2026",
+    "title": { "es": "Serenata a Cafayate", "en": "Serenade to Cafayate" },
+    "dateRange": { "start": "2026-02-20", "end": "2026-02-22" },
+    "region": "valles",
+    "description": {
+      "es": "Fiesta popular con música y tradiciones locales.",
+      "en": "Folk festival with music and local traditions."
+    },
+    "website": "https://serenataacafayate.com/"
+  }
+]
