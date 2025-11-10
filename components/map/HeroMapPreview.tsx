@@ -26,7 +26,7 @@ export default function HeroMapPreview() {
 
     // Estilo con tonos naturales (puedes usar tu key de MapTiler)
     const styleUrl = process.env.NEXT_PUBLIC_MAPTILER_KEY
-      ? `https://api.maptiler.com/maps/outdoor-v2/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
+      ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
       : 'https://demotiles.maplibre.org/style.json';
 
     // Inicializar mapa
