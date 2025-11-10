@@ -11,6 +11,9 @@ const MapLibre = dynamic(() => import('@/components/map/MapLibre'), {
 });
 
 export default function MapClient({ pois }: { pois: POI[] }) {
-  const styleUrl = `https://api.maptiler.com/maps/streets-v2/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`;
-  return <MapLibre pois={pois} />;
+  const styleUrl = process.env.NEXT_PUBLIC_MAPTILER_KEY
+    ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
+    : undefined;
+
+  return <MapLibre pois={pois} styleUrl={styleUrl} />;
 }
