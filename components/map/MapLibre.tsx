@@ -58,14 +58,8 @@ export default function MapLibre({pois, styleUrl}: Props) {
       console.error('Map error:', e.error);
     });
 
-    map.addControl(new maplibregl.NavigationControl({visualizePitch: true}), 'top-right');
-    map.addControl(
-      new maplibregl.AttributionControl({
-        compact: true, 
-        customAttribution: '© OpenStreetMap contributors'
-      }), 
-      'bottom-right'
-    );
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
+    map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
 
     map.on('load', () => {
       // Verificar que el mapa todavía existe
