@@ -30,9 +30,9 @@ export default function MapLibre({pois, styleUrl}: Props) {
     if (!containerRef.current || mapRef.current) return;
 
     // CRÍTICO: Usar styleUrl correctamente (estaba duplicado)
-    const finalStyle = styleUrl ?? 
+    const finalStyle = styleUrl ??
       (process.env.NEXT_PUBLIC_MAPTILER_KEY
-        ? `https://api.maptiler.com/maps/streets-v2/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
+        ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
         : 'https://demotiles.maplibre.org/style.json');
 
     const map = new maplibregl.Map({
