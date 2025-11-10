@@ -1,18 +1,5 @@
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-
-// Importar el mapa de forma dinámica (sin SSR)
-const HeroMapPreview = dynamic(
-  () => import('@/components/map/HeroMapPreview'),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="aspect-video rounded-2xl shadow-soft bg-arena/30 animate-pulse flex items-center justify-center">
-        <p className="text-poncho/50 text-sm font-medium">Cargando mapa...</p>
-      </div>
-    )
-  }
-);
+import HeroMapWrapper from '@/components/map/HeroMapWrapper';
 
 export default function HomePage() {
   return (
@@ -41,9 +28,9 @@ export default function HomePage() {
         </div>
       </div>
       
-      {/* Columna derecha: MAPA PREVIEW (antes era imagen estática) */}
+      {/* Columna derecha: MAPA PREVIEW */}
       <div className="aspect-video rounded-2xl shadow-soft overflow-hidden">
-        <HeroMapPreview />
+        <HeroMapWrapper />
       </div>
     </main>
   );
