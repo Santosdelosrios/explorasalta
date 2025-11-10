@@ -44,6 +44,11 @@ export default async function HomePage({
 
   return (
     <>
+      <main
+        id="main"
+        className="container mx-auto flex flex-col gap-14 px-4 py-16 md:px-6"
+      >
+        <section className="flex flex-col items-center gap-6 text-center md:items-start md:text-left">
       <main id="main" className="container mx-auto grid items-center gap-8 px-4 py-16 md:grid-cols-2">
         {/* Columna izquierda: Texto */}
         <div>
@@ -53,6 +58,8 @@ export default async function HomePage({
               {locale === 'es' ? 'Mapa interactivo y cultura viva' : 'Interactive map and living culture'}
             </span>
           </h1>
+          <p className="max-w-2xl text-lg text-zinc-700">{copy.description}</p>
+          <div className="flex flex-wrap justify-center gap-3 md:justify-start">
           <p className="mt-4 text-lg text-zinc-700">{copy.description}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -68,6 +75,11 @@ export default async function HomePage({
               {copy.experiencesCta}
             </Link>
           </div>
+        </section>
+
+        <section className="w-full">
+          <HeroMapWrapper />
+        </section>
         </div>
 
         {/* Columna derecha: MAPA PREVIEW */}
