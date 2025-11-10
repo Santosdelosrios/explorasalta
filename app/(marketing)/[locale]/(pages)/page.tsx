@@ -36,7 +36,7 @@ const HERO_COPY: Record<Locale, {
 export default async function HomePage({
   params
 }: {
-  params: { locale: Locale };
+  params: {locale: Locale};
 }) {
   const locale = params.locale;
   const copy = HERO_COPY[locale];
@@ -49,19 +49,16 @@ export default async function HomePage({
         className="container mx-auto flex flex-col gap-14 px-4 py-16 md:px-6"
       >
         <section className="flex flex-col items-center gap-6 text-center md:items-start md:text-left">
-      <main id="main" className="container mx-auto grid items-center gap-8 px-4 py-16 md:grid-cols-2">
-        {/* Columna izquierda: Texto */}
-        <div>
           <h1 className="font-[Montserrat] text-4xl font-extrabold md:text-5xl">
             {copy.title}
             <span className="block text-xl font-semibold text-cardon md:text-2xl">
-              {locale === 'es' ? 'Mapa interactivo y cultura viva' : 'Interactive map and living culture'}
+              {locale === 'es'
+                ? 'Mapa interactivo y cultura viva'
+                : 'Interactive map and living culture'}
             </span>
           </h1>
           <p className="max-w-2xl text-lg text-zinc-700">{copy.description}</p>
           <div className="flex flex-wrap justify-center gap-3 md:justify-start">
-          <p className="mt-4 text-lg text-zinc-700">{copy.description}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
             <Link
               className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
               href={`/${locale}/mapa`}
@@ -80,12 +77,6 @@ export default async function HomePage({
         <section className="w-full">
           <HeroMapWrapper />
         </section>
-        </div>
-
-        {/* Columna derecha: MAPA PREVIEW */}
-        <div className="overflow-hidden rounded-2xl shadow-soft">
-          <HeroMapWrapper />
-        </div>
       </main>
 
       <CulturaVivaSection events={events} locale={locale} />

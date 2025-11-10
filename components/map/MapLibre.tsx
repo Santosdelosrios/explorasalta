@@ -34,7 +34,6 @@ export default function MapLibre({pois, styleUrl}: Props) {
       (process.env.NEXT_PUBLIC_MAPTILER_KEY
         ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
         : 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB');
-        : 'https://demotiles.maplibre.org/style.json');
 
     const map = new maplibregl.Map({
       container: containerRef.current,
