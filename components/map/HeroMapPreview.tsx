@@ -5,10 +5,16 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 // Puntos turísticos de Salta para el tour automático
 const TOUR_POINTS = [
+  { name: 'Salta Capital', coords: [-65.4117, -24.7829], zoom: 11 },
   { name: 'Cafayate', coords: [-65.9767, -26.0733], zoom: 11 },
   { name: 'Cachi', coords: [-66.1667, -25.1167], zoom: 11.5 },
+  { name: 'Iruya', coords: [-65.2172, -22.7833], zoom: 12 },
   { name: 'San Antonio de los Cobres', coords: [-66.3208, -24.2167], zoom: 10.5 },
+  { name: 'Rosario de la Frontera', coords: [-64.9667, -25.8], zoom: 11 },
+  { name: 'Coronel Moldes', coords: [-65.4786, -25.2922], zoom: 12 },
+  { name: 'Las Lajitas', coords: [-64.1667, -24.7333], zoom: 11.5 },
 ] as const;
+
 
 // Vista general de Salta
 const SALTA_CENTER: [number, number] = [-65.4, -24.8];
