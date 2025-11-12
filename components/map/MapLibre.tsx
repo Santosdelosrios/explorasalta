@@ -227,8 +227,9 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   const params = useSearchParams();
   const router = useRouter();
 
-  const query = useMemo(() => parseMapQuery(params.toString()), [params]);
-  const {lng, lat, z, poi} = query;
+  const search = params.toString();
+  const query = useMemo(() => parseMapQuery(search), [search]);
+  const {lng, lat, z, poi: selectedPoi, cat, region} = query;
 
   const poiIndex = useMemo(() => {
     const index = new Map<string, POI>();
@@ -239,16 +240,16 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   }, [pois]);
 
   const filteredPois = useMemo(() => {
-    return pois.filter(poi => {
-      const matchesCategory = query.cat
-        ? query.cat.includes(poi.category)
-        : query.poi
-          ? poi.id === query.poi
+    return pois.filter(candidate => {
+      const matchesCategory = cat
+        ? cat.includes(candidate.category)
+        : selectedPoi
+          ? candidate.id === selectedPoi
           : false;
-      const matchesRegion = query.region ? query.region.includes(poi.region) : true;
+      const matchesRegion = region ? region.includes(candidate.region) : true;
       return matchesCategory && matchesRegion;
     });
-  }, [pois, query.cat, query.region, query.poi]);
+  }, [pois, cat, region, selectedPoi]);
 
   const features = useMemo(() => ({
     type: 'FeatureCollection',
@@ -383,8 +384,8 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         showPoiPopup(id, coordinates);
       });
 
-      if (poi) {
-        const poiData = poiIndex.get(poi);
+      if (selectedPoi) {
+        const poiData = poiIndex.get(selectedPoi);
         if (poiData) {
           const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
           showPoiPopup(poiData.id, coordinates, { updateQuery: false, flyTo: true });
@@ -411,7 +412,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         popupRef.current = null;
       }
     };
-  }, [styleUrl, lng, lat, z, poiIndex, locale, router, features, poi]);
+  }, [styleUrl, lng, lat, z, poiIndex, locale, router, features, selectedPoi]);
 
   // Actualizar source cuando cambien los features (filtros)
   useEffect(() => {
@@ -428,9 +429,9 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   useEffect(() => {
     const map = mapRef.current;
     const popup = popupRef.current;
-    if (!map || !map.isStyleLoaded() || !popup || !poi) return;
+    if (!map || !map.isStyleLoaded() || !popup || !selectedPoi) return;
 
-    const poiData = poiIndex.get(poi);
+    const poiData = poiIndex.get(selectedPoi);
     if (!poiData) return;
 
     const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
@@ -438,7 +439,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
     const content = createPopupContent(poiData, locale);
     popup.setLngLat(coordinates).setDOMContent(content).addTo(map);
-  }, [poi, poiIndex, locale]);
+  }, [selectedPoi, poiIndex, locale]);
 
   return <div ref={containerRef} className="h-[64vh] w-full rounded-2xl shadow" />;
 }
