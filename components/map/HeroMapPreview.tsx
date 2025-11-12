@@ -20,6 +20,8 @@ const TOUR_POINTS = [
 const SALTA_CENTER: [number, number] = [-65.4, -24.8];
 const INITIAL_ZOOM = 6.5;
 
+const FALLBACK_HYBRID_STYLE = 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB';
+
 export default function HeroMapPreview() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map | null>(null);
@@ -33,7 +35,7 @@ export default function HeroMapPreview() {
     // Estilo con tonos naturales (puedes usar tu key de MapTiler)
     const styleUrl = process.env.NEXT_PUBLIC_MAPTILER_KEY
       ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
-      : 'https://demotiles.maplibre.org/style.json';
+      : FALLBACK_HYBRID_STYLE;
 
     // Inicializar mapa
     const map = new maplibregl.Map({
@@ -105,17 +107,14 @@ export default function HeroMapPreview() {
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-soft">
+    <div className="relative w-full h-[360px] rounded-2xl shadow-soft overflow-hidden md:h-[420px] lg:h-[480px]">
       {/* Contenedor del mapa */}
-      <div 
-        ref={containerRef} 
-        className={`w-full h-full transition-opacity duration-1000 ${
+      <div
+        ref={containerRef}
+        className={`w-full h-full transition-opacity duration-700 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       />
-      
-      {/* Overlay sutil con gradiente para mejor legibilidad */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
       
       {/* Badge opcional "Vista Previa" */}
       <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-semibold text-poncho shadow-sm">
