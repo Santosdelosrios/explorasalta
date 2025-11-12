@@ -1,37 +1,86 @@
+import type {ReactNode} from 'react';
 import Link from 'next/link';
 import HeroMapWrapper from '@/components/map/HeroMapWrapper';
+import CulturaVivaSection from '@/components/sections/CulturaVivaSection';
+import {getEventos} from '@/lib/fetchers';
+import type {Locale} from '@/lib/i18n/config';
 
-export default function HomePage() {
+const HERO_COPY: Record<Locale, {
+  title: ReactNode;
+  description: string;
+  mapCta: string;
+  experiencesCta: string;
+}> = {
+  es: {
+    title: (
+      <>
+        Explorá <span className="text-poncho">Salta</span>
+      </>
+    ),
+    description: 'Descubrí paisajes, pueblos, rutas y tradiciones del norte argentino.',
+    mapCta: 'Ir al mapa',
+    experiencesCta: 'Ver experiencias'
+  },
+  en: {
+    title: (
+      <>
+        Explore <span className="text-poncho">Salta</span>
+      </>
+    ),
+    description: 'Discover landscapes, villages, routes and living traditions across northern Argentina.',
+    mapCta: 'Open the map',
+    experiencesCta: 'Browse experiences'
+  }
+};
+
+export default async function HomePage({
+  params
+}: {
+  params: {locale: Locale};
+}) {
+  const locale = params.locale;
+  const copy = HERO_COPY[locale];
+  const events = await getEventos();
+
   return (
-    <main id="main" className="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-8 items-center">
-      {/* Columna izquierda: Texto */}
-      <div>
-        <h1 className="text-4xl md:text-5xl font-extrabold font-[Montserrat]">
-          Explorá <span className="text-poncho">Salta</span>: mapa interactivo y cultura viva
-        </h1>
-        <p className="mt-4 text-lg text-zinc-700">
-          Descubrí paisajes, pueblos, rutas y tradiciones del norte argentino.
-        </p>
-        <div className="mt-6 flex gap-3">
-          <Link 
-            className="px-5 py-3 rounded-xl bg-poncho text-white hover:bg-poncho/90 transition-colors font-semibold shadow-soft" 
-            href="/es/mapa"
-          >
-            Ir al mapa
-          </Link>
-          <Link 
-            className="px-5 py-3 rounded-xl border border-poncho/30 hover:border-poncho/50 hover:bg-ink/5 transition-all font-semibold" 
-            href="/es/experiencias"
-          >
-            Ver experiencias
-          </Link>
-        </div>
-      </div>
-      
-      {/* Columna derecha: MAPA PREVIEW */}
-      <div className="aspect-video rounded-2xl shadow-soft overflow-hidden">
-        <HeroMapWrapper />
-      </div>
-    </main>
+    <>
+      <main
+        id="main"
+        className="container mx-auto flex flex-col gap-14 px-4 py-16 md:px-6"
+      >
+        <section className="flex flex-col items-center gap-6 text-center md:items-start md:text-left">
+          <h1 className="font-heading text-4xl font-extrabold md:text-5xl">
+            {copy.title}
+            <span className="block text-xl font-semibold text-cardon md:text-2xl">
+              {locale === 'es'
+                ? 'Mapa interactivo y cultura viva'
+                : 'Interactive map and living culture'}
+            </span>
+          </h1>
+          <p className="max-w-2xl text-lg text-zinc-700">{copy.description}</p>
+          <div className="flex flex-wrap justify-center gap-3 md:justify-start">
+            <Link
+              className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
+              href="#mapa"
+              prefetch={false}
+            >
+              {copy.mapCta}
+            </Link>
+            <Link
+              className="rounded-xl border border-poncho/30 px-5 py-3 font-semibold transition-all hover:border-poncho/50 hover:bg-ink/5"
+              href={`/${locale}/experiencias`}
+            >
+              {copy.experiencesCta}
+            </Link>
+          </div>
+        </section>
+
+        <section className="w-full" id="mapa">
+          <HeroMapWrapper />
+        </section>
+      </main>
+
+      <CulturaVivaSection events={events} locale={locale} />
+    </>
   );
 }
