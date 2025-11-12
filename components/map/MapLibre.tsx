@@ -37,7 +37,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
       const matchesRegion = query.region ? query.region.includes(poi.region) : true;
       return matchesCategory && matchesRegion;
     });
-  }, [pois, query.cat, query.region]);
+  }, [pois, query.cat, query.region, query.poi]);
 
   const features = useMemo(() => ({
     type: 'FeatureCollection',
@@ -171,9 +171,13 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         `)
         .addTo(map);
 
-      const sp = new URLSearchParams(params);
+      const currentSearch = typeof window !== 'undefined' ? window.location.search : params.toString();
+      const sp = new URLSearchParams(currentSearch);
       sp.set('poi', id);
-      router.replace(`?${sp.toString()}`, { scroll: false });
+      const nextUrl = typeof window !== 'undefined'
+        ? `${window.location.pathname}?${sp.toString()}`
+        : `?${sp.toString()}`;
+      router.replace(nextUrl, { scroll: false });
       });
 
       // Mostrar POI inicial si existe en la query
