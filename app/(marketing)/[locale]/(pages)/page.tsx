@@ -76,7 +76,7 @@ export default async function HomePage({
         </section>
 
         <section className="w-full" id="mapa">
-          <HeroMapWrapper />
+          <HeroMapWrapper locale={locale} />
         </section>
       </main>
 

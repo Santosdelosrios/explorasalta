@@ -2,28 +2,53 @@
 import {useEffect, useMemo, useRef} from 'react';
 import maplibregl, {Map} from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import type {POI} from '@/lib/schema';
 import {useSearchParams, useRouter} from 'next/navigation';
+import type {POI} from '@/lib/schema';
+import type {Locale} from '@/lib/i18n/config';
+import {CATEGORY_METADATA, getCategoryLabel} from '@/lib/content/categories';
 import {parseMapQuery} from '@/lib/url';
 
-type Props = { pois: POI[]; styleUrl?: string };
+type Props = { pois: POI[]; styleUrl?: string; locale: Locale };
 
-export default function MapLibre({pois, styleUrl}: Props) {
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+export default function MapLibre({pois, styleUrl, locale}: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map | null>(null);
   const params = useSearchParams();
   const router = useRouter();
 
   const query = useMemo(() => parseMapQuery(params.toString()), [params]);
-  
+
+  const filteredPois = useMemo(() => {
+    return pois.filter(poi => {
+      const matchesCategory = query.cat ? query.cat.includes(poi.category) : true;
+      const matchesRegion = query.region ? query.region.includes(poi.region) : true;
+      return matchesCategory && matchesRegion;
+    });
+  }, [pois, query.cat, query.region]);
+
   const features = useMemo(() => ({
     type: 'FeatureCollection',
-    features: pois.map(p => ({
+    features: filteredPois.map(p => ({
       type: 'Feature',
-      properties: { id: p.id, category: p.category, region: p.region, title: p.title.es },
+      properties: {
+        id: p.id,
+        category: p.category,
+        region: p.region,
+        title: p.title[locale],
+        summary: p.summary[locale]
+      },
       geometry: { type: 'Point', coordinates: [p.coords.lng, p.coords.lat] }
     }))
-  }), [pois]);
+  }), [filteredPois, locale]);
 
   useEffect(() => {
     // CRÍTICO: Evitar doble inicialización
@@ -114,19 +139,37 @@ export default function MapLibre({pois, styleUrl}: Props) {
         maxWidth: '320px' 
       });
 
-      map.on('click', 'poi', e => {
-        const f = e.features?.[0];
-        if (!f) return;
-        const {id, title} = f.properties as any;
-        const [lng, lat] = (f.geometry as any).coordinates;
-        
-        popup.setLngLat([lng, lat])
-          .setHTML(`<strong>${title}</strong>`)
-          .addTo(map);
-        
-        const sp = new URLSearchParams(params);
-        sp.set('poi', id);
-        router.replace(`?${sp.toString()}`, { scroll: false });
+    map.on('click', 'poi', e => {
+      const f = e.features?.[0];
+      if (!f) return;
+      const {id, title, category, summary} = f.properties as any;
+      const [lng, lat] = (f.geometry as any).coordinates;
+
+      const catKey = (category ?? 'pueblo') as keyof typeof CATEGORY_METADATA;
+      const catIcon = CATEGORY_METADATA[catKey]?.icon ?? '📍';
+      const catLabel = getCategoryLabel(catKey, locale);
+
+      popup
+        .setLngLat([lng, lat])
+        .setHTML(`
+          <div style="font-family: var(--font-body, 'Tenor Sans'), system-ui; max-width: 260px;">
+            <strong style="font-family: var(--font-heading, 'Lexend Deca'), inherit; font-size: 1rem; color: #7B2D26; display: block; margin-bottom: 0.25rem;">
+              ${escapeHtml(title)}
+            </strong>
+            <span style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: #4A2F27; text-transform: uppercase; letter-spacing: 0.12em;">
+              <span aria-hidden="true">${catIcon}</span>
+              ${escapeHtml(catLabel)}
+            </span>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem; line-height: 1.35; color: #2C2C2C;">
+              ${escapeHtml(summary ?? '')}
+            </p>
+          </div>
+        `)
+        .addTo(map);
+
+      const sp = new URLSearchParams(params);
+      sp.set('poi', id);
+      router.replace(`?${sp.toString()}`, { scroll: false });
       });
 
       // Mostrar POI inicial si existe en la query
@@ -142,7 +185,10 @@ export default function MapLibre({pois, styleUrl}: Props) {
         }
       }
 
-      map.getCanvas().setAttribute('aria-label', 'Mapa interactivo de Salta');
+      map.getCanvas().setAttribute(
+        'aria-label',
+        locale === 'es' ? 'Mapa interactivo de Salta' : 'Interactive map of Salta'
+      );
       map.getCanvas().setAttribute('role', 'application');
     });
 

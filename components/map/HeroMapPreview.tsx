@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
-import maplibregl, { Map } from 'maplibre-gl';
+import {useEffect, useRef, useState} from 'react';
+import maplibregl, {Map} from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import type {Locale} from '@/lib/i18n/config';
 
 // Puntos turísticos de Salta para el tour automático
 const TOUR_POINTS = [
@@ -22,7 +23,20 @@ const INITIAL_ZOOM = 6.5;
 
 const FALLBACK_HYBRID_STYLE = 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB';
 
-export default function HeroMapPreview() {
+const COPY: Record<Locale, {preview: string; loading: string; cta: string}> = {
+  es: {
+    preview: 'Vista previa',
+    loading: 'Cargando mapa…',
+    cta: 'Explorá el mapa interactivo →'
+  },
+  en: {
+    preview: 'Preview',
+    loading: 'Loading map…',
+    cta: 'Explore the interactive map →'
+  }
+};
+
+export default function HeroMapPreview({locale}: {locale: Locale}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -117,8 +131,8 @@ export default function HeroMapPreview() {
       />
       
       {/* Badge opcional "Vista Previa" */}
-      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-semibold text-poncho shadow-sm">
-        Vista Previa
+      <div className="absolute top-4 left-4 rounded-lg bg-white/90 px-3 py-1.5 text-xs font-semibold text-poncho shadow-sm backdrop-blur-sm">
+        {COPY[locale].preview}
       </div>
       
       {/* Indicador de carga */}
@@ -126,16 +140,14 @@ export default function HeroMapPreview() {
         <div className="absolute inset-0 flex items-center justify-center bg-arena/50 backdrop-blur-sm">
           <div className="flex flex-col items-center gap-3">
             <div className="w-8 h-8 border-4 border-poncho border-t-transparent rounded-full animate-spin" />
-            <p className="text-sm text-poncho font-medium">Cargando mapa...</p>
+            <p className="text-sm font-medium text-poncho">{COPY[locale].loading}</p>
           </div>
         </div>
       )}
       
       {/* Texto de llamada a la acción (opcional) */}
-      <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg">
-        <p className="text-xs text-ink/70 font-medium">
-          Explorá el mapa interactivo →
-        </p>
+      <div className="absolute bottom-4 right-4 rounded-lg bg-white/95 px-4 py-2 shadow-lg backdrop-blur-sm">
+        <p className="text-xs font-medium text-ink/70">{COPY[locale].cta}</p>
       </div>
     </div>
   );
