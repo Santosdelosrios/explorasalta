@@ -49,7 +49,7 @@ export default async function HomePage({
         className="container mx-auto flex flex-col gap-14 px-4 py-16 md:px-6"
       >
         <section className="flex flex-col items-center gap-6 text-center md:items-start md:text-left">
-          <h1 className="font-[Montserrat] text-4xl font-extrabold md:text-5xl">
+          <h1 className="font-heading text-4xl font-extrabold md:text-5xl">
             {copy.title}
             <span className="block text-xl font-semibold text-cardon md:text-2xl">
               {locale === 'es'
