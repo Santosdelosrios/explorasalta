@@ -2,13 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tipografías: Lexend Deca para títulos + sistema para texto */
+/* Tipografías: Lexend Deca para títulos + Tenor Sans para texto */
 :root {
   color-scheme: light;
 }
 
 html, body {
   @apply bg-arena text-ink;
+  font-family: var(--font-body), 'Tenor Sans', 'Segoe UI', system-ui, sans-serif;
 }
 
 a {
