@@ -75,5 +75,21 @@
       "es": "Selva de montaña, cascadas y biodiversidad exuberante.",
       "en": "Mountain rainforest, waterfalls and exuberant biodiversity."
     }
+  },
+  {
+    "id": "puna",
+    "name": { "es": "Puna", "en": "Puna" },
+    "intro": {
+      "es": "Mesetas altas, pueblos suspendidos y cielos infinitos.",
+      "en": "High plateaus, hanging villages and endless skies."
+    }
+  },
+  {
+    "id": "lerma",
+    "name": { "es": "Valle de Lerma", "en": "Lerma Valley" },
+    "intro": {
+      "es": "Embalses, cultivos y la puerta de entrada a la aventura.",
+      "en": "Reservoirs, farmlands and the gateway to adventure."
+    }
   }
 ]
