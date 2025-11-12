@@ -228,6 +228,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   const router = useRouter();
 
   const query = useMemo(() => parseMapQuery(params.toString()), [params]);
+  const {lng, lat, z, poi} = query;
 
   const poiIndex = useMemo(() => {
     const index = new Map<string, POI>();
@@ -278,8 +279,8 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
     const map = new maplibregl.Map({
       container,
       style: finalStyle,
-      center: [query.lng ?? -65.423, query.lat ?? -24.787],
-      zoom: query.z ?? 6,
+      center: [lng ?? -65.423, lat ?? -24.787],
+      zoom: z ?? 6,
       attributionControl: false,
       refreshExpiredTiles: false,
       maxParallelImageRequests: 8
@@ -382,8 +383,8 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         showPoiPopup(id, coordinates);
       });
 
-      if (query.poi) {
-        const poiData = poiIndex.get(query.poi);
+      if (poi) {
+        const poiData = poiIndex.get(poi);
         if (poiData) {
           const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
           showPoiPopup(poiData.id, coordinates, { updateQuery: false, flyTo: true });
@@ -410,7 +411,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         popupRef.current = null;
       }
     };
-  }, [styleUrl, query.lng, query.lat, query.z, poiIndex, locale, router, features, query.poi]);
+  }, [styleUrl, lng, lat, z, poiIndex, locale, router, features, poi]);
 
   // Actualizar source cuando cambien los features (filtros)
   useEffect(() => {
@@ -427,9 +428,9 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   useEffect(() => {
     const map = mapRef.current;
     const popup = popupRef.current;
-    if (!map || !map.isStyleLoaded() || !popup || !query.poi) return;
+    if (!map || !map.isStyleLoaded() || !popup || !poi) return;
 
-    const poiData = poiIndex.get(query.poi);
+    const poiData = poiIndex.get(poi);
     if (!poiData) return;
 
     const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
@@ -437,7 +438,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
     const content = createPopupContent(poiData, locale);
     popup.setLngLat(coordinates).setDOMContent(content).addTo(map);
-  }, [query.poi, poiIndex, locale]);
+  }, [poi, poiIndex, locale]);
 
   return <div ref={containerRef} className="h-[64vh] w-full rounded-2xl shadow" />;
 }
