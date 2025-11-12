@@ -416,13 +416,27 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
   // Actualizar source cuando cambien los features (filtros)
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !map.isStyleLoaded()) return;
+    featuresRef.current = features;
 
-    const source = map.getSource('pois') as maplibregl.GeoJSONSource;
-    if (source) {
-      source.setData(features as any);
+    const map = mapRef.current;
+    if (!map) return;
+
+    const applyFeatures = () => {
+      const source = map.getSource('pois') as maplibregl.GeoJSONSource | undefined;
+      if (source) {
+        source.setData(featuresRef.current as any);
+      }
+    };
+
+    if (map.isStyleLoaded()) {
+      applyFeatures();
+      return;
     }
+
+    map.once('load', applyFeatures);
+    return () => {
+      map.off('load', applyFeatures);
+    };
   }, [features]);
 
   // Manejar navegación a POI específico
