@@ -92,14 +92,18 @@ export function Navbar({locale}: NavbarProps) {
 
   return (
     <nav className="sticky top-0 z-40 border-b bg-arena/80 backdrop-blur">
-      <div className="container mx-auto flex h-14 items-center justify-between px-4">
+      <div className="container mx-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-3 md:flex-nowrap">
         <Link
           href={`/${activeLocale}`}
           className="font-heading text-lg font-extrabold text-poncho transition hover:text-cardon"
         >
           Explorá Salta
         </Link>
-        <ul className="hidden gap-5 md:flex" role="menubar" aria-label="Secciones principales">
+        <ul
+          className="hidden items-start gap-6 md:flex"
+          role="menubar"
+          aria-label="Secciones principales"
+        >
           {items.map(item => {
             const isActive = pathname?.startsWith(item.href);
             return (
@@ -110,14 +114,14 @@ export function Navbar({locale}: NavbarProps) {
                   prefetch
                   aria-current={isActive ? 'page' : undefined}
                   className={cn(
-                    'group flex flex-col items-center gap-1 text-sm transition',
+                    'group flex max-w-[12rem] flex-col items-start gap-1 text-left text-sm leading-tight transition',
                     isActive ? 'text-poncho' : 'text-ink hover:text-poncho'
                   )}
                 >
-                  <span className="border-b border-transparent pb-0.5 font-semibold group-hover:border-poncho/60">
+                  <span className="font-heading text-base font-semibold">
                     {item.label}
                   </span>
-                  <span className="text-[11px] font-normal uppercase tracking-[0.2em] text-cardon/60">
+                  <span className="text-xs font-normal uppercase tracking-[0.18em] text-cardon/70">
                     {item.hint}
                   </span>
                 </Link>
