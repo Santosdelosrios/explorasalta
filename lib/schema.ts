@@ -2,6 +2,11 @@ export type RegionId = 'valles' | 'puna' | 'yungas' | 'ciudad' | 'lerma' | 'anta
 export type Category = 'pueblo' | 'mirador' | 'ruta' | 'fiesta' | 'museo' | 'gastronomia' | 'sendero' | 'patrimonio';
 export type Translated<T> = { es: T; en: T };
 
+export interface POIRating {
+  average: number; // 0..5 scale
+  count: number; // number of reviews backing the average
+}
+
 export interface POI {
   id: string;
   title: Translated<string>;
@@ -13,6 +18,7 @@ export interface POI {
   tags?: string[];
   popularity?: number; // 0..100
   url?: string;
+  rating?: POIRating;
 }
 
 export interface Experiencia {
