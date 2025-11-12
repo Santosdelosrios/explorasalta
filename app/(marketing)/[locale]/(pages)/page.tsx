@@ -61,7 +61,8 @@ export default async function HomePage({
           <div className="flex flex-wrap justify-center gap-3 md:justify-start">
             <Link
               className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
-              href={`/${locale}/mapa`}
+              href="#mapa"
+              prefetch={false}
             >
               {copy.mapCta}
             </Link>
@@ -74,7 +75,7 @@ export default async function HomePage({
           </div>
         </section>
 
-        <section className="w-full">
+        <section className="w-full" id="mapa">
           <HeroMapWrapper />
         </section>
       </main>
