@@ -10,49 +10,19 @@ import {parseMapQuery} from '@/lib/url';
 
 type Props = { pois: POI[]; styleUrl?: string; locale: Locale };
 
-const STORAGE_PREFIX = 'explorasalta:poi-rating';
-
 const RATING_COPY: Record<Locale, {
   visitorsLabel: string;
   reviewCount: (count: number) => string;
-  yourRating: string;
-  prompt: string;
-  thanks: string;
-  currentRating: (value: number) => string;
-  starLabel: (value: number) => string;
 }> = {
   es: {
     visitorsLabel: 'Valoración de visitantes',
-    reviewCount: count => `${count} ${count === 1 ? 'reseña' : 'reseñas'}`,
-    yourRating: 'Tu calificación',
-    prompt: 'Contanos cuántas estrellas merece este lugar.',
-    thanks: '¡Gracias por calificar!',
-    currentRating: value => `Tu calificación: ${value} ${value === 1 ? 'estrella' : 'estrellas'}.`,
-    starLabel: value => `${value} ${value === 1 ? 'estrella' : 'estrellas'}`
+    reviewCount: count => `${count} ${count === 1 ? 'reseña' : 'reseñas'}`
   },
   en: {
     visitorsLabel: 'Visitor rating',
-    reviewCount: count => `${count} ${count === 1 ? 'review' : 'reviews'}`,
-    yourRating: 'Your rating',
-    prompt: 'How many stars would you give this spot?',
-    thanks: 'Thanks for sharing!',
-    currentRating: value => `Your rating: ${value} ${value === 1 ? 'star' : 'stars'}.`,
-    starLabel: value => `${value} ${value === 1 ? 'star' : 'stars'}`
+    reviewCount: count => `${count} ${count === 1 ? 'review' : 'reviews'}`
   }
 };
-
-function getStoredRating(id: string): number | null {
-  if (typeof window === 'undefined') return null;
-  const raw = window.localStorage.getItem(`${STORAGE_PREFIX}:${id}`);
-  if (!raw) return null;
-  const parsed = Number.parseInt(raw, 10);
-  return Number.isFinite(parsed) ? Math.min(Math.max(parsed, 1), 5) : null;
-}
-
-function setStoredRating(id: string, value: number) {
-  if (typeof window === 'undefined') return;
-  window.localStorage.setItem(`${STORAGE_PREFIX}:${id}`, String(value));
-}
 
 function createStaticStars(value: number) {
   const filled = Math.round(Math.min(Math.max(value, 0), 5));
@@ -143,80 +113,6 @@ function createPopupContent(poi: POI, locale: Locale): HTMLElement {
     container.appendChild(ratingBlock);
   }
 
-  const ratingControls = document.createElement('div');
-  ratingControls.style.display = 'flex';
-  ratingControls.style.flexDirection = 'column';
-  ratingControls.style.gap = '0.25rem';
-
-  const ratingHeading = document.createElement('span');
-  ratingHeading.textContent = RATING_COPY[locale].yourRating;
-  ratingHeading.style.fontSize = '0.75rem';
-  ratingHeading.style.fontWeight = '600';
-  ratingHeading.style.color = '#4A2F27';
-  ratingControls.appendChild(ratingHeading);
-
-  const starsRow = document.createElement('div');
-  starsRow.style.display = 'inline-flex';
-  starsRow.style.alignItems = 'center';
-  starsRow.style.gap = '0.15rem';
-  starsRow.setAttribute('role', 'radiogroup');
-
-  const stored = getStoredRating(poi.id);
-  let currentValue = stored ?? 0;
-
-  const feedback = document.createElement('p');
-  feedback.textContent = stored
-    ? RATING_COPY[locale].currentRating(stored)
-    : RATING_COPY[locale].prompt;
-  feedback.style.fontSize = '0.75rem';
-  feedback.style.color = '#4A2F27';
-  feedback.style.margin = '0';
-  feedback.setAttribute('aria-live', 'polite');
-
-  const buttons: HTMLButtonElement[] = [];
-  const updateState = (value: number) => {
-    buttons.forEach((btn, idx) => {
-      const active = idx < value;
-      btn.style.color = active ? '#F59E0B' : '#D6D3D1';
-      btn.style.transform = active ? 'scale(1.05)' : 'scale(1)';
-      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-    });
-  };
-
-  for (let i = 1; i <= 5; i += 1) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.textContent = '★';
-    btn.style.background = 'transparent';
-    btn.style.border = 'none';
-    btn.style.padding = '0';
-    btn.style.margin = '0';
-    btn.style.cursor = 'pointer';
-    btn.style.fontSize = '1.2rem';
-    btn.style.transition = 'transform 0.15s ease';
-    btn.setAttribute('role', 'radio');
-    btn.setAttribute('aria-label', RATING_COPY[locale].starLabel(i));
-    btn.addEventListener('mouseenter', () => updateState(i));
-    btn.addEventListener('focus', () => updateState(i));
-    btn.addEventListener('mouseleave', () => updateState(currentValue));
-    btn.addEventListener('blur', () => updateState(currentValue));
-    btn.addEventListener('click', event => {
-      event.stopPropagation();
-      currentValue = i;
-      setStoredRating(poi.id, i);
-      feedback.textContent = `${RATING_COPY[locale].thanks} ${RATING_COPY[locale].currentRating(i)}`;
-      updateState(currentValue);
-    });
-    buttons.push(btn);
-    starsRow.appendChild(btn);
-  }
-
-  updateState(currentValue);
-
-  ratingControls.appendChild(starsRow);
-  ratingControls.appendChild(feedback);
-  container.appendChild(ratingControls);
-
   return container;
 }
 
@@ -229,7 +125,12 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
   const search = params.toString();
   const query = useMemo(() => parseMapQuery(search), [search]);
-  const {lng, lat, z, poi: selectedPoi, cat, region} = query;
+  const lng = query.lng;
+  const lat = query.lat;
+  const z = query.z;
+  const selectedPoi = query.poi;
+  const cat = query.cat;
+  const region = query.region;
 
   const poiIndex = useMemo(() => {
     const index = new Map<string, POI>();
@@ -246,7 +147,9 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         : selectedPoi
           ? candidate.id === selectedPoi
           : false;
-      const matchesRegion = region ? region.includes(candidate.region) : true;
+      const matchesRegion = region
+        ? region.includes(candidate.region) || candidate.id === selectedPoi
+        : true;
       return matchesCategory && matchesRegion;
     });
   }, [pois, cat, region, selectedPoi]);
@@ -266,13 +169,16 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
     }))
   }), [filteredPois, locale]);
 
+  const featuresRef = useRef(features);
+
   useEffect(() => {
     if (mapRef.current) return;
 
     const container = containerRef.current;
     if (!container) return;
 
-    const finalStyle = styleUrl ??
+    const finalStyle =
+      styleUrl ??
       (process.env.NEXT_PUBLIC_MAPTILER_KEY
         ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
         : 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB');
@@ -303,7 +209,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
       map.addSource('pois', {
         type: 'geojson',
-        data: features,
+        data: featuresRef.current,
         cluster: true,
         clusterRadius: 40
       });
@@ -412,7 +318,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         popupRef.current = null;
       }
     };
-  }, [styleUrl, lng, lat, z, poiIndex, locale, router, features, selectedPoi]);
+  }, [styleUrl, lng, lat, z, poiIndex, locale, router, features]);
 
   // Actualizar source cuando cambien los features (filtros)
   useEffect(() => {
@@ -442,17 +348,31 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   // Manejar navegación a POI específico
   useEffect(() => {
     const map = mapRef.current;
-    const popup = popupRef.current;
-    if (!map || !map.isStyleLoaded() || !popup || !selectedPoi) return;
+    if (!map || !selectedPoi) return;
 
     const poiData = poiIndex.get(selectedPoi);
     if (!poiData) return;
 
-    const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
-    map.flyTo({ center: coordinates, zoom: 12 });
+    const showSelected = () => {
+      const popup = popupRef.current;
+      if (!popup) return;
 
-    const content = createPopupContent(poiData, locale);
-    popup.setLngLat(coordinates).setDOMContent(content).addTo(map);
+      const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
+      map.flyTo({ center: coordinates, zoom: Math.max(map.getZoom(), 12) });
+
+      const content = createPopupContent(poiData, locale);
+      popup.setLngLat(coordinates).setDOMContent(content).addTo(map);
+    };
+
+    if (map.isStyleLoaded() && popupRef.current) {
+      showSelected();
+      return;
+    }
+
+    map.once('load', showSelected);
+    return () => {
+      map.off('load', showSelected);
+    };
   }, [selectedPoi, poiIndex, locale]);
 
   return <div ref={containerRef} className="h-[64vh] w-full rounded-2xl shadow" />;
