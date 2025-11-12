@@ -2,13 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tipografías: Montserrat (títulos) + Inter (texto) vía <link> en layout */
+/* Tipografías: Lexend Deca para títulos + Tenor Sans para texto */
 :root {
   color-scheme: light;
 }
 
 html, body {
   @apply bg-arena text-ink;
+  font-family: var(--font-body), 'Tenor Sans', 'Segoe UI', system-ui, sans-serif;
 }
 
 a {
@@ -17,4 +18,18 @@ a {
 
 .focus-ring {
   @apply outline outline-2 outline-offset-2 outline-cielo;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading), 'Lexend Deca', 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading), 'Lexend Deca', 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+  }
 }
