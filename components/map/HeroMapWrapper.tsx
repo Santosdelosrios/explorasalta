@@ -1,22 +1,19 @@
 'use client';
 import dynamic from 'next/dynamic';
+import type {Locale} from '@/lib/i18n/config';
 
-// Importación dinámica del mapa (sin SSR)
-const HeroMapPreview = dynamic(
-  () => import('@/components/map/HeroMapPreview'),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full flex items-center justify-center bg-arena/30 animate-pulse rounded-2xl">
-        <div className="text-center space-y-2">
-          <div className="w-8 h-8 border-4 border-poncho border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-poncho/50 text-sm font-medium">Cargando mapa...</p>
-        </div>
+const HeroMapPreview = dynamic(() => import('@/components/map/HeroMapPreview'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full animate-pulse items-center justify-center rounded-2xl bg-arena/30">
+      <div className="space-y-2 text-center">
+        <div className="mx-auto h-8 w-8 animate-spin rounded-full border-4 border-poncho border-t-transparent" />
+        <p className="text-sm font-medium text-poncho/60">Cargando mapa · Loading map</p>
       </div>
-    )
-  }
-);
+    </div>
+  )
+});
 
-export default function HeroMapWrapper() {
-  return <HeroMapPreview />;
+export default function HeroMapWrapper({locale}: {locale: Locale}) {
+  return <HeroMapPreview locale={locale} />;
 }
