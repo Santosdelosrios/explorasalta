@@ -24,5 +24,133 @@
     "coords": { "lat": -24.795, "lng": -65.411 },
     "tags": ["vista", "urbano"],
     "popularity": 88
+  },
+  {
+    "id": "mirador-del-torreon",
+    "title": {
+      "es": "Mirador del Torreón",
+      "en": "Torreón Viewpoint"
+    },
+    "summary": {
+      "es": "Punto panorámico en la Cuesta del Obispo con vistas al Valle Encantado y cardones.",
+      "en": "Panoramic perch on Cuesta del Obispo overlooking Valle Encantado and towering cacti."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": { "lat": -25.183333, "lng": -65.75 },
+    "tags": ["paisaje", "montaña"],
+    "popularity": 82
+  },
+  {
+    "id": "mirador-condor-iruya",
+    "title": {
+      "es": "Mirador de El Cóndor",
+      "en": "El Cóndor Viewpoint"
+    },
+    "summary": {
+      "es": "Mirador emblemático de Iruya para ver el amanecer y el vuelo de cóndores.",
+      "en": "Iconic Iruya lookout for sunrise vistas and condor sightings."
+    },
+    "category": "mirador",
+    "region": "puna",
+    "coords": { "lat": -22.8, "lng": -65.233333 },
+    "tags": ["amanecer", "fauna"],
+    "popularity": 86
+  },
+  {
+    "id": "mirador-ventanas",
+    "title": {
+      "es": "Mirador de las Ventanas",
+      "en": "Las Ventanas Viewpoint"
+    },
+    "summary": {
+      "es": "Formaciones con aberturas naturales que enmarcan los colores de la Quebrada de las Conchas.",
+      "en": "Natural rock openings framing the colorful Quebrada de las Conchas desert."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": { "lat": -25.724722, "lng": -65.547222 },
+    "tags": ["geologia", "fotografia"],
+    "popularity": 84
+  },
+  {
+    "id": "mirador-castillos",
+    "title": {
+      "es": "Mirador de Los Castillos",
+      "en": "Los Castillos Viewpoint"
+    },
+    "summary": {
+      "es": "Vista a formaciones rojizas que evocan castillos sobre la ruta a Cafayate.",
+      "en": "View of reddish rock formations resembling castles along the road to Cafayate."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": { "lat": -25.802222, "lng": -65.717499 },
+    "tags": ["ruta", "paisaje"],
+    "popularity": 83
+  },
+  {
+    "id": "mirador-cruz-iruya",
+    "title": {
+      "es": "Mirador de la Cruz",
+      "en": "La Cruz Viewpoint"
+    },
+    "summary": {
+      "es": "Mirador cercano al pueblo de Iruya con ascenso breve y vistas al río y montañas.",
+      "en": "Close-to-town Iruya lookout with a short climb and sweeping river and mountain views."
+    },
+    "category": "mirador",
+    "region": "puna",
+    "coords": { "lat": -22.802778, "lng": -65.228889 },
+    "tags": ["pueblo", "atardecer"],
+    "popularity": 79
+  },
+  {
+    "id": "mirador-cabra-corral",
+    "title": {
+      "es": "Mirador del Dique Cabra Corral",
+      "en": "Cabra Corral Dam Viewpoint"
+    },
+    "summary": {
+      "es": "Mirador sobre el embalse ideal para actividades náuticas y aventura.",
+      "en": "Overlooks the reservoir, ideal for water sports and adventure activities."
+    },
+    "category": "mirador",
+    "region": "lerma",
+    "coords": { "lat": -25.239444, "lng": -65.416667 },
+    "tags": ["agua", "aventura"],
+    "popularity": 81
+  },
+  {
+    "id": "mirador-portezuelo",
+    "title": {
+      "es": "Mirador de El Portezuelo",
+      "en": "El Portezuelo Viewpoint"
+    },
+    "summary": {
+      "es": "Acceso arbolado a Salta capital con vistas al Valle de Lerma.",
+      "en": "Tree-lined gateway to Salta city with views over the Lerma Valley."
+    },
+    "category": "mirador",
+    "region": "ciudad",
+    "coords": { "lat": -24.794444, "lng": -65.394444 },
+    "tags": ["urbano", "valle"],
+    "popularity": 77
+  },
+  {
+    "id": "mirador-recta-tin-tin",
+    "title": {
+      "es": "Mirador de la Recta del Tin Tin",
+      "en": "Recta del Tin Tin Viewpoint"
+    },
+    "summary": {
+      "es": "Mirador sobre la histórica recta rodeada de cardones en el Parque Nacional Los Cardones.",
+      "en": "Lookout over the historic straightaway surrounded by cacti in Los Cardones National Park."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": { "lat": -25.199167, "lng": -65.950833 },
+    "tags": ["historia", "cardones"],
+    "popularity": 80
   }
 ]
