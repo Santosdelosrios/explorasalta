@@ -1,18 +1,79 @@
 [
   {
+    "id": "anta",
+    "name": {
+      "es": "Anta",
+      "en": "Anta"
+    },
+    "intro": {
+      "es": "Llanuras del sur salteño con historia jesuítica y estancias agrícolas.",
+      "en": "Southern plains of Salta with Jesuit history and working estancias."
+    }
+  },
+  {
+    "id": "ciudad",
+    "name": {
+      "es": "Ciudad de Salta",
+      "en": "City of Salta"
+    },
+    "intro": {
+      "es": "Arquitectura colonial, museos y gastronomía.",
+      "en": "Colonial architecture, museums and food."
+    }
+  },
+  {
+    "id": "lerma",
+    "name": {
+      "es": "Valle de Lerma",
+      "en": "Lerma Valley"
+    },
+    "intro": {
+      "es": "Embalses, cultivos y la puerta de entrada a la aventura.",
+      "en": "Reservoirs, farmlands and the gateway to adventure."
+    }
+  },
+  {
+    "id": "orán",
+    "name": {
+      "es": "Orán y Selva de Montaña",
+      "en": "Orán & Mountain Jungle"
+    },
+    "intro": {
+      "es": "Puerta al Chaco salteño con yacimientos petroleros y reservas naturales.",
+      "en": "Gateway to Salta's Chaco with oil heritage and natural reserves."
+    }
+  },
+  {
+    "id": "puna",
+    "name": {
+      "es": "Puna",
+      "en": "Puna"
+    },
+    "intro": {
+      "es": "Mesetas altas, pueblos suspendidos y cielos infinitos.",
+      "en": "High plateaus, hanging villages and endless skies."
+    }
+  },
+  {
     "id": "valles",
-    "name": { "es": "Valles Calchaquíes", "en": "Calchaquí Valleys" },
+    "name": {
+      "es": "Valles Calchaquíes",
+      "en": "Calchaquí Valleys"
+    },
     "intro": {
       "es": "Paisajes rojizos, viñedos y pueblos históricos.",
       "en": "Red landscapes, vineyards and historic towns."
     }
   },
   {
-    "id": "ciudad",
-    "name": { "es": "Ciudad de Salta", "en": "City of Salta" },
+    "id": "yungas",
+    "name": {
+      "es": "Yungas",
+      "en": "Yungas"
+    },
     "intro": {
-      "es": "Arquitectura colonial, museos y gastronomía.",
-      "en": "Colonial architecture, museums and food."
+      "es": "Selva de montaña, cascadas y biodiversidad exuberante.",
+      "en": "Mountain rainforest, waterfalls and exuberant biodiversity."
     }
   },
   {

@@ -29,7 +29,11 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
   const filteredPois = useMemo(() => {
     return pois.filter(poi => {
-      const matchesCategory = query.cat ? query.cat.includes(poi.category) : true;
+      const matchesCategory = query.cat
+        ? query.cat.includes(poi.category)
+        : query.poi
+          ? poi.id === query.poi
+          : false;
       const matchesRegion = query.region ? query.region.includes(poi.region) : true;
       return matchesCategory && matchesRegion;
     });
