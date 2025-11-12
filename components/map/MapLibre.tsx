@@ -229,12 +229,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
   const search = params.toString();
   const query = useMemo(() => parseMapQuery(search), [search]);
-  const lng = query.lng;
-  const lat = query.lat;
-  const z = query.z;
-  const selectedPoi = query.poi;
-  const cat = query.cat;
-  const region = query.region;
+  const {lng, lat, z, poi: selectedPoi, cat, region} = query;
 
   const poiIndex = useMemo(() => {
     const index = new Map<string, POI>();
@@ -251,9 +246,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         : selectedPoi
           ? candidate.id === selectedPoi
           : false;
-      const matchesRegion = region
-        ? region.includes(candidate.region) || candidate.id === selectedPoi
-        : true;
+      const matchesRegion = region ? region.includes(candidate.region) : true;
       return matchesCategory && matchesRegion;
     });
   }, [pois, cat, region, selectedPoi]);
@@ -273,16 +266,13 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
     }))
   }), [filteredPois, locale]);
 
-  const featuresRef = useRef(features);
-
   useEffect(() => {
     if (mapRef.current) return;
 
     const container = containerRef.current;
     if (!container) return;
 
-    const finalStyle =
-      styleUrl ??
+    const finalStyle = styleUrl ??
       (process.env.NEXT_PUBLIC_MAPTILER_KEY
         ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
         : 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB');
@@ -304,8 +294,6 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         console.log('Request cancelled (normal in dev mode)');
         return;
       }
-      console.error('Map error:', e.error);
-    });
 
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
     map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
@@ -315,7 +303,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
       map.addSource('pois', {
         type: 'geojson',
-        data: featuresRef.current,
+        data: features,
         cluster: true,
         clusterRadius: 40
       });
@@ -402,7 +390,6 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
           const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
           showPoiPopup(poiData.id, coordinates, { updateQuery: false, flyTo: true });
         }
-      }
 
       map.getCanvas().setAttribute(
         'aria-label',
@@ -425,7 +412,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         popupRef.current = null;
       }
     };
-  }, [styleUrl, lng, lat, z, poiIndex, locale, router, features]);
+  }, [styleUrl, lng, lat, z, poiIndex, locale, router, features, selectedPoi]);
 
   // Actualizar source cuando cambien los features (filtros)
   useEffect(() => {
@@ -455,31 +442,17 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   // Manejar navegación a POI específico
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !selectedPoi) return;
+    const popup = popupRef.current;
+    if (!map || !map.isStyleLoaded() || !popup || !selectedPoi) return;
 
     const poiData = poiIndex.get(selectedPoi);
     if (!poiData) return;
 
-    const showSelected = () => {
-      const popup = popupRef.current;
-      if (!popup) return;
+    const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
+    map.flyTo({ center: coordinates, zoom: 12 });
 
-      const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
-      map.flyTo({ center: coordinates, zoom: Math.max(map.getZoom(), 12) });
-
-      const content = createPopupContent(poiData, locale);
-      popup.setLngLat(coordinates).setDOMContent(content).addTo(map);
-    };
-
-    if (map.isStyleLoaded() && popupRef.current) {
-      showSelected();
-      return;
-    }
-
-    map.once('load', showSelected);
-    return () => {
-      map.off('load', showSelected);
-    };
+    const content = createPopupContent(poiData, locale);
+    popup.setLngLat(coordinates).setDOMContent(content).addTo(map);
   }, [selectedPoi, poiIndex, locale]);
 
   return <div ref={containerRef} className="h-[64vh] w-full rounded-2xl shadow" />;
