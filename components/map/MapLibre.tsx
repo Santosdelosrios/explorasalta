@@ -200,8 +200,6 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         console.log('Request cancelled (normal in dev mode)');
         return;
       }
-      console.error('Map error:', e.error);
-    });
 
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
     map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
@@ -298,7 +296,6 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
           const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
           showPoiPopup(poiData.id, coordinates, { updateQuery: false, flyTo: true });
         }
-      }
 
       map.getCanvas().setAttribute(
         'aria-label',
