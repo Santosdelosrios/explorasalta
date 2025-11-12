@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import {Navbar} from '@/components/ui/Navbar';
+import type {Locale} from '@/lib/i18n/config';
 
 export const metadata: Metadata = {
   title: { default: 'Explorá Salta', template: '%s | Explorá Salta' },
@@ -9,17 +10,19 @@ export const metadata: Metadata = {
 };
 
 export default function MarketingLayout({
-  children
-}: { 
-  children: React.ReactNode; 
-  params: { locale: 'es'|'en' } 
+  children,
+  params
+}: {
+  children: React.ReactNode;
+  params: {locale: Locale};
 }) {
+  const locale = params.locale;
   return (
     <>
       <a href="#main" className="sr-only focus:not-sr-only">
-        Saltar al contenido
+        {locale === 'es' ? 'Saltar al contenido' : 'Skip to content'}
       </a>
-      <Navbar />
+      <Navbar locale={locale} />
       {children}
     </>
   );
