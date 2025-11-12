@@ -121,7 +121,7 @@ export default function HeroMapPreview({locale}: {locale: Locale}) {
   };
 
   return (
-    <div className="relative w-full h-[360px] rounded-2xl shadow-soft overflow-hidden md:h-[420px] lg:h-[480px]">
+    <div className="relative w-full h-[400px] rounded-2xl shadow-soft overflow-hidden md:h-[500px] lg:h-[600px] xl:h-[680px]">
       {/* Contenedor del mapa */}
       <div
         ref={containerRef}

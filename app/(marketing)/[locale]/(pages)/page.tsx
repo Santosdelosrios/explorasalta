@@ -46,33 +46,35 @@ export default async function HomePage({
     <>
       <main
         id="main"
-        className="container mx-auto flex flex-col gap-14 px-4 py-16 md:px-6"
+        className="container mx-auto flex flex-col gap-16 px-4 py-16 md:px-6"
       >
         <section className="flex flex-col items-center gap-6 text-center md:items-start md:text-left">
-          <h1 className="font-heading text-4xl font-extrabold md:text-5xl">
-            {copy.title}
-            <span className="block text-xl font-semibold text-cardon md:text-2xl">
-              {locale === 'es'
-                ? 'Mapa interactivo y cultura viva'
-                : 'Interactive map and living culture'}
-            </span>
-          </h1>
-          <p className="max-w-2xl text-lg text-zinc-700">{copy.description}</p>
-          <div className="flex flex-wrap justify-center gap-3 md:justify-start">
-            <Link
-              className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
-              href="#mapa"
-              prefetch={false}
-            >
-              {copy.mapCta}
-            </Link>
-            <Link
-              className="rounded-xl border border-poncho/30 px-5 py-3 font-semibold transition-all hover:border-poncho/50 hover:bg-ink/5"
-              href={`/${locale}/experiencias`}
-            >
-              {copy.experiencesCta}
-            </Link>
+          <div className="flex w-full flex-col items-center gap-4 md:flex-row md:items-start md:justify-between md:text-left">
+            <h1 className="max-w-3xl font-heading text-4xl font-extrabold md:text-5xl">
+              {copy.title}
+              <span className="block text-xl font-semibold text-cardon md:text-2xl">
+                {locale === 'es'
+                  ? 'Mapa interactivo y cultura viva'
+                  : 'Interactive map and living culture'}
+              </span>
+            </h1>
+            <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
+              <Link
+                className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
+                href="#mapa"
+                prefetch={false}
+              >
+                {copy.mapCta}
+              </Link>
+              <Link
+                className="rounded-xl border border-poncho/30 px-5 py-3 font-semibold transition-all hover:border-poncho/50 hover:bg-ink/5"
+                href={`/${locale}/experiencias`}
+              >
+                {copy.experiencesCta}
+              </Link>
+            </div>
           </div>
+          <p className="max-w-2xl text-lg text-zinc-700 md:text-left">{copy.description}</p>
         </section>
 
         <section className="w-full" id="mapa">
