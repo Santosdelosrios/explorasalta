@@ -267,157 +267,139 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   useEffect(() => {
     if (mapRef.current) return;
 
-    let frame: number | null = null;
+    const container = containerRef.current;
+    if (!container) return;
 
-    const initialize = () => {
-      if (mapRef.current) return;
+    const finalStyle = styleUrl ??
+      (process.env.NEXT_PUBLIC_MAPTILER_KEY
+        ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
+        : 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB');
 
-      const container = containerRef.current;
-      if (!(container instanceof HTMLElement)) {
-        frame = requestAnimationFrame(initialize);
+    const map = new maplibregl.Map({
+      container,
+      style: finalStyle,
+      center: [query.lng ?? -65.423, query.lat ?? -24.787],
+      zoom: query.z ?? 6,
+      attributionControl: false,
+      refreshExpiredTiles: false,
+      maxParallelImageRequests: 8
+    });
+
+    mapRef.current = map;
+
+    map.on('error', e => {
+      if (e.error?.name === 'AbortError') {
+        console.log('Request cancelled (normal in dev mode)');
         return;
       }
 
-      // CRÍTICO: Usar styleUrl correctamente (estaba duplicado)
-      const finalStyle = styleUrl ??
-        (process.env.NEXT_PUBLIC_MAPTILER_KEY
-          ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
-          : 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB');
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
+    map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
 
-      const map = new maplibregl.Map({
-        container,
-        style: finalStyle,
-        center: [query.lng ?? -65.423, query.lat ?? -24.787],
-        zoom: query.z ?? 6,
-        attributionControl: false,
-        // NUEVO: Opciones para reducir errores de AbortError
-        refreshExpiredTiles: false,
-        maxParallelImageRequests: 8
+    const handleLoad = () => {
+      if (!mapRef.current) return;
+
+      map.addSource('pois', {
+        type: 'geojson',
+        data: features,
+        cluster: true,
+        clusterRadius: 40
       });
 
-      mapRef.current = map;
-
-      // NUEVO: Manejar errores del mapa
-      map.on('error', (e) => {
-        // Filtrar AbortErrors que son normales en desarrollo
-        if (e.error?.name === 'AbortError') {
-          console.log('Request cancelled (normal in dev mode)');
-          return;
+      map.addLayer({
+        id: 'clusters',
+        type: 'circle',
+        source: 'pois',
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-radius': 18,
+          'circle-color': '#7B2D26'
         }
-        console.error('Map error:', e.error);
       });
 
-      map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
-      map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
+      map.addLayer({
+        id: 'cluster-count',
+        type: 'symbol',
+        source: 'pois',
+        filter: ['has', 'point_count'],
+        layout: {
+          'text-field': '{point_count_abbreviated}',
+          'text-size': 12
+        },
+        paint: {'text-color': '#fff'}
+      });
 
-      map.on('load', () => {
-        // Verificar que el mapa todavía existe
-        if (!mapRef.current) return;
+      map.addLayer({
+        id: 'poi',
+        type: 'circle',
+        source: 'pois',
+        filter: ['!', ['has', 'point_count']],
+        paint: {
+          'circle-radius': 6,
+          'circle-color': '#6E8B3D',
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#fff'
+        }
+      });
 
-        map.addSource('pois', {
-          type: 'geojson',
-          data: features,
-          cluster: true,
-          clusterRadius: 40
-        });
+      const popup = new maplibregl.Popup({
+        closeOnClick: true,
+        closeButton: true,
+        maxWidth: '320px'
+      });
 
-        map.addLayer({
-          id: 'clusters',
-          type: 'circle',
-          source: 'pois',
-          filter: ['has', 'point_count'],
-          paint: {
-            'circle-radius': 18,
-            'circle-color': '#7B2D26'
-          }
-        });
+      popupRef.current = popup;
 
-        map.addLayer({
-          id: 'cluster-count',
-          type: 'symbol',
-          source: 'pois',
-          filter: ['has', 'point_count'],
-          layout: {
-            'text-field': '{point_count_abbreviated}',
-            'text-size': 12
-          },
-          paint: {'text-color': '#fff'}
-        });
+      const showPoiPopup = (
+        poiId: string,
+        coordinates: [number, number],
+        options?: { updateQuery?: boolean; flyTo?: boolean }
+      ) => {
+        const poiData = poiIndex.get(poiId);
+        if (!poiData) return;
 
-        map.addLayer({
-          id: 'poi',
-          type: 'circle',
-          source: 'pois',
-          filter: ['!', ['has', 'point_count']],
-          paint: {
-            'circle-radius': 6,
-            'circle-color': '#6E8B3D',
-            'circle-stroke-width': 2,
-            'circle-stroke-color': '#fff'
-          }
-        });
-
-        const popup = new maplibregl.Popup({
-          closeOnClick: true,
-          closeButton: true,
-          maxWidth: '320px'
-        });
-
-        popupRef.current = popup;
-
-        const showPoiPopup = (
-          poiId: string,
-          coordinates: [number, number],
-          options?: { updateQuery?: boolean; flyTo?: boolean }
-        ) => {
-          const poiData = poiIndex.get(poiId);
-          if (!poiData) return;
-
-          if (options?.flyTo) {
-            map.flyTo({ center: coordinates, zoom: Math.max(map.getZoom(), 11.5) });
-          }
-
-          const content = createPopupContent(poiData, locale);
-          popup.setLngLat(coordinates).setDOMContent(content).addTo(map);
-
-          const shouldUpdateQuery = options?.updateQuery ?? true;
-          if (shouldUpdateQuery && typeof window !== 'undefined') {
-            const sp = new URLSearchParams(window.location.search);
-            sp.set('poi', poiId);
-            router.replace(`${window.location.pathname}?${sp.toString()}`, { scroll: false });
-          }
-        };
-
-        map.on('click', 'poi', e => {
-          const f = e.features?.[0];
-          if (!f) return;
-          const {id} = f.properties as { id?: string };
-          const coordinates = (f.geometry as any).coordinates as [number, number];
-          if (!id) return;
-          showPoiPopup(id, coordinates);
-        });
-
-        // Mostrar POI inicial si existe en la query
-        if (query.poi) {
-          const poiData = poiIndex.get(query.poi);
-          if (poiData) {
-            const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
-            showPoiPopup(poiData.id, coordinates, { updateQuery: false, flyTo: true });
-          }
+        if (options?.flyTo) {
+          map.flyTo({ center: coordinates, zoom: Math.max(map.getZoom(), 11.5) });
         }
 
-        map.getCanvas().setAttribute(
-          'aria-label',
-          locale === 'es' ? 'Mapa interactivo de Salta' : 'Interactive map of Salta'
-        );
-        map.getCanvas().setAttribute('role', 'application');
+        const content = createPopupContent(poiData, locale);
+        popup.setLngLat(coordinates).setDOMContent(content).addTo(map);
+
+        const shouldUpdateQuery = options?.updateQuery ?? true;
+        if (shouldUpdateQuery && typeof window !== 'undefined') {
+          const sp = new URLSearchParams(window.location.search);
+          sp.set('poi', poiId);
+          router.replace(`${window.location.pathname}?${sp.toString()}`, { scroll: false });
+        }
+      };
+
+      map.on('click', 'poi', e => {
+        const f = e.features?.[0];
+        if (!f) return;
+        const {id} = f.properties as { id?: string };
+        const coordinates = (f.geometry as any).coordinates as [number, number];
+        if (!id) return;
+        showPoiPopup(id, coordinates);
       });
+
+      if (query.poi) {
+        const poiData = poiIndex.get(query.poi);
+        if (poiData) {
+          const coordinates: [number, number] = [poiData.coords.lng, poiData.coords.lat];
+          showPoiPopup(poiData.id, coordinates, { updateQuery: false, flyTo: true });
+        }
+
+      map.getCanvas().setAttribute(
+        'aria-label',
+        locale === 'es' ? 'Mapa interactivo de Salta' : 'Interactive map of Salta'
+      );
+      map.getCanvas().setAttribute('role', 'application');
     };
 
-    initialize();
+    map.on('load', handleLoad);
 
     return () => {
-      if (frame) cancelAnimationFrame(frame);
+      map.off('load', handleLoad);
 
       if (mapRef.current) {
         mapRef.current.remove();
@@ -428,7 +410,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         popupRef.current = null;
       }
     };
-  }, []); // CRÍTICO: Array vacío para evitar re-renders
+  }, [styleUrl, query.lng, query.lat, query.z, poiIndex, locale, router, features, query.poi]);
 
   // Actualizar source cuando cambien los features (filtros)
   useEffect(() => {
