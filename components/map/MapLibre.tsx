@@ -295,31 +295,13 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
     const popup = new maplibregl.Popup({closeButton: true, closeOnClick: true, maxWidth: '320px'});
     popupRef.current = popup;
 
-    function handleLoad() {
+    const handleLoad = () => {
       map.addSource('pois', {
         type: 'geojson',
         data: featuresRef.current ?? {type: 'FeatureCollection', features: []},
         cluster: true,
         clusterRadius: 40
       });
-    };
-
-    const showPoiPopup = (
-      poiId: string,
-      coordinates: [number, number],
-      options?: {updateQuery?: boolean}
-    ) => {
-      const poi = poiIndex.get(poiId);
-      if (!poi) return;
-
-      panToCoordinates(coordinates);
-      popup.setLngLat(coordinates).setDOMContent(createPopupContent(poi, locale)).addTo(map);
-
-      if (options?.updateQuery !== false && typeof window !== 'undefined') {
-        const searchParams = new URLSearchParams(window.location.search);
-        searchParams.set('poi', poiId);
-        router.replace(`${window.location.pathname}?${searchParams.toString()}`, {scroll: false});
-      }
     };
 
       map.addLayer({
@@ -359,16 +341,16 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
           openPoiPopup(poi.id, coordinates, {updateQuery: false});
         }
       }
-    }
+    };
 
-    function handlePoiClick(event: maplibregl.MapLayerMouseEvent) {
+    const handlePoiClick = (event: maplibregl.MapLayerMouseEvent) => {
       const feature = event.features?.[0];
       if (!feature) return;
       const {id} = feature.properties as {id?: string};
       const coordinates = (feature.geometry as Point).coordinates as [number, number];
       if (!id) return;
       openPoiPopup(id, coordinates);
-    }
+    };
 
     map.on('load', handleLoad);
     map.on('click', 'poi', handlePoiClick);
