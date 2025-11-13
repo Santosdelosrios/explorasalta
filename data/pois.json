@@ -1,28 +1,1333 @@
 [
   {
-    "id": "quebrada-de-las-conchas",
-    "title": { "es": "Quebrada de las Conchas", "en": "Quebrada de las Conchas" },
-    "summary": {
-      "es": "Formaciones rojizas sobre la RN68, entre Cafayate y Salta.",
-      "en": "Red rock formations along RN68, between Cafayate and Salta."
+    "id": "anapa",
+    "title": {
+      "es": "Añapa",
+      "en": "Añapa Drink"
     },
-    "category": "mirador",
-    "region": "valles",
-    "coords": { "lat": -25.6406, "lng": -65.918 },
-    "tags": ["paisaje", "geologia"],
+    "summary": {
+      "es": "Bebida ancestral a base de algarroba molida con agua, refrescante y nutritiva.",
+      "en": "Ancestral drink made by mixing ground carob fruit with water, refreshing and nourishing."
+    },
+    "category": "gastronomia",
+    "region": "puna",
+    "coords": {
+      "lat": -24.231389,
+      "lng": -66.322778
+    },
+    "tags": [
+      "ancestral",
+      "algarroba"
+    ],
+    "popularity": 76
+  },
+  {
+    "id": "cabildo-historico",
+    "title": {
+      "es": "Cabildo Histórico de Salta",
+      "en": "Historic Cabildo"
+    },
+    "summary": {
+      "es": "Edificio colonial del siglo XVIII que hoy alberga al Museo Histórico del Norte.",
+      "en": "18th-century colonial building now hosting the Historical Museum of the North."
+    },
+    "category": "museo",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785,
+      "lng": -65.413611
+    },
+    "tags": [
+      "colonial",
+      "historia"
+    ],
+    "popularity": 88
+  },
+  {
+    "id": "camino-a-iruya",
+    "title": {
+      "es": "Camino a Iruya",
+      "en": "Road to Iruya"
+    },
+    "summary": {
+      "es": "Camino de cornisa y ripio que ingresa por Jujuy y regala vistas espectaculares de cerros multicolores.",
+      "en": "Narrow gravel mountain road entering from Jujuy with spectacular multi-colored mountain vistas."
+    },
+    "category": "ruta",
+    "region": "puna",
+    "coords": {
+      "lat": -22.802222,
+      "lng": -65.230278
+    },
+    "tags": [
+      "cornisa",
+      "paisaje",
+      "aventura"
+    ],
+    "popularity": 85
+  },
+  {
+    "id": "carbonada-saltena",
+    "title": {
+      "es": "Carbonada",
+      "en": "Carbonada Stew"
+    },
+    "summary": {
+      "es": "Guiso agridulce con carne, zapallo, maíz y frutas secas cocido lentamente en olla.",
+      "en": "Sweet-savory stew of beef, squash, corn and dried fruits simmered slowly in a pot."
+    },
+    "category": "gastronomia",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785,
+      "lng": -65.413333
+    },
+    "tags": [
+      "hogar",
+      "tradicion"
+    ],
+    "popularity": 83
+  },
+  {
+    "id": "catedral-salta",
+    "title": {
+      "es": "Catedral Basílica de Salta",
+      "en": "Salta Cathedral"
+    },
+    "summary": {
+      "es": "Templo neobarroco que guarda a los patronos del Milagro y los restos del general Güemes.",
+      "en": "Neo-baroque cathedral housing the Miracle patrons and the remains of General Güemes."
+    },
+    "category": "patrimonio",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785,
+      "lng": -65.413333
+    },
+    "tags": [
+      "religion",
+      "monumento"
+    ],
     "popularity": 95
   },
   {
     "id": "cerro-san-bernardo",
-    "title": { "es": "Cerro San Bernardo", "en": "San Bernardo Hill" },
+    "title": {
+      "es": "Cerro San Bernardo",
+      "en": "San Bernardo Hill"
+    },
     "summary": {
       "es": "Mirador de la ciudad de Salta, acceso por teleférico o escalinatas.",
       "en": "City viewpoint with cable car or stairs access."
     },
     "category": "mirador",
     "region": "ciudad",
-    "coords": { "lat": -24.795, "lng": -65.411 },
-    "tags": ["vista", "urbano"],
+    "coords": {
+      "lat": -24.795,
+      "lng": -65.411
+    },
+    "tags": [
+      "vista",
+      "urbano"
+    ],
     "popularity": 88
+  },
+  {
+    "id": "chanfaina-saltena",
+    "title": {
+      "es": "Chanfaina",
+      "en": "Chanfaina Stew"
+    },
+    "summary": {
+      "es": "Plato intenso de menudencias de cordero o cabrito con papa y ají, típico de las fiestas gauchas.",
+      "en": "Robust stew of lamb or goat offal with potatoes and chili, typical at gaucho gatherings."
+    },
+    "category": "gastronomia",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785,
+      "lng": -65.413333
+    },
+    "tags": [
+      "tradicional",
+      "gourmet"
+    ],
+    "popularity": 78
+  },
+  {
+    "id": "circuito-diques",
+    "title": {
+      "es": "Circuito de los Diques",
+      "en": "Reservoir Circuit"
+    },
+    "summary": {
+      "es": "Recorrido entre los diques Cabra Corral y Campo Alegre ideal para deportes náuticos y avistaje de aves.",
+      "en": "Drive linking Cabra Corral and Campo Alegre reservoirs, perfect for water sports and birdwatching."
+    },
+    "category": "ruta",
+    "region": "lerma",
+    "coords": {
+      "lat": -25.239444,
+      "lng": -65.416667
+    },
+    "tags": [
+      "agua",
+      "naturaleza",
+      "familia"
+    ],
+    "popularity": 78
+  },
+  {
+    "id": "convento-san-bernardo",
+    "title": {
+      "es": "Convento San Bernardo",
+      "en": "San Bernardo Convent"
+    },
+    "summary": {
+      "es": "Antiguo hospital convertido en convento carmelita con portal de algarrobo tallado de 1762.",
+      "en": "Former hospital turned Carmelite convent featuring a 1762 carved carob wood portal."
+    },
+    "category": "patrimonio",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.788056,
+      "lng": -65.413333
+    },
+    "tags": [
+      "barroco",
+      "religion"
+    ],
+    "popularity": 86
+  },
+  {
+    "id": "empanadas-saltenas",
+    "title": {
+      "es": "Empanadas Salteñas",
+      "en": "Salta Empanadas"
+    },
+    "summary": {
+      "es": "Masa horneada rellena de carne cortada a cuchillo, papa, huevo y especias típicas.",
+      "en": "Hand-cut beef turnovers with potato, egg and signature northern spices."
+    },
+    "category": "gastronomia",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785,
+      "lng": -65.413333
+    },
+    "tags": [
+      "tradicional",
+      "horno"
+    ],
+    "popularity": 97
+  },
+  {
+    "id": "graneros-prehispanicos",
+    "title": {
+      "es": "Graneros Prehispánicos de La Poma",
+      "en": "La Poma Pre-Hispanic Granaries"
+    },
+    "summary": {
+      "es": "Depósitos incas y preincas utilizados para almacenar maíz en los Valles Calchaquíes.",
+      "en": "Inca and pre-Inca storehouses once used to preserve maize in the Calchaquí Valleys."
+    },
+    "category": "patrimonio",
+    "region": "valles",
+    "coords": {
+      "lat": -23.649444,
+      "lng": -66.288611
+    },
+    "tags": [
+      "inca",
+      "agricultura"
+    ],
+    "popularity": 79
+  },
+  {
+    "id": "humitas-en-chala",
+    "title": {
+      "es": "Humitas en Chala",
+      "en": "Steamed Humitas"
+    },
+    "summary": {
+      "es": "Crema de choclo rallado con queso envuelta en chala y cocida al vapor, dulce o salada.",
+      "en": "Creamy grated corn with cheese steamed inside husks, served sweet or savory."
+    },
+    "category": "gastronomia",
+    "region": "valles",
+    "coords": {
+      "lat": -24.785,
+      "lng": -65.413333
+    },
+    "tags": [
+      "maiz",
+      "tradicion"
+    ],
+    "popularity": 86
+  },
+  {
+    "id": "iglesia-san-francisco",
+    "title": {
+      "es": "Iglesia San Francisco",
+      "en": "San Francisco Church"
+    },
+    "summary": {
+      "es": "Fachada roja icónica con la torre campanario más alta de Sudamérica y diseño barroco-neoclásico.",
+      "en": "Iconic red facade with South America's tallest bell tower and baroque-neoclassical design."
+    },
+    "category": "patrimonio",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785833,
+      "lng": -65.410833
+    },
+    "tags": [
+      "arquitectura",
+      "religion"
+    ],
+    "popularity": 92
+  },
+  {
+    "id": "iglesia-san-jose-cachi",
+    "title": {
+      "es": "Iglesia San José de Cachi",
+      "en": "San José Church of Cachi"
+    },
+    "summary": {
+      "es": "Templo vallisto con techo y púlpito tallados en madera de cardón declarado Monumento Histórico Nacional.",
+      "en": "Valley church with cardón wood ceiling and pulpit, declared a National Historic Monument."
+    },
+    "category": "patrimonio",
+    "region": "valles",
+    "coords": {
+      "lat": -25.123056,
+      "lng": -66.166111
+    },
+    "tags": [
+      "cardon",
+      "arquitectura"
+    ],
+    "popularity": 85
+  },
+  {
+    "id": "locro-salteno",
+    "title": {
+      "es": "Locro Salteño",
+      "en": "Salta Locro"
+    },
+    "summary": {
+      "es": "Guiso criollo con maíz blanco, porotos, zapallo y carnes servido con frito de pimentón.",
+      "en": "Hearty stew of white corn, beans, squash and meats finished with paprika-infused fat."
+    },
+    "category": "gastronomia",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785,
+      "lng": -65.413333
+    },
+    "tags": [
+      "invierno",
+      "tradicional"
+    ],
+    "popularity": 89
+  },
+  {
+    "id": "maam",
+    "title": {
+      "es": "Museo de Arqueología de Alta Montaña",
+      "en": "High Mountain Archaeology Museum"
+    },
+    "summary": {
+      "es": "Exhibe el patrimonio inca de los Niños de Llullaillaco en pleno centro de Salta.",
+      "en": "Displays the Inca heritage of the Llullaillaco Children in downtown Salta."
+    },
+    "category": "museo",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.786389,
+      "lng": -65.413333
+    },
+    "tags": [
+      "arqueologia",
+      "inca"
+    ],
+    "popularity": 94
+  },
+  {
+    "id": "mac-salta",
+    "title": {
+      "es": "Museo de Arte Contemporáneo",
+      "en": "Contemporary Art Museum"
+    },
+    "summary": {
+      "es": "Espacio dedicado al arte contemporáneo con exhibiciones temporales de artistas nacionales e internacionales.",
+      "en": "Venue for contemporary art with rotating exhibitions of national and international artists."
+    },
+    "category": "museo",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785,
+      "lng": -65.411944
+    },
+    "tags": [
+      "arte",
+      "contemporaneo"
+    ],
+    "popularity": 82
+  },
+  {
+    "id": "mirador-cabra-corral",
+    "title": {
+      "es": "Mirador del Dique Cabra Corral",
+      "en": "Cabra Corral Dam Viewpoint"
+    },
+    "summary": {
+      "es": "Mirador sobre el embalse ideal para actividades náuticas y aventura.",
+      "en": "Overlooks the reservoir, ideal for water sports and adventure activities."
+    },
+    "category": "mirador",
+    "region": "lerma",
+    "coords": {
+      "lat": -25.239444,
+      "lng": -65.416667
+    },
+    "tags": [
+      "agua",
+      "aventura"
+    ],
+    "popularity": 81
+  },
+  {
+    "id": "mirador-castillos",
+    "title": {
+      "es": "Mirador de Los Castillos",
+      "en": "Los Castillos Viewpoint"
+    },
+    "summary": {
+      "es": "Vista a formaciones rojizas que evocan castillos sobre la ruta a Cafayate.",
+      "en": "View of reddish rock formations resembling castles along the road to Cafayate."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": {
+      "lat": -25.802222,
+      "lng": -65.7175
+    },
+    "tags": [
+      "ruta",
+      "paisaje"
+    ],
+    "popularity": 83
+  },
+  {
+    "id": "mirador-condor-iruya",
+    "title": {
+      "es": "Mirador de El Cóndor",
+      "en": "El Cóndor Viewpoint"
+    },
+    "summary": {
+      "es": "Mirador emblemático de Iruya para ver el amanecer y el vuelo de cóndores.",
+      "en": "Iconic Iruya lookout for sunrise vistas and condor sightings."
+    },
+    "category": "mirador",
+    "region": "puna",
+    "coords": {
+      "lat": -22.8,
+      "lng": -65.233333
+    },
+    "tags": [
+      "amanecer",
+      "fauna"
+    ],
+    "popularity": 86
+  },
+  {
+    "id": "mirador-cruz-iruya",
+    "title": {
+      "es": "Mirador de la Cruz",
+      "en": "La Cruz Viewpoint"
+    },
+    "summary": {
+      "es": "Mirador cercano al pueblo de Iruya con ascenso breve y vistas al río y montañas.",
+      "en": "Close-to-town Iruya lookout with a short climb and sweeping river and mountain views."
+    },
+    "category": "mirador",
+    "region": "puna",
+    "coords": {
+      "lat": -22.802778,
+      "lng": -65.228889
+    },
+    "tags": [
+      "pueblo",
+      "atardecer"
+    ],
+    "popularity": 79
+  },
+  {
+    "id": "mirador-del-torreon",
+    "title": {
+      "es": "Mirador del Torreón",
+      "en": "Torreón Viewpoint"
+    },
+    "summary": {
+      "es": "Punto panorámico en la Cuesta del Obispo con vistas al Valle Encantado y cardones.",
+      "en": "Panoramic perch on Cuesta del Obispo overlooking Valle Encantado and towering cacti."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": {
+      "lat": -25.183333,
+      "lng": -65.75
+    },
+    "tags": [
+      "paisaje",
+      "montaña"
+    ],
+    "popularity": 82
+  },
+  {
+    "id": "mirador-portezuelo",
+    "title": {
+      "es": "Mirador de El Portezuelo",
+      "en": "El Portezuelo Viewpoint"
+    },
+    "summary": {
+      "es": "Acceso arbolado a Salta capital con vistas al Valle de Lerma.",
+      "en": "Tree-lined gateway to Salta city with views over the Lerma Valley."
+    },
+    "category": "mirador",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.794444,
+      "lng": -65.394444
+    },
+    "tags": [
+      "urbano",
+      "valle"
+    ],
+    "popularity": 77
+  },
+  {
+    "id": "mirador-recta-tin-tin",
+    "title": {
+      "es": "Mirador de la Recta del Tin Tin",
+      "en": "Recta del Tin Tin Viewpoint"
+    },
+    "summary": {
+      "es": "Mirador sobre la histórica recta rodeada de cardones en el Parque Nacional Los Cardones.",
+      "en": "Lookout over the historic straightaway surrounded by cacti in Los Cardones National Park."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": {
+      "lat": -25.199167,
+      "lng": -65.950833
+    },
+    "tags": [
+      "historia",
+      "cardones"
+    ],
+    "popularity": 80
+  },
+  {
+    "id": "mirador-ventanas",
+    "title": {
+      "es": "Mirador de las Ventanas",
+      "en": "Las Ventanas Viewpoint"
+    },
+    "summary": {
+      "es": "Formaciones con aberturas naturales que enmarcan los colores de la Quebrada de las Conchas.",
+      "en": "Natural rock openings framing the colorful Quebrada de las Conchas desert."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": {
+      "lat": -25.724722,
+      "lng": -65.547222
+    },
+    "tags": [
+      "geologia",
+      "fotografia"
+    ],
+    "popularity": 84
+  },
+  {
+    "id": "museo-antropologia",
+    "title": {
+      "es": "Museo de Antropología de Salta",
+      "en": "Salta Anthropology Museum"
+    },
+    "summary": {
+      "es": "Colecciones arqueológicas y etnográficas del Noroeste argentino en un palacete centenario.",
+      "en": "Archaeological and ethnographic collections of Northwest Argentina inside a century-old mansion."
+    },
+    "category": "museo",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.792778,
+      "lng": -65.405833
+    },
+    "tags": [
+      "cultura",
+      "originarios"
+    ],
+    "popularity": 83
+  },
+  {
+    "id": "museo-bellas-artes",
+    "title": {
+      "es": "Museo de Bellas Artes Lola Mora",
+      "en": "Lola Mora Fine Arts Museum"
+    },
+    "summary": {
+      "es": "Galería en la Casa Arias Rengel con arte salteño, argentino y contemporáneo.",
+      "en": "Gallery inside Casa Arias Rengel showcasing Salta, Argentine and contemporary art."
+    },
+    "category": "museo",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.784722,
+      "lng": -65.415556
+    },
+    "tags": [
+      "arte",
+      "exposiciones"
+    ],
+    "popularity": 84
+  },
+  {
+    "id": "museo-casa-hernandez",
+    "title": {
+      "es": "Museo Casa de Hernández",
+      "en": "Casa de Hernández Museum"
+    },
+    "summary": {
+      "es": "Casa colonial que conserva mobiliario, platería y la vida cotidiana salteña del siglo XIX.",
+      "en": "Colonial home preserving furniture, silverware and 19th-century everyday life in Salta."
+    },
+    "category": "museo",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785278,
+      "lng": -65.414167
+    },
+    "tags": [
+      "colonial",
+      "tradicion"
+    ],
+    "popularity": 80
+  },
+  {
+    "id": "museo-guemes",
+    "title": {
+      "es": "Museo Güemes",
+      "en": "Güemes Museum"
+    },
+    "summary": {
+      "es": "Museo interactivo dedicado al héroe gaucho Martín Miguel de Güemes y la Guerra Gaucha.",
+      "en": "Interactive museum dedicated to gaucho hero Martín Miguel de Güemes and the Gaucho War."
+    },
+    "category": "museo",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.783889,
+      "lng": -65.4125
+    },
+    "tags": [
+      "historia",
+      "gauchos"
+    ],
+    "popularity": 89
+  },
+  {
+    "id": "museo-parodi-bustos",
+    "title": {
+      "es": "Museo de Ciencias Naturales y del Petróleo",
+      "en": "Natural Sciences & Oil Museum"
+    },
+    "summary": {
+      "es": "En General Mosconi narra la historia petrolera del norte salteño junto a colecciones de paleontología.",
+      "en": "In General Mosconi it shares the oil history of northern Salta alongside paleontology displays."
+    },
+    "category": "museo",
+    "region": "orán",
+    "coords": {
+      "lat": -22.916667,
+      "lng": -63.766667
+    },
+    "tags": [
+      "petroleo",
+      "geologia"
+    ],
+    "popularity": 76
+  },
+  {
+    "id": "museo-pio-pablo",
+    "title": {
+      "es": "Museo Arqueológico Pío Pablo Díaz",
+      "en": "Pío Pablo Díaz Archaeological Museum"
+    },
+    "summary": {
+      "es": "Relata la historia prehispánica de los Valles Calchaquíes desde Cachi con valiosas piezas arqueológicas.",
+      "en": "Shares the pre-Hispanic history of the Calchaquí Valleys from Cachi through remarkable artifacts."
+    },
+    "category": "museo",
+    "region": "valles",
+    "coords": {
+      "lat": -25.123056,
+      "lng": -66.166111
+    },
+    "tags": [
+      "arqueologia",
+      "valle"
+    ],
+    "popularity": 81
+  },
+  {
+    "id": "museo-vid-vino",
+    "title": {
+      "es": "Museo de la Vid y el Vino",
+      "en": "Vine and Wine Museum"
+    },
+    "summary": {
+      "es": "Espacio interactivo que recorre la historia del vino de altura y el Torrontés en Cafayate.",
+      "en": "Interactive space retracing the history of high-altitude wine and Torrontés in Cafayate."
+    },
+    "category": "museo",
+    "region": "valles",
+    "coords": {
+      "lat": -25.894167,
+      "lng": -65.98
+    },
+    "tags": [
+      "vino",
+      "interactivo"
+    ],
+    "popularity": 86
+  },
+  {
+    "id": "patay",
+    "title": {
+      "es": "Patay",
+      "en": "Patay Bread"
+    },
+    "summary": {
+      "es": "Pan seco elaborado con harina de algarroba, legado de las comunidades originarias.",
+      "en": "Dense bread made with carob flour, a legacy of indigenous communities."
+    },
+    "category": "gastronomia",
+    "region": "valles",
+    "coords": {
+      "lat": -25.123056,
+      "lng": -66.166111
+    },
+    "tags": [
+      "tradicional",
+      "algarroba"
+    ],
+    "popularity": 75
+  },
+  {
+    "id": "patrimonio-cabildo",
+    "title": {
+      "es": "Cabildo Histórico (Patrimonio)",
+      "en": "Historic Cabildo (Heritage)"
+    },
+    "summary": {
+      "es": "Uno de los cabildos coloniales mejor conservados del país y Monumento Histórico Nacional.",
+      "en": "One of Argentina's best-preserved colonial cabildos and a National Historic Monument."
+    },
+    "category": "patrimonio",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785,
+      "lng": -65.413611
+    },
+    "tags": [
+      "colonial",
+      "historia"
+    ],
+    "popularity": 91
+  },
+  {
+    "id": "portal-san-francisco",
+    "title": {
+      "es": "Portal del Convento San Francisco",
+      "en": "San Francisco Convent Portal"
+    },
+    "summary": {
+      "es": "Tallado barroco altoperuano considerado una obra maestra dentro de la iglesia homónima.",
+      "en": "High Andean baroque woodcarving masterpiece housed inside the San Francisco church."
+    },
+    "category": "patrimonio",
+    "region": "ciudad",
+    "coords": {
+      "lat": -24.785833,
+      "lng": -65.410833
+    },
+    "tags": [
+      "barroco",
+      "arte"
+    ],
+    "popularity": 80
+  },
+  {
+    "id": "quebrada-de-las-conchas",
+    "title": {
+      "es": "Quebrada de las Conchas",
+      "en": "Quebrada de las Conchas"
+    },
+    "summary": {
+      "es": "Formaciones rojizas sobre la RN68, entre Cafayate y Salta.",
+      "en": "Red rock formations along RN68, between Cafayate and Salta."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": {
+      "lat": -25.6406,
+      "lng": -65.918
+    },
+    "tags": [
+      "paisaje",
+      "geologia"
+    ],
+    "popularity": 95
+  },
+  {
+    "id": "quesillo-cayote",
+    "title": {
+      "es": "Quesillo con dulce de cayote",
+      "en": "Quesillo with Cayote Jam"
+    },
+    "summary": {
+      "es": "Postre típico de los Valles Calchaquíes que combina queso fresco con dulce de cayote y nueces.",
+      "en": "Typical Calchaquí dessert pairing fresh cheese with cayote squash jam and walnuts."
+    },
+    "category": "gastronomia",
+    "region": "valles",
+    "coords": {
+      "lat": -25.894167,
+      "lng": -65.98
+    },
+    "tags": [
+      "postre",
+      "valles"
+    ],
+    "popularity": 84
+  },
+  {
+    "id": "rn9-cornisa",
+    "title": {
+      "es": "Ruta Nacional 9: Camino de la Cornisa",
+      "en": "National Route 9: Cornice Road"
+    },
+    "summary": {
+      "es": "Tramo que une Salta con Jujuy entre curvas cerradas y la vegetación exuberante de la yunga.",
+      "en": "Stretch linking Salta and Jujuy through sharp curves and lush Yungas cloud forest."
+    },
+    "category": "ruta",
+    "region": "yungas",
+    "coords": {
+      "lat": -24.574722,
+      "lng": -65.404167
+    },
+    "tags": [
+      "selva",
+      "auto",
+      "curvas"
+    ],
+    "popularity": 82
+  },
+  {
+    "id": "ruinas-miraflores",
+    "title": {
+      "es": "Ruinas Jesuíticas de Miraflores",
+      "en": "Jesuit Ruins of Miraflores"
+    },
+    "summary": {
+      "es": "Vestigios de la misión jesuita en Metán, testimonio de la colonia en el sur salteño.",
+      "en": "Remains of the Jesuit mission in Metán, bearing witness to the colonial era in southern Salta."
+    },
+    "category": "patrimonio",
+    "region": "anta",
+    "coords": {
+      "lat": -25.5,
+      "lng": -64.766667
+    },
+    "tags": [
+      "jesuitas",
+      "historia"
+    ],
+    "popularity": 73
+  },
+  {
+    "id": "ruta-40-salta-cachi",
+    "title": {
+      "es": "Ruta 40: tramo Salta - Cachi",
+      "en": "Route 40: Salta to Cachi"
+    },
+    "summary": {
+      "es": "Tramo legendario con paisajes desérticos, la Quebrada de las Flechas y pueblos históricos.",
+      "en": "Legendary stretch with desert landscapes, Quebrada de las Flechas and historic villages."
+    },
+    "category": "ruta",
+    "region": "valles",
+    "coords": {
+      "lat": -25.9,
+      "lng": -66.05
+    },
+    "tags": [
+      "aventura",
+      "roadtrip"
+    ],
+    "popularity": 90
+  },
+  {
+    "id": "ruta-artesanos",
+    "title": {
+      "es": "Ruta de los Artesanos",
+      "en": "Artisans Route"
+    },
+    "summary": {
+      "es": "Circuito en Seclantás que reúne talleres textiles y los famosos ponchos salteños.",
+      "en": "Circuit around Seclantás showcasing textile workshops and the famed Salta ponchos."
+    },
+    "category": "ruta",
+    "region": "valles",
+    "coords": {
+      "lat": -25.331944,
+      "lng": -66.2425
+    },
+    "tags": [
+      "artesania",
+      "cultura",
+      "textil"
+    ],
+    "popularity": 80
+  },
+  {
+    "id": "ruta-del-vino-salta",
+    "title": {
+      "es": "Ruta del Vino de Salta",
+      "en": "Salta Wine Route"
+    },
+    "summary": {
+      "es": "Recorrido por bodegas de altura en Cafayate y los Valles Calchaquíes para degustar el Torrontés.",
+      "en": "Circuit across high-altitude wineries in Cafayate and the Calchaquí Valleys to taste Torrontés."
+    },
+    "category": "ruta",
+    "region": "valles",
+    "coords": {
+      "lat": -25.894167,
+      "lng": -65.98
+    },
+    "tags": [
+      "vino",
+      "gastronomia",
+      "enoturismo"
+    ],
+    "popularity": 93
+  },
+  {
+    "id": "ruta-nacional-68",
+    "title": {
+      "es": "Ruta Nacional 68",
+      "en": "National Route 68"
+    },
+    "summary": {
+      "es": "Carretera escénica por la Quebrada de las Conchas con formaciones como el Anfiteatro y la Garganta del Diablo.",
+      "en": "Scenic drive through the Quebrada de las Conchas featuring rock icons like the Amphitheater and Devil's Throat."
+    },
+    "category": "ruta",
+    "region": "valles",
+    "coords": {
+      "lat": -25.25,
+      "lng": -65.5
+    },
+    "tags": [
+      "auto",
+      "paisaje",
+      "quebrada"
+    ],
+    "popularity": 92
+  },
+  {
+    "id": "ruta-provincial-33",
+    "title": {
+      "es": "Ruta Provincial 33",
+      "en": "Provincial Route 33"
+    },
+    "summary": {
+      "es": "Une Chicoana con Cachi atravesando la Cuesta del Obispo, el Valle Encantado y la Recta del Tin Tin a más de 3000 msnm.",
+      "en": "Links Chicoana with Cachi over Cuesta del Obispo, Valle Encantado and the 3,000 m high Recta del Tin Tin."
+    },
+    "category": "ruta",
+    "region": "valles",
+    "coords": {
+      "lat": -25.2,
+      "lng": -65.783333
+    },
+    "tags": [
+      "montaña",
+      "cardones",
+      "auto"
+    ],
+    "popularity": 88
+  },
+  {
+    "id": "ruta-sol-luna",
+    "title": {
+      "es": "Ruta del Sol y la Luna",
+      "en": "Sun and Moon Route"
+    },
+    "summary": {
+      "es": "Circuito de alta montaña por Tolar Grande, el Salar de Arizaro y el Cono de Arita en plena Puna.",
+      "en": "High Andean loop through Tolar Grande, the Arizaro Salt Flat and the conical Arita hill."
+    },
+    "category": "ruta",
+    "region": "puna",
+    "coords": {
+      "lat": -24.214722,
+      "lng": -67.385278
+    },
+    "tags": [
+      "puna",
+      "aventura",
+      "salinas"
+    ],
+    "popularity": 87
+  },
+  {
+    "id": "senda-cabra-corral",
+    "title": {
+      "es": "Senda del Cabra Corral",
+      "en": "Cabra Corral Path"
+    },
+    "summary": {
+      "es": "Caminatas suaves alrededor del dique para disfrutar del paisaje y actividades en el agua.",
+      "en": "Gentle walks around the reservoir to enjoy the scenery and on-water activities."
+    },
+    "category": "sendero",
+    "region": "lerma",
+    "coords": {
+      "lat": -25.239444,
+      "lng": -65.416667
+    },
+    "tags": [
+      "familia",
+      "agua"
+    ],
+    "popularity": 74
+  },
+  {
+    "id": "sendero-condor",
+    "title": {
+      "es": "Sendero a El Cóndor",
+      "en": "El Cóndor Trail"
+    },
+    "summary": {
+      "es": "Ascenso exigente desde Iruya al mirador más alto para ver el pueblo colgante y cóndores planeando.",
+      "en": "Challenging climb from Iruya to the highest lookout with hanging-village views and soaring condors."
+    },
+    "category": "sendero",
+    "region": "puna",
+    "coords": {
+      "lat": -22.802222,
+      "lng": -65.230278
+    },
+    "tags": [
+      "trekking",
+      "condores"
+    ],
+    "popularity": 82
+  },
+  {
+    "id": "sendero-cono-arita",
+    "title": {
+      "es": "Sendero al Cono de Arita",
+      "en": "Cono de Arita Walk"
+    },
+    "summary": {
+      "es": "Caminata sobre el Salar de Arizaro para rodear la formación volcánica cónica casi perfecta.",
+      "en": "Walk across the Arizaro salt flat to circle the near-perfect conical Arita formation."
+    },
+    "category": "sendero",
+    "region": "puna",
+    "coords": {
+      "lat": -24.266111,
+      "lng": -67.755
+    },
+    "tags": [
+      "puna",
+      "salinas",
+      "fotografia"
+    ],
+    "popularity": 78
+  },
+  {
+    "id": "sendero-garganta-diablo",
+    "title": {
+      "es": "Sendero Garganta del Diablo",
+      "en": "Devil's Throat Trail"
+    },
+    "summary": {
+      "es": "Caminata corta que ingresa a la formación rojiza más emblemática de la Quebrada de las Conchas.",
+      "en": "Short walk into the most emblematic red rock formation of the Quebrada de las Conchas."
+    },
+    "category": "sendero",
+    "region": "valles",
+    "coords": {
+      "lat": -25.794167,
+      "lng": -65.677778
+    },
+    "tags": [
+      "familia",
+      "fotografia"
+    ],
+    "popularity": 86
+  },
+  {
+    "id": "sendero-laguna-patos",
+    "title": {
+      "es": "Sendero Laguna de los Patos",
+      "en": "Laguna de los Patos Trail"
+    },
+    "summary": {
+      "es": "Caminata en la Quebrada de San Lorenzo dentro de la yunga ideal para avistaje de aves.",
+      "en": "Walk inside the San Lorenzo gorge cloud forest, perfect for spotting birds."
+    },
+    "category": "sendero",
+    "region": "yungas",
+    "coords": {
+      "lat": -24.740556,
+      "lng": -65.476389
+    },
+    "tags": [
+      "selva",
+      "aves",
+      "familia"
+    ],
+    "popularity": 81
+  },
+  {
+    "id": "sendero-nogalar",
+    "title": {
+      "es": "Sendero El Nogalar de los Toldos",
+      "en": "Nogalar de los Toldos Trail"
+    },
+    "summary": {
+      "es": "Senderos de selva en el Parque Nacional El Baritú ideales para observar la biodiversidad de la yunga.",
+      "en": "Jungle trails inside El Baritú National Park ideal for witnessing Yungas biodiversity."
+    },
+    "category": "sendero",
+    "region": "yungas",
+    "coords": {
+      "lat": -22.5,
+      "lng": -64.5
+    },
+    "tags": [
+      "selva",
+      "biodiversidad"
+    ],
+    "popularity": 76
+  },
+  {
+    "id": "sendero-ojos-mar",
+    "title": {
+      "es": "Sendero a los Ojos de Mar",
+      "en": "Ojos de Mar Trail"
+    },
+    "summary": {
+      "es": "Paseo corto para ver lagunas saladas con estromatolitos cerca de Tolar Grande.",
+      "en": "Short walk to salty lagoons with stromatolites near Tolar Grande."
+    },
+    "category": "sendero",
+    "region": "puna",
+    "coords": {
+      "lat": -24.261111,
+      "lng": -67.375
+    },
+    "tags": [
+      "geologia",
+      "puna"
+    ],
+    "popularity": 80
+  },
+  {
+    "id": "sendero-torreon",
+    "title": {
+      "es": "Trekking Mirador del Torreón",
+      "en": "Torreón Viewpoint Trek"
+    },
+    "summary": {
+      "es": "Recorrido interpretativo que sube desde la selva de yungas hasta los cardones de la Cuesta del Obispo.",
+      "en": "Interpretive hike climbing from Yungas forest to the cardon desert at Cuesta del Obispo."
+    },
+    "category": "sendero",
+    "region": "valles",
+    "coords": {
+      "lat": -25.183333,
+      "lng": -65.75
+    },
+    "tags": [
+      "interpretativo",
+      "montaña"
+    ],
+    "popularity": 79
+  },
+  {
+    "id": "sitio-esteco",
+    "title": {
+      "es": "Sitio Arqueológico Esteco II",
+      "en": "Esteco II Archaeological Site"
+    },
+    "summary": {
+      "es": "Ruinas de la legendaria Talavera de Madrid, una de las ciudades perdidas del Virreinato del Perú.",
+      "en": "Ruins of legendary Talavera de Madrid, one of the lost cities of the Viceroyalty of Peru."
+    },
+    "category": "patrimonio",
+    "region": "anta",
+    "coords": {
+      "lat": -25.433333,
+      "lng": -64.966667
+    },
+    "tags": [
+      "colonial",
+      "leyendas"
+    ],
+    "popularity": 74
+  },
+  {
+    "id": "sitio-tastil",
+    "title": {
+      "es": "Sitio Arqueológico de Tastil",
+      "en": "Tastil Archaeological Site"
+    },
+    "summary": {
+      "es": "Ruinas de una ciudad preincaica en la Quebrada del Toro, ejemplo de arquitectura andina.",
+      "en": "Ruins of a pre-Inca city in Quebrada del Toro showcasing Andean urban planning."
+    },
+    "category": "patrimonio",
+    "region": "puna",
+    "coords": {
+      "lat": -24.713056,
+      "lng": -65.946667
+    },
+    "tags": [
+      "arqueologia",
+      "preinca"
+    ],
+    "popularity": 84
+  },
+  {
+    "id": "tamales-chicoana",
+    "title": {
+      "es": "Tamales de Chicoana",
+      "en": "Chicoana Tamales"
+    },
+    "summary": {
+      "es": "Pasta de maíz envuelta en chala con relleno de carne sazonada, emblema culinario de Chicoana.",
+      "en": "Corn dough wrapped in husks with seasoned meat filling, the culinary emblem of Chicoana."
+    },
+    "category": "gastronomia",
+    "region": "lerma",
+    "coords": {
+      "lat": -25.073056,
+      "lng": -65.523333
+    },
+    "tags": [
+      "maiz",
+      "festivales"
+    ],
+    "popularity": 88
+  },
+  {
+    "id": "trekking-nubes",
+    "title": {
+      "es": "Trekking de las Nubes",
+      "en": "Clouds Trek"
+    },
+    "summary": {
+      "es": "Travesía de varios días por la Puna salteña conectando San Antonio de los Cobres con Nazareno.",
+      "en": "Multi-day expedition across Salta's Puna linking San Antonio de los Cobres with Nazareno."
+    },
+    "category": "sendero",
+    "region": "puna",
+    "coords": {
+      "lat": -24.231389,
+      "lng": -66.322778
+    },
+    "tags": [
+      "expedicion",
+      "alta-montana"
+    ],
+    "popularity": 75
+  },
+  {
+    "id": "trekking-tastil",
+    "title": {
+      "es": "Trekking a Santa Rosa de Tastil",
+      "en": "Santa Rosa de Tastil Trek"
+    },
+    "summary": {
+      "es": "Sendero de altura que conduce al sitio arqueológico de Tastil con vistas de la Quebrada del Toro.",
+      "en": "High-altitude trek leading to the Tastil archaeological site with views of Quebrada del Toro."
+    },
+    "category": "sendero",
+    "region": "puna",
+    "coords": {
+      "lat": -24.713056,
+      "lng": -65.946667
+    },
+    "tags": [
+      "arqueologia",
+      "trekking"
+    ],
+    "popularity": 77
+  },
+  {
+    "id": "tren-a-las-nubes",
+    "title": {
+      "es": "Tren a las Nubes",
+      "en": "Train to the Clouds"
+    },
+    "summary": {
+      "es": "Ferrocarril de altura que parte de San Antonio de los Cobres y cruza el Viaducto La Polvorilla a 4200 msnm.",
+      "en": "High-altitude rail journey from San Antonio de los Cobres crossing the La Polvorilla viaduct at 4,200 m."
+    },
+    "category": "ruta",
+    "region": "puna",
+    "coords": {
+      "lat": -24.258611,
+      "lng": -66.392222
+    },
+    "tags": [
+      "ferrocarril",
+      "aventura",
+      "ingenieria"
+    ],
+    "popularity": 96
+  },
+  {
+    "id": "vinos-de-altura",
+    "title": {
+      "es": "Vinos de Altura",
+      "en": "High-Altitude Wines"
+    },
+    "summary": {
+      "es": "Vinos Torrontés cultivados a más de 1700 msnm en Cafayate con aromas florales intensos.",
+      "en": "Torrontés wines grown above 1,700 m in Cafayate with intensely floral aromas."
+    },
+    "category": "gastronomia",
+    "region": "valles",
+    "coords": {
+      "lat": -25.894167,
+      "lng": -65.98
+    },
+    "tags": [
+      "torrontes",
+      "vino"
+    ],
+    "popularity": 92
   }
 ]
