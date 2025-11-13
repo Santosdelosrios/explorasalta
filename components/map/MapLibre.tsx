@@ -313,6 +313,8 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   }, [styleUrl, lng, lat, z, locale, poiIndex, router, selectedPoi]);
 
   useEffect(() => {
+    featuresRef.current = features;
+
     const map = mapRef.current;
     if (!map) return;
 
