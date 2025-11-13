@@ -256,11 +256,14 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   );
 
   useEffect(() => {
-    if (mapRef.current || !containerRef.current) {
+    if (mapRef.current) {
       return;
     }
 
     const container = containerRef.current;
+    if (!container) {
+      return;
+    }
 
     const baseStyle =
       styleUrl ??
