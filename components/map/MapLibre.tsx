@@ -216,20 +216,16 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
     map.addControl(new maplibregl.NavigationControl({visualizePitch: true}), 'top-right');
     map.addControl(new maplibregl.AttributionControl({compact: true}), 'bottom-right');
 
-    const popup = new maplibregl.Popup({ closeButton: true, closeOnClick: true, maxWidth: '320px' });
+    const popup = new maplibregl.Popup({closeButton: true, closeOnClick: true, maxWidth: '320px'});
     popupRef.current = popup;
 
     const showPoiPopup = (
       poiId: string,
       coordinates: [number, number],
-      options?: {updateQuery?: boolean; flyTo?: boolean}
+      options?: {updateQuery?: boolean}
     ) => {
       const poi = poiIndex.get(poiId);
       if (!poi) return;
-
-      if (options?.flyTo) {
-        map.flyTo({center: coordinates, zoom: Math.max(map.getZoom(), 11.5)});
-      }
 
       popup.setLngLat(coordinates).setDOMContent(createPopupContent(poi, locale)).addTo(map);
 
@@ -281,7 +277,9 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
       if (selectedPoi) {
         const poi = poiIndex.get(selectedPoi);
         if (poi) {
-          showPoiPopup(poi.id, [poi.coords.lng, poi.coords.lat], {updateQuery: false, flyTo: true});
+          const coordinates: [number, number] = [poi.coords.lng, poi.coords.lat];
+          map.easeTo({center: coordinates, zoom: map.getZoom()});
+          showPoiPopup(poi.id, coordinates, {updateQuery: false});
         }
       }
     };
@@ -355,7 +353,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
     const showSelected = () => {
       const coordinates: [number, number] = [poi.coords.lng, poi.coords.lat];
-      map.flyTo({center: coordinates, zoom: Math.max(map.getZoom(), 12)});
+      map.easeTo({center: coordinates, zoom: map.getZoom()});
       popup.setLngLat(coordinates).setDOMContent(createPopupContent(poi, locale)).addTo(map);
     };
 

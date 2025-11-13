@@ -46,10 +46,10 @@ export default async function HomePage({
     <>
       <main
         id="main"
-        className="container mx-auto flex flex-col gap-16 px-4 py-16 md:px-6"
+        className="container mx-auto flex flex-col gap-12 px-3 py-12 md:px-5"
       >
-        <section className="flex flex-col items-center gap-6 text-center md:items-start md:text-left">
-          <div className="flex w-full flex-col items-center gap-4 md:flex-row md:items-start md:justify-between md:text-left">
+        <section className="flex flex-col items-center gap-4 text-center md:items-start md:text-left">
+          <div className="flex w-full flex-col items-center gap-3 md:flex-row md:items-start md:justify-between md:text-left">
             <h1 className="max-w-3xl font-heading text-4xl font-extrabold md:text-5xl">
               {copy.title}
               <span className="block text-xl font-semibold text-cardon md:text-2xl">
@@ -61,8 +61,8 @@ export default async function HomePage({
             <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
               <Link
                 className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
-                href="#mapa"
-                prefetch={false}
+                href={{pathname: `/${locale}`, hash: 'mapa'}}
+                scroll
               >
                 {copy.mapCta}
               </Link>
