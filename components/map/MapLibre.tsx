@@ -273,7 +273,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
       });
     };
 
-    const showPoiPopup = (
+    const openPoiPopup = (
       poiId: string,
       coordinates: [number, number],
       options?: {updateQuery?: boolean}
@@ -307,6 +307,16 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
     ) => {
       const poi = poiIndex.get(poiId);
       if (!poi) return;
+
+      panToCoordinates(coordinates);
+      popup.setLngLat(coordinates).setDOMContent(createPopupContent(poi, locale)).addTo(map);
+
+      if (options?.updateQuery !== false && typeof window !== 'undefined') {
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set('poi', poiId);
+        router.replace(`${window.location.pathname}?${searchParams.toString()}`, {scroll: false});
+      }
+    };
 
       map.addLayer({
         id: 'clusters',
@@ -342,7 +352,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         const poi = poiIndex.get(selectedPoi);
         if (poi) {
           const coordinates: [number, number] = [poi.coords.lng, poi.coords.lat];
-          showPoiPopup(poi.id, coordinates, {updateQuery: false});
+          openPoiPopup(poi.id, coordinates, {updateQuery: false});
         }
       }
     };
@@ -353,7 +363,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
       const {id} = feature.properties as {id?: string};
       const coordinates = (feature.geometry as Point).coordinates as [number, number];
       if (!id) return;
-      showPoiPopup(id, coordinates);
+      openPoiPopup(id, coordinates);
     };
 
     map.on('load', handleLoad);
