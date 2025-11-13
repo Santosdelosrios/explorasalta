@@ -1,8 +1,157 @@
 [
   {
+    "id": "corso-flores-2025",
+    "title": {
+      "es": "Corso de las Flores",
+      "en": "Flowers Parade"
+    },
+    "dateRange": {
+      "start": "2025-02-15",
+      "end": "2025-02-16"
+    },
+    "region": "ciudad",
+    "description": {
+      "es": "Carrozas y comparsas llenan de color las noches de carnaval en Salta Capital.",
+      "en": "Floats and troupes splash color across Salta's carnival nights."
+    }
+  },
+  {
+    "id": "culto-pachamama-2025",
+    "title": {
+      "es": "Ceremonia a la Pachamama",
+      "en": "Pachamama Ceremony"
+    },
+    "dateRange": {
+      "start": "2025-08-01"
+    },
+    "region": "puna",
+    "description": {
+      "es": "Ofrecimiento ancestral a la Madre Tierra en comunidades de la Puna y Valles.",
+      "en": "Ancestral offering to Mother Earth across Puna and valley communities."
+    }
+  },
+  {
+    "id": "fiesta-milagro-2025",
+    "title": {
+      "es": "Fiesta del Señor y la Virgen del Milagro",
+      "en": "Feast of the Miracle"
+    },
+    "dateRange": {
+      "start": "2025-09-13",
+      "end": "2025-09-15"
+    },
+    "region": "ciudad",
+    "description": {
+      "es": "La procesión más multitudinaria de Salta recorre el casco histórico cada 15 de septiembre.",
+      "en": "Salta's largest procession fills the historic core every September 15th."
+    }
+  },
+  {
+    "id": "fiesta-nacional-chicha-2025",
+    "title": {
+      "es": "Fiesta Nacional de la Chicha",
+      "en": "National Chicha Festival"
+    },
+    "dateRange": {
+      "start": "2025-03-08",
+      "end": "2025-03-09"
+    },
+    "region": "yungas",
+    "description": {
+      "es": "La Caldera honra la bebida ancestral con ferias, música folklórica y bailes.",
+      "en": "La Caldera honors the ancestral drink with markets, folk music and dance."
+    }
+  },
+  {
+    "id": "fiesta-nacional-tamal-2025",
+    "title": {
+      "es": "Fiesta Nacional del Tamal",
+      "en": "National Tamal Festival"
+    },
+    "dateRange": {
+      "start": "2025-07-12",
+      "end": "2025-07-13"
+    },
+    "region": "lerma",
+    "description": {
+      "es": "Chicoana celebra su plato emblema con concursos, música y sabor casero.",
+      "en": "Chicoana celebrates its signature dish with contests, music and homemade flavor."
+    }
+  },
+  {
+    "id": "fiesta-san-jose-obrero-2025",
+    "title": {
+      "es": "Fiesta de San José Obrero",
+      "en": "Saint Joseph the Worker Feast"
+    },
+    "dateRange": {
+      "start": "2025-03-19"
+    },
+    "region": "lerma",
+    "description": {
+      "es": "Cerrillos honra a su patrono con misas, peñas gauchas y ferias comunitarias.",
+      "en": "Cerrillos honors its patron with mass, gaucho gatherings and community fairs."
+    }
+  },
+  {
+    "id": "fiesta-vino-torrontes-2025",
+    "title": {
+      "es": "Fiesta Nacional del Vino Torrontés",
+      "en": "National Torrontés Wine Festival"
+    },
+    "dateRange": {
+      "start": "2025-02-20",
+      "end": "2025-02-23"
+    },
+    "region": "valles",
+    "locationPoiId": "museo-vid-vino",
+    "description": {
+      "es": "Celebración cafayateña con degustaciones, peñas y elección de la Reina del Torrontés.",
+      "en": "Cafayate celebration with tastings, folk gigs and the Torrontés Queen coronation."
+    },
+    "website": "https://turismosalta.gov.ar"
+  },
+  {
+    "id": "homenaje-guemes-2025",
+    "title": {
+      "es": "Paso a la Inmortalidad de Güemes",
+      "en": "Güemes Memorial Day"
+    },
+    "dateRange": {
+      "start": "2025-06-17"
+    },
+    "region": "ciudad",
+    "description": {
+      "es": "Cabalgatas y desfiles gauchos homenajean al héroe salteño en el Monumento a Güemes.",
+      "en": "Mounted parades honor Salta's hero at the Güemes Monument."
+    }
+  },
+  {
+    "id": "peregrinacion-sumalao-2025",
+    "title": {
+      "es": "Peregrinación al Señor de Sumalao",
+      "en": "Pilgrimage to Lord of Sumalao"
+    },
+    "dateRange": {
+      "start": "2025-05-10",
+      "end": "2025-05-11"
+    },
+    "region": "lerma",
+    "description": {
+      "es": "Devotos caminan hasta La Merced para honrar al Cristo de Sumalao.",
+      "en": "Devotees walk to La Merced to honor the Christ of Sumalao."
+    }
+  },
+  {
     "id": "serenata-a-cafayate-2026",
-    "title": { "es": "Serenata a Cafayate", "en": "Serenade to Cafayate" },
-    "dateRange": { "start": "2026-02-20", "end": "2026-02-22" },
+    "title": {
+      "es": "Serenata a Cafayate",
+      "en": "Serenade to Cafayate"
+    },
+    "dateRange": {
+      "start": "2026-02-20",
+      "end": "2026-02-22"
+    },
     "region": "valles",
     "description": {
       "es": "Fiesta popular con música y tradiciones locales.",
