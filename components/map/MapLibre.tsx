@@ -256,11 +256,10 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   );
 
   useEffect(() => {
-    if (mapRef.current || !containerRef.current) {
+    const container = containerRef.current;
+    if (mapRef.current || !container) {
       return;
     }
-
-    const container = containerRef.current;
 
     const baseStyle =
       styleUrl ??
@@ -342,7 +341,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
       openPoiPopup(id, coordinates);
     };
 
-    map.on('load', handleLoad);
+    map.once('load', handleLoad);
     map.on('click', 'poi', handlePoiClick);
 
     map.getCanvas().setAttribute(
