@@ -278,7 +278,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         const poi = poiIndex.get(selectedPoi);
         if (poi) {
           const coordinates: [number, number] = [poi.coords.lng, poi.coords.lat];
-          map.easeTo({center: coordinates, zoom: map.getZoom()});
+          map.panTo(coordinates, {duration: 600});
           showPoiPopup(poi.id, coordinates, {updateQuery: false});
         }
       }
@@ -353,7 +353,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
 
     const showSelected = () => {
       const coordinates: [number, number] = [poi.coords.lng, poi.coords.lat];
-      map.easeTo({center: coordinates, zoom: map.getZoom()});
+      map.panTo(coordinates, {duration: 600});
       popup.setLngLat(coordinates).setDOMContent(createPopupContent(poi, locale)).addTo(map);
     };
 
