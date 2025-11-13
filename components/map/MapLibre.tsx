@@ -341,7 +341,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
           openPoiPopup(poi.id, coordinates, {updateQuery: false});
         }
       }
-    };
+    },
 
     const handlePoiClick = (event: maplibregl.MapLayerMouseEvent) => {
       const feature = event.features?.[0];
