@@ -10,5 +10,215 @@
     "durationHours": 8,
     "difficulty": "easy",
     "cover": "/images/branding/hero.jpg"
+  },
+  {
+    "id": "tren-a-las-nubes-tour",
+    "title": {
+      "es": "Tren a las Nubes",
+      "en": "Train to the Clouds"
+    },
+    "overview": {
+      "es": "Jornada completa que parte desde Salta y asciende hasta el Viaducto La Polvorilla, superando los 4.200 metros en la Puna.",
+      "en": "Full-day outing that departs Salta and climbs to the La Polvorilla Viaduct above 4,200 meters across the Puna."
+    },
+    "poiIds": ["tren-a-las-nubes"],
+    "durationHours": 16,
+    "difficulty": "hard"
+  },
+  {
+    "id": "cuesta-del-obispo-drive",
+    "title": {
+      "es": "Ruta a Cachi por la Cuesta del Obispo",
+      "en": "Cuesta del Obispo Road to Cachi"
+    },
+    "overview": {
+      "es": "Ascenso panorámico por la RP33 que enlaza el Valle de Lerma con los Valles Calchaquíes entre curvas, jungla y cardones.",
+      "en": "Panoramic RP33 climb linking the Lerma Valley with the Calchaquí Valleys through switchbacks, jungle and cactus plains."
+    },
+    "poiIds": ["ruta-provincial-33", "mirador-del-torreon", "mirador-recta-tin-tin"],
+    "durationHours": 9,
+    "difficulty": "moderate"
+  },
+  {
+    "id": "parque-cardones-loop",
+    "title": {
+      "es": "Parque Nacional Los Cardones",
+      "en": "Los Cardones National Park"
+    },
+    "overview": {
+      "es": "Recorrido breve por la Recta del Tin Tin para admirar cardones centenarios, fauna altoandina y cielos límpidos.",
+      "en": "Short circuit along the Recta del Tin Tin to admire century-old cacti, high-Andean wildlife and crystalline skies."
+    },
+    "poiIds": ["mirador-recta-tin-tin", "ruta-provincial-33"],
+    "durationHours": 3,
+    "difficulty": "easy"
+  },
+  {
+    "id": "city-tour-historico",
+    "title": {
+      "es": "City Tour Histórico",
+      "en": "Historic City Tour"
+    },
+    "overview": {
+      "es": "Paseo a pie por la Catedral, el Cabildo y templos coloniales para entender la historia de Salta Capital.",
+      "en": "Walking tour across the Cathedral, the Cabildo and colonial temples to grasp the history of Salta City."
+    },
+    "poiIds": ["catedral-salta", "cabildo-historico", "convento-san-bernardo"],
+    "durationHours": 4,
+    "difficulty": "easy"
+  },
+  {
+    "id": "maam-focus",
+    "title": {
+      "es": "MAAM y Plaza 9 de Julio",
+      "en": "MAAM & Main Square"
+    },
+    "overview": {
+      "es": "Visita concentrada al Museo de Arqueología de Alta Montaña para conocer a los Niños de Llullaillaco y el patrimonio inca.",
+      "en": "Focused visit to the High Mountain Archaeology Museum to meet the Llullaillaco Children and Inca heritage."
+    },
+    "poiIds": ["maam"],
+    "durationHours": 2,
+    "difficulty": "easy"
+  },
+  {
+    "id": "cerro-san-bernardo-hike",
+    "title": {
+      "es": "Ascenso al Cerro San Bernardo",
+      "en": "San Bernardo Hill Climb"
+    },
+    "overview": {
+      "es": "Subida corta por teleférico, auto o vía crucis peatonal para obtener la mejor panorámica de la ciudad.",
+      "en": "Short ascent by cable car, car or stairway to capture the best panoramic view of the city."
+    },
+    "poiIds": ["cerro-san-bernardo"],
+    "durationHours": 2,
+    "difficulty": "easy"
+  },
+  {
+    "id": "penas-balcarce-night",
+    "title": {
+      "es": "Noche de Peñas Folclóricas",
+      "en": "Folkloric Peña Night"
+    },
+    "overview": {
+      "es": "Velada musical en la calle Balcarce con guitarras, zambas y platos típicos como empanadas y tamales.",
+      "en": "Live-music evening on Balcarce Street with guitars, zambas and signature dishes like empanadas and tamales."
+    },
+    "poiIds": ["empanadas-saltenas", "tamales-chicoana"],
+    "durationHours": 4,
+    "difficulty": "easy"
+  },
+  {
+    "id": "san-lorenzo-trekking",
+    "title": {
+      "es": "Trekking y Naturaleza en San Lorenzo",
+      "en": "San Lorenzo Trek & Nature"
+    },
+    "overview": {
+      "es": "Senderos sombreados en la Quebrada de San Lorenzo ideales para cabalgatas y avistaje de aves en la yunga.",
+      "en": "Shaded trails inside the San Lorenzo gorge ideal for horseback rides and birdwatching in the cloud forest."
+    },
+    "poiIds": ["sendero-laguna-patos", "sendero-nogalar"],
+    "durationHours": 4,
+    "difficulty": "moderate"
+  },
+  {
+    "id": "quebrada-flecha-stop",
+    "title": {
+      "es": "Quebrada de la Flecha",
+      "en": "Quebrada de la Flecha"
+    },
+    "overview": {
+      "es": "Parada fotográfica sobre la Ruta 40 para contemplar las formaciones afiladas de Angastaco.",
+      "en": "Photo stop along Route 40 to admire the needle-like formations near Angastaco."
+    },
+    "poiIds": ["ruta-40-salta-cachi", "mirador-castillos"],
+    "durationHours": 1,
+    "difficulty": "easy"
+  },
+  {
+    "id": "circuito-puna-salinas",
+    "title": {
+      "es": "Circuito Puna: Salinas y Purmamarca",
+      "en": "Puna Loop: Salt Flats & Purmamarca"
+    },
+    "overview": {
+      "es": "Excursión de día completo a las Salinas Grandes y al Cerro de los Siete Colores, con altura superior a los 3.500 msnm.",
+      "en": "Full-day excursion to the Salinas Grandes and the Seven-Color Hill, staying above 3,500 meters most of the route."
+    },
+    "poiIds": ["ruta-sol-luna", "sendero-ojos-mar"],
+    "durationHours": 11,
+    "difficulty": "moderate"
+  },
+  {
+    "id": "molinos-colome-daytrip",
+    "title": {
+      "es": "Molinos y Bodega Colomé",
+      "en": "Molinos & Colomé Daytrip"
+    },
+    "overview": {
+      "es": "Día completo combinando el casco colonial de Molinos con degustaciones y arte de altura en los valles.",
+      "en": "Full-day combination of Molinos' colonial heart with tastings and high-altitude art in the valleys."
+    },
+    "poiIds": ["ruta-artesanos", "museo-vid-vino"],
+    "durationHours": 10,
+    "difficulty": "easy"
+  },
+  {
+    "id": "cabra-corral-adventure",
+    "title": {
+      "es": "Aventura en el Dique Cabra Corral",
+      "en": "Cabra Corral Adventure"
+    },
+    "overview": {
+      "es": "Jornada activa con deportes náuticos, puenting y navegación en el embalse más famoso de Salta.",
+      "en": "Active day packed with water sports, bungee jumps and boat rides on Salta's marquee reservoir."
+    },
+    "poiIds": ["circuito-diques", "mirador-cabra-corral", "senda-cabra-corral"],
+    "durationHours": 7,
+    "difficulty": "moderate"
+  },
+  {
+    "id": "pueblo-iruya-escape",
+    "title": {
+      "es": "Pueblo de Iruya",
+      "en": "Iruya Village Escape"
+    },
+    "overview": {
+      "es": "Camino de cornisa que culmina en Iruya para pasar la noche y subir a miradores como la Cruz o El Cóndor.",
+      "en": "Cornice road adventure ending in Iruya for an overnight stay and hikes to viewpoints like La Cruz or El Cóndor."
+    },
+    "poiIds": ["camino-a-iruya", "mirador-cruz-iruya", "sendero-condor"],
+    "durationHours": 24,
+    "difficulty": "hard"
+  },
+  {
+    "id": "camino-cornisa-route",
+    "title": {
+      "es": "Camino de Cornisa (RN9)",
+      "en": "Cornice Road (RN9)"
+    },
+    "overview": {
+      "es": "Ruta angosta entre Salta y Jujuy rodeada de selva de yungas, diques y curvas pronunciadas.",
+      "en": "Narrow road between Salta and Jujuy lined with Yungas jungle, reservoirs and tight bends."
+    },
+    "poiIds": ["rn9-cornisa", "circuito-diques"],
+    "durationHours": 4,
+    "difficulty": "moderate"
+  },
+  {
+    "id": "circuito-gaucho-yatasto",
+    "title": {
+      "es": "Circuito Histórico Gaucho",
+      "en": "Gaucho Heritage Circuit"
+    },
+    "overview": {
+      "es": "Ruta que recuerda a Güemes y la Posta de Yatasto con museos y sitios coloniales en el sur de la provincia.",
+      "en": "Route honoring Güemes and the Yatasto relay with museums and colonial landmarks in southern Salta."
+    },
+    "poiIds": ["museo-guemes", "ruinas-miraflores"],
+    "durationHours": 5,
+    "difficulty": "easy"
   }
 ]
