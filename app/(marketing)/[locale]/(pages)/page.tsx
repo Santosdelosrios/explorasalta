@@ -58,25 +58,20 @@ export default async function HomePage({
                   : 'Interactive map and living culture'}
               </span>
             </h1>
-            <div className="flex w-full flex-col items-center gap-3 md:max-w-sm md:items-end">
-              <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
-                <Link
-                  className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
-                  href={{pathname: `/${locale}`, hash: 'mapa'}}
-                  scroll
-                >
-                  {copy.mapCta}
-                </Link>
-                <Link
-                  className="rounded-xl border border-poncho/30 px-5 py-3 font-semibold transition-all hover:border-poncho/50 hover:bg-ink/5"
-                  href={`/${locale}/experiencias`}
-                >
-                  {copy.experiencesCta}
-                </Link>
-              </div>
-              <div className="w-full rounded-2xl border border-poncho/20 bg-white/70 px-4 py-3 text-sm font-semibold text-ink shadow-soft">
-                {locale === 'es' ? 'Espacio publicitario' : 'Promotional placement'}
-              </div>
+            <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
+              <Link
+                className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
+                href={{pathname: `/${locale}`, hash: 'mapa'}}
+                scroll
+              >
+                {copy.mapCta}
+              </Link>
+              <Link
+                className="rounded-xl border border-poncho/30 px-5 py-3 font-semibold transition-all hover:border-poncho/50 hover:bg-ink/5"
+                href={`/${locale}/experiencias`}
+              >
+                {copy.experiencesCta}
+              </Link>
             </div>
           </div>
           <p className="max-w-2xl text-lg text-zinc-700 md:text-left">{copy.description}</p>
