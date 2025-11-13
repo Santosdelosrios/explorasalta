@@ -292,6 +292,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         cluster: true,
         clusterRadius: 40
       });
+    };
 
       map.addLayer({
         id: 'clusters',
@@ -361,6 +362,8 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   }, [styleUrl, lng, lat, z, locale, poiIndex, router, selectedPoi, openPoiPopup]);
 
   useEffect(() => {
+    featuresRef.current = features;
+
     const map = mapRef.current;
     if (!map) return;
 
