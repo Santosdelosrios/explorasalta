@@ -12,55 +12,30 @@ type NavbarProps = {
 const NAV_ITEMS: Array<{
   slug: string;
   labels: Record<Locale, string>;
-  description: Record<Locale, string>;
 }> = [
   {
     slug: 'mapa',
-    labels: {es: 'Mapa', en: 'Map'},
-    description: {
-      es: 'Explorá los puntos imperdibles de la provincia',
-      en: 'Explore Salta’s must-see highlights'
-    }
+    labels: {es: 'Mapa', en: 'Map'}
   },
   {
     slug: 'regiones',
-    labels: {es: 'Regiones', en: 'Regions'},
-    description: {
-      es: 'Recorré cada paisaje con información clave',
-      en: 'Dive into each landscape with essential info'
-    }
+    labels: {es: 'Regiones', en: 'Regions'}
   },
   {
     slug: 'experiencias',
-    labels: {es: 'Experiencias', en: 'Experiences'},
-    description: {
-      es: 'Arma itinerarios temáticos y combiná actividades',
-      en: 'Build themed itineraries and mix activities'
-    }
+    labels: {es: 'Experiencias', en: 'Experiences'}
   },
   {
     slug: 'cultura',
-    labels: {es: 'Cultura viva', en: 'Living culture'},
-    description: {
-      es: 'Consultá la agenda cultural actualizada',
-      en: 'Check the up-to-date cultural calendar'
-    }
+    labels: {es: 'Cultura viva', en: 'Living culture'}
   },
   {
     slug: 'blog',
-    labels: {es: 'Blog', en: 'Blog'},
-    description: {
-      es: 'Historias, entrevistas y consejos de viaje',
-      en: 'Stories, interviews and travel tips'
-    }
+    labels: {es: 'Blog', en: 'Blog'}
   },
   {
     slug: 'contacto',
-    labels: {es: 'Contacto', en: 'Contact'},
-    description: {
-      es: 'Escribinos y sumate a la comunidad exploradora',
-      en: 'Write to us and join the explorer community'
-    }
+    labels: {es: 'Contacto', en: 'Contact'}
   }
 ];
 
@@ -84,7 +59,6 @@ export function Navbar({locale}: NavbarProps) {
       NAV_ITEMS.map(item => ({
         ...item,
         label: item.labels[activeLocale],
-        hint: item.description[activeLocale],
         href: `/${activeLocale}/${item.slug}`
       })),
     [activeLocale]
@@ -118,12 +92,7 @@ export function Navbar({locale}: NavbarProps) {
                     isActive ? 'text-poncho' : 'text-ink hover:text-poncho'
                   )}
                 >
-                  <span className="font-heading text-base font-semibold">
-                    {item.label}
-                  </span>
-                  <span className="text-xs font-normal uppercase tracking-[0.18em] text-cardon/70">
-                    {item.hint}
-                  </span>
+                  <span className="font-heading text-base font-semibold">{item.label}</span>
                 </Link>
               </li>
             );
