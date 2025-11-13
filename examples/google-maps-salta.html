@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa Interactivo de Salta</title>
+    <style>
+      :root {
+        font-family: "Tenor Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #111827;
+        background-color: #f7fafc;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem 1rem 3rem;
+      }
+
+      h1 {
+        font-family: "Lexend Deca", "Tenor Sans", sans-serif;
+        font-weight: 600;
+        margin: 0;
+        text-align: center;
+      }
+
+      #map {
+        width: min(960px, 100%);
+        height: 540px;
+        border-radius: 1.5rem;
+        box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+      }
+
+      .info-window {
+        max-width: 240px;
+        font-size: 0.95rem;
+      }
+
+      .info-window h2 {
+        font-size: 1rem;
+        margin: 0 0 0.35rem;
+      }
+
+      .rating-row {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-weight: 600;
+      }
+
+      .stars {
+        display: inline-flex;
+        gap: 0.1rem;
+        color: #fbbf24;
+        font-size: 1rem;
+      }
+
+      .reviews-count {
+        color: #4b5563;
+        font-size: 0.85rem;
+        margin: 0.1rem 0 0.75rem;
+      }
+
+      .reviews-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-weight: 600;
+        color: #2563eb;
+        text-decoration: none;
+      }
+
+      .reviews-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Explora Salta con Google Maps</h1>
+    <div id="map"></div>
+
+    <script>
+      const lugaresSalta = [
+        {
+          nombre: "Catedral Basílica de Salta",
+          lat: -24.788407,
+          lng: -65.410858,
+          placeId: "ChIJR9g2rt5SK5QRZfNcaUVbnVQ",
+        },
+        {
+          nombre: "Cerro San Bernardo",
+          lat: -24.782619,
+          lng: -65.402752,
+          placeId: "ChIJZ1koXLTGK5QRM9RnBbTK1Zs",
+        },
+        {
+          nombre: "Cabildo Histórico de Salta",
+          lat: -24.789169,
+          lng: -65.410118,
+          placeId: "ChIJ3fjSnN5SK5QRyNyEJD7BqXg",
+        },
+      ];
+
+      let map;
+      let infoWindow;
+      let placesService;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: -24.788, lng: -65.4105 },
+          zoom: 14,
+          mapId: "a1b2c3-demo-map",
+        });
+
+        infoWindow = new google.maps.InfoWindow();
+        placesService = new google.maps.places.PlacesService(map);
+
+        lugaresSalta.forEach((lugar) => {
+          const marker = new google.maps.Marker({
+            position: { lat: lugar.lat, lng: lugar.lng },
+            map,
+            title: lugar.nombre,
+          });
+
+          marker.addListener("click", () => {
+            obtenerDetallesLugar(lugar, marker);
+          });
+        });
+      }
+
+      function obtenerDetallesLugar(lugar, marker) {
+        const request = {
+          placeId: lugar.placeId,
+          fields: ["name", "rating", "user_ratings_total", "url", "place_id"],
+        };
+
+        placesService.getDetails(request, (place, status) => {
+          if (status !== google.maps.places.PlacesServiceStatus.OK || !place) {
+            mostrarInfoWindow(
+              marker,
+              `<div class="info-window"><h2>${lugar.nombre}</h2><p>No pudimos cargar los datos de Google Maps.</p></div>`
+            );
+            return;
+          }
+
+          const rating = place.rating ? place.rating.toFixed(1) : "–";
+          const reviews = place.user_ratings_total ?? 0;
+          const stars = place.rating ? generarEstrellas(place.rating) : "Sin datos";
+          const reviewsUrl = place.url ||
+            `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              place.name
+            )}&query_place_id=${place.place_id || lugar.placeId}`;
+
+          const content = `
+            <div class="info-window">
+              <h2>${place.name}</h2>
+              <div class="rating-row">
+                <div class="stars" aria-label="${rating} de 5">${stars}</div>
+                <span>${rating}</span>
+              </div>
+              <p class="reviews-count">${reviews} reseñas</p>
+              <a class="reviews-link" href="${reviewsUrl}" target="_blank" rel="noopener noreferrer">
+                Ver reseñas en Google Maps →
+              </a>
+            </div>
+          `;
+
+          mostrarInfoWindow(marker, content);
+        });
+      }
+
+      function generarEstrellas(valor) {
+        const rounded = Math.round(valor);
+        return `${"★".repeat(rounded)}${"☆".repeat(5 - rounded)}`;
+      }
+
+      function mostrarInfoWindow(marker, content) {
+        infoWindow.setContent(content);
+        infoWindow.open({ anchor: marker, map, shouldFocus: false });
+      }
+
+      window.initMap = initMap;
+    </script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"
+      async
+      defer
+    ></script>
+  </body>
+</html>
