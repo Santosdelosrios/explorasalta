@@ -298,6 +298,25 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
         cluster: true,
         clusterRadius: 40
       });
+    };
+
+    const showPoiPopup = (
+      poiId: string,
+      coordinates: [number, number],
+      options?: {updateQuery?: boolean}
+    ) => {
+      const poi = poiIndex.get(poiId);
+      if (!poi) return;
+
+      panToCoordinates(coordinates);
+      popup.setLngLat(coordinates).setDOMContent(createPopupContent(poi, locale)).addTo(map);
+
+      if (options?.updateQuery !== false && typeof window !== 'undefined') {
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set('poi', poiId);
+        router.replace(`${window.location.pathname}?${searchParams.toString()}`, {scroll: false});
+      }
+    };
 
       map.addLayer({
         id: 'clusters',
@@ -367,6 +386,8 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
   }, [styleUrl, lng, lat, z, locale, poiIndex, router, selectedPoi]);
 
   useEffect(() => {
+    featuresRef.current = features;
+
     const map = mapRef.current;
     if (!map) return;
 
