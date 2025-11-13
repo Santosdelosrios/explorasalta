@@ -242,14 +242,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
       const poi = poiIndex.get(poiId);
       if (!poi) return;
 
-      const currentZoom = map.getZoom();
-      map.easeTo({
-        center: coordinates,
-        zoom: currentZoom,
-        bearing: map.getBearing(),
-        pitch: map.getPitch(),
-        duration: 600
-      });
+      map.panTo(coordinates, {duration: 600});
 
       popup.setLngLat(coordinates).setDOMContent(createPopupContent(poi, locale)).addTo(map);
 
@@ -341,7 +334,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
           openPoiPopup(poi.id, coordinates, {updateQuery: false});
         }
       }
-    },
+    };
 
     const handlePoiClick = (event: maplibregl.MapLayerMouseEvent) => {
       const feature = event.features?.[0];
@@ -400,8 +393,7 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
     }
 
     const map = mapRef.current;
-    const popup = popupRef.current;
-    if (!map || !popup) {
+    if (!map) {
       return;
     }
 
@@ -410,29 +402,19 @@ export default function MapLibre({pois, styleUrl, locale}: Props) {
       return;
     }
 
-    const showSelected = () => {
-      const coordinates: [number, number] = [poi.coords.lng, poi.coords.lat];
-      const currentZoom = map.getZoom();
-      map.easeTo({
-        center: coordinates,
-        zoom: currentZoom,
-        bearing: map.getBearing(),
-        pitch: map.getPitch(),
-        duration: 600
-      });
-      popup.setLngLat(coordinates).setDOMContent(createPopupContent(poi, locale)).addTo(map);
-    };
+    const coordinates: [number, number] = [poi.coords.lng, poi.coords.lat];
+    const open = () => openPoiPopup(poi.id, coordinates, {updateQuery: false});
 
     if (map.isStyleLoaded()) {
-      showSelected();
+      open();
       return;
     }
 
-    map.once('load', showSelected);
+    map.once('load', open);
     return () => {
-      map.off('load', showSelected);
+      map.off('load', open);
     };
-  }, [selectedPoi, poiIndex, locale, openPoiPopup]);
+  }, [selectedPoi, poiIndex, openPoiPopup]);
 
   return <div ref={containerRef} className="h-[64vh] w-full rounded-2xl shadow" />;
 }
