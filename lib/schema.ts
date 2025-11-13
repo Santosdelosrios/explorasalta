@@ -19,6 +19,7 @@ export interface POI {
   popularity?: number; // 0..100
   url?: string;
   rating?: POIRating;
+  placeId?: string;
 }
 
 export interface Experiencia {

@@ -25,6 +25,17 @@ const RATING_COPY: Record<Locale, { visitorsLabel: string; reviewCount: (count: 
   }
 };
 
+const DIRECTIONS_COPY: Record<Locale, { label: string; attribution: string }> = {
+  es: {
+    label: 'Cómo llegar',
+    attribution: 'Basado en datos de Google Maps'
+  },
+  en: {
+    label: 'Get directions',
+    attribution: 'Powered by Google Maps data'
+  }
+};
+
 type Props = {
   pois: POI[];
   styleUrl?: string;
@@ -118,6 +129,38 @@ function createPopupContent(poi: POI, locale: Locale): HTMLElement {
 
     ratingBlock.appendChild(row);
     container.appendChild(ratingBlock);
+  }
+
+  const directionsUrl = poi.placeId
+    ? `https://www.google.com/maps/dir/?api=1&destination_place_id=${poi.placeId}`
+    : `https://www.google.com/maps/dir/?api=1&destination=${poi.coords.lat},${poi.coords.lng}`;
+
+  const directionsButton = document.createElement('a');
+  directionsButton.href = directionsUrl;
+  directionsButton.target = '_blank';
+  directionsButton.rel = 'noopener noreferrer';
+  directionsButton.textContent = DIRECTIONS_COPY[locale].label;
+  directionsButton.style.display = 'inline-flex';
+  directionsButton.style.alignItems = 'center';
+  directionsButton.style.justifyContent = 'center';
+  directionsButton.style.gap = '0.35rem';
+  directionsButton.style.padding = '0.5rem 0.9rem';
+  directionsButton.style.borderRadius = '999px';
+  directionsButton.style.backgroundColor = '#2563eb';
+  directionsButton.style.color = '#fff';
+  directionsButton.style.fontSize = '0.85rem';
+  directionsButton.style.fontWeight = '600';
+  directionsButton.style.textDecoration = 'none';
+  directionsButton.setAttribute('aria-label', `${DIRECTIONS_COPY[locale].label} · Google Maps`);
+  container.appendChild(directionsButton);
+
+  if (poi.placeId) {
+    const attribution = document.createElement('span');
+    attribution.textContent = DIRECTIONS_COPY[locale].attribution;
+    attribution.style.fontSize = '0.7rem';
+    attribution.style.color = '#6B7280';
+    attribution.style.display = 'block';
+    container.appendChild(attribution);
   }
 
   return container;
