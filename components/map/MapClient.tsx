@@ -1,12 +1,15 @@
-// components/map/MapClient.tsx
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
+import type {Locale} from '@/lib/i18n/config';
+import type {POI} from '@/lib/schema';
 
-const MapClientInner = dynamic(() => import("./MapExplorer"), {
-  ssr: false,
-});
+import MapExplorer from './MapExplorer';
 
-export default function MapClient(props: any) {
-  return <MapClientInner {...props} />;
+interface MapClientProps {
+  pois: POI[];
+  locale: Locale;
+}
+
+export default function MapClient(props: MapClientProps) {
+  return <MapExplorer {...props} />;
 }

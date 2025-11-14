@@ -318,18 +318,29 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
             const ratingLabel = copy.reviews(poi.rating?.average, poi.rating?.count);
 
             return (
-              <button
+              <article
                 key={poi.id}
-                type="button"
+                role="button"
+                tabIndex={0}
+                aria-pressed={active}
                 onClick={() => setActivePoiId(poi.id)}
-                className={`w-full rounded-2xl border px-4 py-3 text-left transition ${
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setActivePoiId(poi.id);
+                  }
+                }}
+                className={`group w-full rounded-2xl border px-4 py-4 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ochre ${
                   active
-                    ? 'border-ochre/60 bg-ochre/10 shadow'
-                    : 'border-white/20 bg-white/70 hover:border-ochre/30'
+                    ? 'border-ochre/60 bg-ochre/10 shadow-lg'
+                    : 'border-white/30 bg-white/80 hover:border-ochre/30'
                 }`}
               >
-                <div className="flex items-baseline justify-between gap-3">
-                  <p className="font-semibold text-poncho">
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-ink/40">
+                  {category.label[locale]}
+                </p>
+                <div className="mt-1 flex items-baseline justify-between gap-3">
+                  <p className="text-lg font-semibold text-poncho">
                     {category.icon} {poi.title[locale]}
                   </p>
                   {poi.rating?.average && (
@@ -338,11 +349,19 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
                     </p>
                   )}
                 </div>
-                <p className="mt-1 text-sm text-ink/70">{poi.summary[locale]}</p>
-                <p className="mt-2 text-xs font-medium uppercase tracking-[0.2em] text-ink/40">
-                  {ratingLabel}
-                </p>
-              </button>
+                <p className="mt-1 text-sm leading-relaxed text-ink/70">{poi.summary[locale]}</p>
+                <p className="mt-3 text-xs font-medium text-ink/60">{ratingLabel}</p>
+                <a
+                  href={directionsUrl(poi)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-ochre transition hover:text-ochre/80"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  {copy.directions}
+                  <span aria-hidden>↗</span>
+                </a>
+              </article>
             );
           })}
         </div>
