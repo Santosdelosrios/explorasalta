@@ -1,6 +1,7 @@
 'use client';
 import {useEffect, useRef, useState} from 'react';
-import maplibregl, {Map} from 'maplibre-gl';
+import maplibregl from 'maplibre-gl';
+import type {Map as MapInstance} from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type {Locale} from '@/lib/i18n/config';
 
@@ -38,7 +39,7 @@ const COPY: Record<Locale, {preview: string; loading: string; cta: string}> = {
 
 export default function HeroMapPreview({locale}: {locale: Locale}) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<Map | null>(null);
+  const mapRef = useRef<MapInstance | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const tourIndexRef = useRef(0);
 
@@ -93,7 +94,7 @@ export default function HeroMapPreview({locale}: {locale: Locale}) {
   }, []);
 
   // Función para el tour automático entre puntos
-  const startAutoTour = (map: Map) => {
+  const startAutoTour = (map: MapInstance) => {
     const flyToNextPoint = () => {
       if (!mapRef.current) return;
 
