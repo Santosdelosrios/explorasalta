@@ -1,5 +1,4 @@
 import MapClient from '@/components/map/MapClient';
-import MapFilters from '@/components/map/MapFilters';
 import {getPOIs} from '@/lib/fetchers';
 import type {Locale} from '@/lib/i18n/config';
 
@@ -33,7 +32,6 @@ export default async function MapaPage({
         <h1 className="font-heading text-4xl font-bold text-poncho">{copy.title}</h1>
         <p className="max-w-3xl text-lg text-ink/80">{copy.intro}</p>
         <p className="text-sm uppercase tracking-[0.18em] text-cardon/70">{copy.filterHint}</p>
-        <MapFilters locale={locale} />
       </header>
 
       <MapClient pois={pois} locale={locale} />
