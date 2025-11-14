@@ -99,3 +99,31 @@ a {
 .poi-popup__button:hover {
   background: #b45309;
 }
+
+/* Bigger close button for map popups */
+.maplibregl-popup-close-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #fff;
+  color: #92400e;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.2);
+  font-size: 1.35rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  top: 0.4rem;
+  right: 0.4rem;
+  cursor: pointer;
+}
+
+.maplibregl-popup-close-button:hover {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.maplibregl-popup-close-button:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}

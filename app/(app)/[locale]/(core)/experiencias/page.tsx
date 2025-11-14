@@ -95,19 +95,6 @@ export default async function ExperienciasPage({
               key={experience.id}
               className="flex h-full flex-col overflow-hidden rounded-3xl border border-poncho/10 bg-white/80 shadow-soft"
             >
-              <div className="relative h-40 bg-gradient-to-br from-cardon/20 via-transparent to-poncho/20">
-                {experience.cover ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={experience.cover}
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                ) : null}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" aria-hidden />
-              </div>
-
               <div className="flex flex-1 flex-col gap-4 p-6">
                 <div className="space-y-2">
                   <h2 className="font-heading text-2xl font-semibold text-poncho">{experience.title[locale]}</h2>
