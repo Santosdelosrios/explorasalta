@@ -1,35 +1,28 @@
-import '@/styles/globals.css';
-import type { Metadata } from 'next';
+import type {Metadata} from 'next';
+import {Navbar} from '@/components/ui/Navbar';
+import type {Locale} from '@/lib/i18n/config';
 
 export const metadata: Metadata = {
-  title: { default: 'Explorá Salta', template: '%s | Explorá Salta' },
+  title: {default: 'Explorá Salta', template: '%s | Explorá Salta'},
   description: 'Mapa interactivo y cultura viva de Salta.'
 };
 
-export default function RootLayout({ 
+export default function CoreLayout({
   children,
   params
-}: { 
+}: {
   children: React.ReactNode;
-  params?: { locale?: string };
+  params?: {locale?: Locale};
 }) {
-  // Obtener locale de params o usar 'es' por defecto
-  const locale = params?.locale || 'es';
-  
+  const locale = params?.locale ?? 'es';
+
   return (
-    <html lang={locale} className="scroll-smooth">
-      <head>
-        {/* Fuentes de Google - aquí en el root */}
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800&display=swap" 
-          rel="stylesheet"
-        />
-      </head>
-      <body className="min-h-dvh">
-        {children}
-      </body>
-    </html>
+    <>
+      <a href="#main" className="sr-only focus:not-sr-only">
+        {locale === 'es' ? 'Saltar al contenido' : 'Skip to content'}
+      </a>
+      <Navbar locale={locale} />
+      {children}
+    </>
   );
 }
