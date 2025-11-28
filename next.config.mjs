@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { typedRoutes: true },
+  experimental: { },
   reactStrictMode: true,
   images: { remotePatterns: [] }
 };
