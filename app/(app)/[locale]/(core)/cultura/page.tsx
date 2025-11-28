@@ -62,11 +62,8 @@ function groupByMonth(events: Evento[]) {
   return groups;
 }
 
-export default async function CulturaPage({
-  params
-}: {
-  params: {locale: Locale};
-}) {
+export default async function CulturaPage({ params }: any) {
+
   const locale = params.locale;
   const copy = COPY[locale];
 
