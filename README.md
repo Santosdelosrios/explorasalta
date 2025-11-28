@@ -23,7 +23,7 @@ Crea un archivo `.env.local` en la raíz con las variables necesarias:
 NEXT_PUBLIC_MAPTILER_KEY=tu_api_key
 ```
 
-Sin esta clave el mapa utiliza el estilo híbrido público por defecto, pero con límite de uso.
+Sin esta clave el mapa utiliza el estilo híbrido público por defecto pero con límite de uso.
 
 ## Instalación y scripts
 
