@@ -1,5 +1,7 @@
 import type {Locale} from '@/lib/i18n/config';
 
+type LocalePageProps = { params: Promise<{ locale: Locale }> };
+
 const COPY: Record<Locale, {
   title: string;
   intro: string;
@@ -57,12 +59,8 @@ const CONTACT_CHANNELS = {
   ]
 };
 
-export default function ContactoPage({
-  params
-}: {
-  params: {locale: Locale};
-}) {
-  const locale = params.locale;
+export default async function ContactoPage({ params }: LocalePageProps) {
+  const { locale } = await params;
   const copy = COPY[locale];
 
   return (
