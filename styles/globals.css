@@ -5,6 +5,8 @@
 /* Tipografías: Lexend Deca para títulos + Tenor Sans para texto */
 :root {
   color-scheme: light;
+  --font-heading: 'Lexend Deca', 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Tenor Sans', 'Segoe UI', system-ui, sans-serif;
 }
 
 html, body {
