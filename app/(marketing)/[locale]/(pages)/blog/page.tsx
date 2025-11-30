@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import type {Locale} from '@/lib/i18n/config';
 
+type LocalePageProps = { params: Promise<{ locale: Locale }> };
+
 type BlogPost = {
   id: string;
   category: Record<Locale, string>;
@@ -83,12 +85,8 @@ const COPY: Record<Locale, {
   }
 };
 
-export default function BlogPage({
-  params
-}: {
-  params: {locale: Locale};
-}) {
-  const locale = params.locale;
+export default async function BlogPage({ params }: LocalePageProps) {
+  const { locale } = await params;
   const copy = COPY[locale];
 
   return (
