@@ -23,6 +23,7 @@ const SALTA_CENTER: [number, number] = [-65.4, -24.8];
 const INITIAL_ZOOM = 6.5;
 
 const FALLBACK_HYBRID_STYLE = 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB';
+const FALLBACK_STYLE = 'https://demotiles.maplibre.org/style.json';
 
 const COPY: Record<Locale, {preview: string; loading: string; cta: string}> = {
   es: {
@@ -37,9 +38,10 @@ const COPY: Record<Locale, {preview: string; loading: string; cta: string}> = {
   }
 };
 
-export default function HeroMapPreview({locale}: {locale: Locale}) {
+export default function HeroMapPreview({locale = 'es'}: {locale?: Locale}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapInstance | null>(null);
+  const fallbackAppliedRef = useRef(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const tourIndexRef = useRef(0);
 
@@ -49,7 +51,7 @@ export default function HeroMapPreview({locale}: {locale: Locale}) {
 
     // Estilo con tonos naturales (puedes usar tu key de MapTiler)
     const styleUrl = process.env.NEXT_PUBLIC_MAPTILER_KEY
-      ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
+      ? `https://api.maptiler.com/maps/satellite/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
       : FALLBACK_HYBRID_STYLE;
 
     // Inicializar mapa
@@ -72,6 +74,11 @@ export default function HeroMapPreview({locale}: {locale: Locale}) {
     map.on('error', (e) => {
       if (e.error?.name !== 'AbortError') {
         console.error('Map error:', e.error);
+      }
+
+      if (!fallbackAppliedRef.current && styleUrl !== FALLBACK_STYLE) {
+        fallbackAppliedRef.current = true;
+        map.setStyle(FALLBACK_STYLE);
       }
     });
 
