@@ -2,7 +2,6 @@
 
 import {useEffect, useRef} from 'react';
 import maplibregl from 'maplibre-gl';
-import type {Map as MapInstance} from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 const TOUR_POINTS = [
