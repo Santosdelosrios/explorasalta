@@ -37,7 +37,7 @@ const COPY: Record<Locale, {preview: string; loading: string; cta: string}> = {
   }
 };
 
-export default function HeroMapPreview({locale}: {locale: Locale}) {
+export default function HeroMapPreview({locale = 'es'}: {locale?: Locale}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapInstance | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
