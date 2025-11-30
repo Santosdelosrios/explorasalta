@@ -49,7 +49,7 @@ export default function HeroMapPreview({locale = 'es'}: {locale?: Locale}) {
     // Evitar doble inicialización
     if (!containerRef.current || mapRef.current) return;
 
-    // Estilo con tonos naturales (puedes usar tu key de MapTiler)
+    // Estilo híbrido (satélite + labels) usando MapTiler
     const styleUrl = process.env.NEXT_PUBLIC_MAPTILER_KEY
       ? `https://api.maptiler.com/maps/satellite/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
       : FALLBACK_HYBRID_STYLE;
