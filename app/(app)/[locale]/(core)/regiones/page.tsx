@@ -4,6 +4,8 @@ import type {POI, Region} from '@/lib/schema';
 import type {Locale} from '@/lib/i18n/config';
 import {CATEGORY_METADATA, getCategoryLabel} from '@/lib/content/categories';
 
+type LocalePageProps = { params: Promise<{ locale: Locale }> };
+
 interface RegionSummary {
   region: Region;
   pois: POI[];
@@ -59,12 +61,8 @@ function formatAnchorLabel(region: Region, locale: Locale) {
   return region.name[locale];
 }
 
-export default async function RegionesPage({
-  params
-}: {
-  params: {locale: Locale};
-}) {
-  const locale = params.locale;
+export default async function RegionesPage({ params }: LocalePageProps) {
+  const { locale } = await params;
   const copy = COPY[locale];
 
   const [regions, pois, experiences] = await Promise.all([

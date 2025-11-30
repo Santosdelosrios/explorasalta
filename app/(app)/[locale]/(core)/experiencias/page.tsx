@@ -3,6 +3,8 @@ import {getExperiencias, getPOIs} from '@/lib/fetchers';
 import type {Experiencia, POI} from '@/lib/schema';
 import type {Locale} from '@/lib/i18n/config';
 
+type LocalePageProps = { params: Promise<{ locale: Locale }> };
+
 const COPY: Record<Locale, {
   title: string;
   intro: string;
@@ -70,12 +72,8 @@ function resolveStops(experience: Experiencia, pois: POI[], locale: Locale) {
     .map(poi => poi.title[locale]);
 }
 
-export default async function ExperienciasPage({
-  params
-}: {
-  params: {locale: Locale};
-}) {
-  const locale = params.locale;
+export default async function ExperienciasPage({ params }: LocalePageProps) {
+  const { locale } = await params;
   const copy = COPY[locale];
   const [experiencias, pois] = await Promise.all([getExperiencias(), getPOIs()]);
 
