@@ -1,7 +1,9 @@
-import path from 'node:path';
-import { promises as fs } from 'node:fs';
 import type { POI, Region, Experiencia, Evento, POIRating } from './schema';
 import { encodePlusCode } from './pluscode';
+import poisData from '@/data/pois.json';
+import regionesData from '@/data/regiones.json';
+import experienciasData from '@/data/experiencias.json';
+import eventosData from '@/data/eventos.json';
 
 function deriveRatingFromPopularity(popularity?: number): POIRating {
   const normalized = typeof popularity === 'number'
@@ -15,19 +17,8 @@ function deriveRatingFromPopularity(popularity?: number): POIRating {
   return { average, count };
 }
 
-async function readJson<T>(rel: string, fallback: T): Promise<T> {
-  const abs = path.join(process.cwd(), rel);
-  try {
-    const raw = await fs.readFile(abs, 'utf8');
-    return JSON.parse(raw) as T;
-  } catch (error) {
-    console.error(`Failed to read JSON file: ${abs}`, error);
-    return fallback;
-  }
-}
-
 export async function getPOIs(): Promise<POI[]> {
-  const pois = await readJson<POI[]>('data/pois.json', []);
+  const pois = [...(poisData as POI[])];
   const seen = new Set<string>();
 
   return pois
@@ -50,11 +41,11 @@ export async function getPOIs(): Promise<POI[]> {
     });
 }
 export async function getRegiones(): Promise<Region[]> {
-  return readJson<Region[]>('data/regiones.json', []);
+  return regionesData as Region[];
 }
 export async function getExperiencias(): Promise<Experiencia[]> {
-  return readJson<Experiencia[]>('data/experiencias.json', []);
+  return experienciasData as Experiencia[];
 }
 export async function getEventos(): Promise<Evento[]> {
-  return readJson<Evento[]>('data/eventos.json', []);
+  return eventosData as Evento[];
 }
