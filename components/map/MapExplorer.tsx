@@ -72,7 +72,7 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const markersRef = useRef<Record<string, maplibregl.Marker>>({});
-  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const cardRefs = useRef<Record<string, HTMLElement | null>>({});
   const fallbackAppliedRef = useRef(false);
   const [mapReady, setMapReady] = useState(false);
 
