@@ -77,9 +77,11 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   const [search, setSearch] = useState('');
   const [activePoiId, setActivePoiId] = useState<string | null>(null);
 
-  const styleUrl = process.env.NEXT_PUBLIC_MAPTILER_KEY
-    ? `https://api.maptiler.com/maps/satellite/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
-    : FALLBACK_STYLE;
+const styleBase = 'https://api.maptiler.com/maps/hybrid/style.json';
+const apiKey = process.env.NEXT_PUBLIC_MAPTILER_KEY ?? 'get_your_own_D6rA4zTHduk6KOKTXzGB';
+
+const styleUrl = `${styleBase}?key=${apiKey}`;
+
 
   const copy = COPY[locale];
 
