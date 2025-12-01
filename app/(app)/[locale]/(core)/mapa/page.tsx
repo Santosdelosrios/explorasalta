@@ -2,6 +2,8 @@ import MapClient from '@/components/map/MapClient';
 import {getPOIs} from '@/lib/fetchers';
 import type {Locale} from '@/lib/i18n/config';
 
+type LocalePageProps = { params: Promise<{ locale: Locale }> };
+
 const COPY: Record<
   Locale,
   {
@@ -21,12 +23,8 @@ const COPY: Record<
   }
 };
 
-export default async function MapaPage({
-  params
-}: {
-  params: {locale: Locale};
-}) {
-  const locale = params.locale;
+export default async function MapaPage({ params }: LocalePageProps) {
+  const { locale } = await params;
   const pois = await getPOIs();
   const copy = COPY[locale];
 

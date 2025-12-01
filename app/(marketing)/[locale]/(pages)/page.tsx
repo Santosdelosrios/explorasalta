@@ -5,6 +5,8 @@ import CulturaVivaSection from '@/components/sections/CulturaVivaSection';
 import {getEventos} from '@/lib/fetchers';
 import type {Locale} from '@/lib/i18n/config';
 
+type LocalePageProps = { params: Promise<{ locale: Locale }> };
+
 const HERO_COPY: Record<Locale, {
   title: ReactNode;
   description: string;
@@ -33,12 +35,8 @@ const HERO_COPY: Record<Locale, {
   }
 };
 
-export default async function HomePage({
-  params
-}: {
-  params: {locale: Locale};
-}) {
-  const locale = params.locale;
+export default async function HomePage({ params }: LocalePageProps) {
+  const { locale } = await params;
   const copy = HERO_COPY[locale];
   const events = await getEventos();
 
