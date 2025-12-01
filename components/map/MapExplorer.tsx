@@ -127,10 +127,10 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
     map.addControl(new maplibregl.AttributionControl({compact: true}));
 
     map.on('error', (event) => {
-      if (!fallbackAppliedRef.current && styleUrl !== BACKUP_STYLE) {
-        console.warn('Map style failed to load, falling back to open tiles', event.error);
+      if (!fallbackAppliedRef.current && styleUrl !== FALLBACK_STYLE) {
+        console.warn('Map style failed to load, falling back to hybrid demo tiles', event.error);
         fallbackAppliedRef.current = true;
-        map.setStyle(BACKUP_STYLE);
+        map.setStyle(FALLBACK_STYLE);
       }
     });
 
