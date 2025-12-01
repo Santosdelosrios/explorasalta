@@ -71,6 +71,8 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const markersRef = useRef<Record<string, maplibregl.Marker>>({});
+  const fallbackAppliedRef = useRef(false);
+  const [mapReady, setMapReady] = useState(false);
 
   const [activeCategories, setActiveCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState('');
@@ -125,6 +127,17 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
     map.addControl(new maplibregl.ScaleControl({maxWidth: 120, unit: 'metric'}), 'bottom-right');
     map.addControl(new maplibregl.AttributionControl({compact: true}));
 
+    const handleLoad = () => setMapReady(true);
+    map.on('load', handleLoad);
+
+    map.on('error', (event) => {
+      if (!fallbackAppliedRef.current && styleUrl !== FALLBACK_STYLE) {
+        console.warn('Map style failed to load, falling back to hybrid demo tiles', event.error);
+        fallbackAppliedRef.current = true;
+        map.setStyle(FALLBACK_STYLE);
+      }
+    });
+
     mapRef.current = map;
     popupRef.current = new maplibregl.Popup({
       closeButton: true,
@@ -133,10 +146,12 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
     });
 
     return () => {
+      setMapReady(false);
       Object.values(markersRef.current).forEach((marker) => marker.remove());
       markersRef.current = {};
       popupRef.current?.remove();
       popupRef.current = null;
+      map.off('load', handleLoad);
       map.remove();
       mapRef.current = null;
     };
@@ -145,7 +160,7 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   // Render markers based on filtered POIs
   useEffect(() => {
     const map = mapRef.current;
-    if (!map) return;
+    if (!map || !mapReady) return;
 
     Object.values(markersRef.current).forEach((marker) => marker.remove());
     markersRef.current = {};
@@ -164,17 +179,45 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
 
       markersRef.current[poi.id] = marker;
     });
-  }, [filteredPois, locale]);
+  }, [filteredPois, locale, mapReady]);
 
-  const directionsUrl = useCallback((poi: POI) => {
-    if (poi.placeId) {
-      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-        poi.title[locale]
-      )}&query_place_id=${poi.placeId}`;
+  const directionsUrl = useCallback(
+    (poi: POI) => {
+      if (poi.plusCode) {
+        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(poi.plusCode)}`;
+      }
+
+      if (poi.placeId) {
+        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+          poi.title[locale]
+        )}&query_place_id=${poi.placeId}`;
+      }
+
+      return `https://www.google.com/maps/dir/?api=1&destination=${poi.coords.lat},${poi.coords.lng}`;
+    },
+    [locale]
+  );
+
+  // Keep the currently visible markers in view as filters change
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !mapReady) return;
+
+    if (!filteredPois.length) {
+      map.easeTo({center: [DEFAULT_VIEW.lng, DEFAULT_VIEW.lat], zoom: DEFAULT_VIEW.zoom, duration: 500});
+      return;
     }
 
-    return `https://www.google.com/maps/dir/?api=1&destination=${poi.coords.lat},${poi.coords.lng}`;
-  }, [locale]);
+    if (filteredPois.length === 1) {
+      const [{coords}] = filteredPois;
+      map.easeTo({center: [coords.lng, coords.lat], zoom: Math.max(DEFAULT_VIEW.zoom + 2, 10), duration: 700});
+      return;
+    }
+
+    const bounds = new maplibregl.LngLatBounds();
+    filteredPois.forEach((poi) => bounds.extend([poi.coords.lng, poi.coords.lat]));
+    map.fitBounds(bounds, {padding: 60, maxZoom: 12.5, duration: 700});
+  }, [filteredPois, mapReady]);
 
   // Sync popup with active POI
   useEffect(() => {
