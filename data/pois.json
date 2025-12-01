@@ -344,7 +344,7 @@
       "es": "Exhibe el patrimonio inca de los Niños de Llullaillaco en pleno centro de Salta.",
       "en": "Displays the Inca heritage of the Llullaillaco Children in downtown Salta."
     },
-    "category": "museo",
+    "category": "patrimonio",
     "region": "ciudad",
     "coords": {
       "lat": -24.786389,
@@ -777,12 +777,12 @@
   {
     "id": "quebrada-de-las-conchas",
     "title": {
-      "es": "Quebrada de las Conchas",
-      "en": "Quebrada de las Conchas"
+      "es": "Quebrada del Río de las Conchas",
+      "en": "Quebrada del Río de las Conchas"
     },
     "summary": {
-      "es": "Formaciones rojizas sobre la RN68, entre Cafayate y Salta.",
-      "en": "Red rock formations along RN68, between Cafayate and Salta."
+      "es": "Formaciones rojizas sobre la RN68, entre Cafayate y Salta, con miradores naturales.",
+      "en": "Reddish formations along RN68 between Cafayate and Salta, dotted with natural viewpoints."
     },
     "category": "mirador",
     "region": "valles",
@@ -911,12 +911,12 @@
   {
     "id": "ruta-del-vino-salta",
     "title": {
-      "es": "Ruta del Vino de Salta",
-      "en": "Salta Wine Route"
+      "es": "Ruta del Vino Cafayate",
+      "en": "Cafayate Wine Route"
     },
     "summary": {
-      "es": "Recorrido por bodegas de altura en Cafayate y los Valles Calchaquíes para degustar el Torrontés.",
-      "en": "Circuit across high-altitude wineries in Cafayate and the Calchaquí Valleys to taste Torrontés."
+      "es": "Viñedos y bodegas en la mítica Ruta 40 alrededor de Cafayate para degustar vinos de altura.",
+      "en": "Vineyards and wineries along legendary Route 40 around Cafayate to taste high-altitude wines."
     },
     "category": "ruta",
     "region": "valles",
@@ -1332,5 +1332,115 @@
       "vino"
     ],
     "popularity": 92
+  },
+  {
+    "id": "pueblo-iruya",
+    "title": {
+      "es": "Iruya",
+      "en": "Iruya"
+    },
+    "summary": {
+      "es": "Pueblo andino tradicional con calles empinadas y vistas al río Iruya.",
+      "en": "Traditional Andean village with steep streets and views of the Iruya river."
+    },
+    "category": "pueblo",
+    "region": "puna",
+    "coords": {
+      "lat": -22.788889,
+      "lng": -65.217222
+    },
+    "tags": [
+      "pueblo",
+      "andino"
+    ],
+    "popularity": 88
+  },
+  {
+    "id": "pueblo-cachi",
+    "title": {
+      "es": "Cachi",
+      "en": "Cachi"
+    },
+    "summary": {
+      "es": "Encantadora localidad de los Valles Calchaquíes con arquitectura colonial y vistas al Nevado de Cachi.",
+      "en": "Charming Calchaquí Valley town with colonial architecture and views of Nevado de Cachi."
+    },
+    "category": "pueblo",
+    "region": "valles",
+    "coords": {
+      "lat": -25.1207,
+      "lng": -66.1656
+    },
+    "tags": [
+      "colonial",
+      "valles"
+    ],
+    "popularity": 86
+  },
+  {
+    "id": "parque-sarmiento-tastil",
+    "title": {
+      "es": "Parque Sarmiento de Tastil",
+      "en": "Tastil Sarmiento Park"
+    },
+    "summary": {
+      "es": "Mirador cercano a las ruinas de Santa Rosa de Tastil y la Quebrada del Toro.",
+      "en": "Viewpoint near the Santa Rosa de Tastil ruins and the Quebrada del Toro."
+    },
+    "category": "mirador",
+    "region": "puna",
+    "coords": {
+      "lat": -24.713,
+      "lng": -65.946
+    },
+    "tags": [
+      "arqueologia",
+      "mirador"
+    ],
+    "popularity": 72
+  },
+  {
+    "id": "quebrada-del-obispo",
+    "title": {
+      "es": "Quebrada del Obispo",
+      "en": "Quebrada del Obispo"
+    },
+    "summary": {
+      "es": "Curvas de cornisa hacia Piedra del Molino con vistas al Valle Encantado y cardones.",
+      "en": "Winding cornice road toward Piedra del Molino with views of Valle Encantado and tall cacti."
+    },
+    "category": "mirador",
+    "region": "valles",
+    "coords": {
+      "lat": -25.0967,
+      "lng": -65.8117
+    },
+    "tags": [
+      "cuesta",
+      "paisaje"
+    ],
+    "popularity": 85
+  },
+  {
+    "id": "ruta-parque-nacional-cardones",
+    "title": {
+      "es": "Ruinas Parque Nacional Los Cardones",
+      "en": "Los Cardones National Park Ruins"
+    },
+    "summary": {
+      "es": "Ruta escénica por el Parque Nacional Los Cardones con cardonales y vestigios arqueológicos cercanos.",
+      "en": "Scenic drive through Los Cardones National Park with towering cacti and nearby archaeological remains."
+    },
+    "category": "ruta",
+    "region": "valles",
+    "coords": {
+      "lat": -25.1667,
+      "lng": -65.8167
+    },
+    "tags": [
+      "cardones",
+      "ruta"
+    ],
+    "popularity": 80
   }
 ]
