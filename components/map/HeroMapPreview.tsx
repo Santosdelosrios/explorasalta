@@ -20,7 +20,7 @@ const INITIAL_ZOOM = 6.5;
 
 export default function HeroMapPreview() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<MapInstance | null>(null);
+  const mapRef = useRef<maplibregl.Map | null>(null);
   const tourIndexRef = useRef(0);
   const tourTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -61,7 +61,7 @@ export default function HeroMapPreview() {
     };
   }, []);
 
-  const startAutoTour = (map: MapInstance) => {
+  const startAutoTour = (map: maplibregl.Map) => {
     const flyToNext = () => {
       if (!mapRef.current) return;
 
