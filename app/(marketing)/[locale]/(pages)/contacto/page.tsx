@@ -13,13 +13,10 @@ const COPY: Record<Locale, {
   };
   infoTitle: string;
   infoSubtitle: string;
-  emailLabel: string;
-  phoneLabel: string;
-  followLabel: string;
 }> = {
   es: {
     title: 'Contacto',
-    intro: 'Escribinos para sumar destinos, compartir tu evento o recibir asesoramiento turístico.',
+    intro: 'Escribinos si querés publicar en nuestro blog, compartir una actividad o sumar contenido a la página.',
     form: {
       name: 'Nombre y apellido',
       email: 'Correo electrónico',
@@ -27,14 +24,11 @@ const COPY: Record<Locale, {
       submit: 'Enviar mensaje'
     },
     infoTitle: 'Equipo Explorá Salta',
-    infoSubtitle: 'Estamos disponibles de lunes a viernes de 9 a 17 h (UTC-3).',
-    emailLabel: 'Correo',
-    phoneLabel: 'Teléfono',
-    followLabel: 'Seguinos'
+    infoSubtitle: 'Página creada por Santos de los Ríos.'
   },
   en: {
     title: 'Contact',
-    intro: 'Reach out to share new destinations, cultural events or request travel support.',
+    intro: 'Reach out if you want to contribute to our blog, share an activity, or add content to the site.',
     form: {
       name: 'Full name',
       email: 'Email address',
@@ -42,22 +36,11 @@ const COPY: Record<Locale, {
       submit: 'Send message'
     },
     infoTitle: 'Explorá Salta team',
-    infoSubtitle: 'We are available Monday to Friday from 9am to 5pm (UTC-3).',
-    emailLabel: 'Email',
-    phoneLabel: 'Phone',
-    followLabel: 'Follow us'
+    infoSubtitle: 'Page created by Santos de los Ríos.',
   }
 };
 
-const CONTACT_CHANNELS = {
-  email: 'hola@explorasalta.ar',
-  phone: '+54 387 555-1234',
-  social: [
-    {label: 'Instagram', handle: '@explorasalta'},
-    {label: 'YouTube', handle: 'Explorá Salta'},
-    {label: 'TikTok', handle: '@explorasalta'}
-  ]
-};
+const CONTACT_EMAIL = 'santosdelosrios12@gmail.com';
 
 export default async function ContactoPage({ params }: LocalePageProps) {
   const { locale } = await params;
@@ -71,7 +54,13 @@ export default async function ContactoPage({ params }: LocalePageProps) {
           <p className="max-w-2xl text-lg text-ink/80">{copy.intro}</p>
         </header>
 
-        <form className="mt-8 grid gap-4" aria-label={copy.title}>
+        <form
+          className="mt-8 grid gap-4"
+          aria-label={copy.title}
+          action={`mailto:${CONTACT_EMAIL}`}
+          method="POST"
+          encType="text/plain"
+        >
           <label className="grid gap-2">
             <span className="text-sm font-semibold uppercase tracking-[0.18em] text-cardon/70">{copy.form.name}</span>
             <input
@@ -111,38 +100,6 @@ export default async function ContactoPage({ params }: LocalePageProps) {
       <aside className="md:w-1/3 space-y-6 rounded-3xl border border-poncho/10 bg-white/80 p-6 shadow-soft">
         <h2 className="font-heading text-2xl font-semibold text-poncho">{copy.infoTitle}</h2>
         <p className="text-sm text-ink/70">{copy.infoSubtitle}</p>
-
-        <dl className="space-y-4 text-sm text-ink/80">
-          <div>
-            <dt className="font-semibold uppercase tracking-[0.18em] text-cardon/70">{copy.emailLabel}</dt>
-            <dd>
-              <a href={`mailto:${CONTACT_CHANNELS.email}`} className="text-poncho underline">
-                {CONTACT_CHANNELS.email}
-              </a>
-            </dd>
-          </div>
-          <div>
-            <dt className="font-semibold uppercase tracking-[0.18em] text-cardon/70">{copy.phoneLabel}</dt>
-            <dd>
-              <a href={`tel:${CONTACT_CHANNELS.phone.replace(/[^\d+]/g, '')}`} className="text-poncho">
-                {CONTACT_CHANNELS.phone}
-              </a>
-            </dd>
-          </div>
-          <div>
-            <dt className="font-semibold uppercase tracking-[0.18em] text-cardon/70">{copy.followLabel}</dt>
-            <dd>
-              <ul className="space-y-1">
-                {CONTACT_CHANNELS.social.map(channel => (
-                  <li key={channel.label} className="flex items-center justify-between">
-                    <span>{channel.label}</span>
-                    <span className="font-semibold text-poncho">{channel.handle}</span>
-                  </li>
-                ))}
-              </ul>
-            </dd>
-          </div>
-        </dl>
       </aside>
     </main>
   );
