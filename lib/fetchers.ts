@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { promises as fs } from 'node:fs';
 import type { POI, Region, Experiencia, Evento, POIRating } from './schema';
+import { encodePlusCode } from './pluscode';
 
 function deriveRatingFromPopularity(popularity?: number): POIRating {
   const normalized = typeof popularity === 'number'
@@ -27,17 +28,26 @@ async function readJson<T>(rel: string, fallback: T): Promise<T> {
 
 export async function getPOIs(): Promise<POI[]> {
   const pois = await readJson<POI[]>('data/pois.json', []);
-  return pois.map(poi => {
-    if (poi.rating) {
-      return poi;
-    }
+  const seen = new Set<string>();
 
-    const derived = deriveRatingFromPopularity(poi.popularity);
-    return {
-      ...poi,
-      rating: derived
-    };
-  });
+  return pois
+    .filter((poi) => {
+      if (seen.has(poi.id)) {
+        return false;
+      }
+      seen.add(poi.id);
+      return true;
+    })
+    .map((poi) => {
+      const rating = poi.rating ?? deriveRatingFromPopularity(poi.popularity);
+      const plusCode = poi.plusCode ?? encodePlusCode(poi.coords.lat, poi.coords.lng);
+
+      return {
+        ...poi,
+        rating,
+        plusCode
+      };
+    });
 }
 export async function getRegiones(): Promise<Region[]> {
   return readJson<Region[]>('data/regiones.json', []);
