@@ -2,16 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tipografías: Lexend Deca para títulos + Tenor Sans para texto */
+/* Tipografías: Julius Sans One como fuente principal */
 :root {
   color-scheme: light;
-  --font-heading: 'Lexend Deca', 'Montserrat', 'Segoe UI', system-ui, sans-serif;
-  --font-body: 'Tenor Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-heading: var(--font-main), 'Julius Sans One', 'Segoe UI', system-ui, sans-serif;
+  --font-body: var(--font-main), 'Julius Sans One', 'Segoe UI', system-ui, sans-serif;
 }
 
 html, body {
   @apply bg-arena text-ink;
-  font-family: var(--font-body), 'Tenor Sans', 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-body), 'Julius Sans One', 'Segoe UI', system-ui, sans-serif;
 }
 
 a {
@@ -26,13 +26,13 @@ a {
   h1,
   h2,
   h3 {
-    font-family: var(--font-heading), 'Lexend Deca', 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-heading), 'Julius Sans One', 'Segoe UI', system-ui, sans-serif;
   }
 }
 
 @layer utilities {
   .font-heading {
-    font-family: var(--font-heading), 'Lexend Deca', 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-heading), 'Julius Sans One', 'Segoe UI', system-ui, sans-serif;
   }
 }
 
@@ -55,11 +55,11 @@ a {
 }
 
 .poi-popup {
-  font-family: var(--font-body), 'Tenor Sans', 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-body), 'Julius Sans One', 'Segoe UI', system-ui, sans-serif;
 }
 
 .poi-popup h3 {
-  font-family: var(--font-heading), 'Lexend Deca', 'Montserrat', sans-serif;
+  font-family: var(--font-heading), 'Julius Sans One', 'Segoe UI', system-ui, sans-serif;
   font-size: 1.05rem;
   margin: 0.1rem 0 0.35rem;
   color: #1b1d1f;
