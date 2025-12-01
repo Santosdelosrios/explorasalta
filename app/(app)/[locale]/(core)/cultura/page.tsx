@@ -3,6 +3,8 @@ import {getEventos, getPOIs, getRegiones} from '@/lib/fetchers';
 import type {Evento, POI, Region} from '@/lib/schema';
 import type {Locale} from '@/lib/i18n/config';
 
+type LocalePageProps = { params: Promise<{ locale: Locale }> };
+
 const COPY: Record<Locale, {
   title: string;
   intro: string;
@@ -62,9 +64,8 @@ function groupByMonth(events: Evento[]) {
   return groups;
 }
 
-export default async function CulturaPage({ params }: any) {
-
-  const locale = params.locale;
+export default async function CulturaPage({ params }: LocalePageProps) {
+  const { locale } = await params;
   const copy = COPY[locale];
 
   const [events, pois, regions] = await Promise.all([

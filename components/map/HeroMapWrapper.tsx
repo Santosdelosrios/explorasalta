@@ -15,5 +15,5 @@ const HeroMapPreview = dynamic(() => import('@/components/map/HeroMapPreview'), 
 });
 
 export default function HeroMapWrapper({locale}: {locale: Locale}) {
-  return <HeroMapPreview locale={locale} />;
+  return <HeroMapPreview />;
 }
