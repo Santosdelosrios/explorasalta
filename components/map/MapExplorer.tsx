@@ -162,7 +162,7 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
   // Render markers based on filtered POIs
   useEffect(() => {
     const map = mapRef.current;
-    if (!map) return;
+    if (!map || !mapReady) return;
 
     Object.values(markersRef.current).forEach((marker) => marker.remove());
     markersRef.current = {};
@@ -181,7 +181,7 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
 
       markersRef.current[poi.id] = marker;
     });
-  }, [filteredPois, locale]);
+  }, [filteredPois, locale, mapReady]);
 
   const directionsUrl = useCallback(
     (poi: POI) => {
