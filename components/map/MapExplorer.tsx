@@ -78,7 +78,7 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   const [activePoiId, setActivePoiId] = useState<string | null>(null);
 
   const styleUrl = process.env.NEXT_PUBLIC_MAPTILER_KEY
-    ? `https://api.maptiler.com/maps/hybrid/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
+    ? `https://api.maptiler.com/maps/satellite/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`
     : FALLBACK_STYLE;
 
   const copy = COPY[locale];
