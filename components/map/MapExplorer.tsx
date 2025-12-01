@@ -129,15 +129,21 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
     map.addControl(new maplibregl.ScaleControl({maxWidth: 120, unit: 'metric'}), 'bottom-right');
     map.addControl(new maplibregl.AttributionControl({compact: true}));
 
-    const handleLoad = () => setMapReady(true);
-    map.on('load', handleLoad);
+    const flagMapReady = () => {
+      if (map.isStyleLoaded()) {
+        setMapReady(true);
+      }
+    };
+
+    map.on('load', flagMapReady);
+    map.on('idle', flagMapReady);
 
     map.on('error', (event) => {
-      if (!fallbackAppliedRef.current && styleUrl !== FALLBACK_STYLE) {
-        console.warn('Map style failed to load, falling back to hybrid demo tiles', event.error);
-        fallbackAppliedRef.current = true;
-        map.setStyle(FALLBACK_STYLE);
-      }
+      if (fallbackAppliedRef.current) return;
+
+      console.warn('Map style failed to load, falling back to demo tiles', event.error);
+      fallbackAppliedRef.current = true;
+      map.setStyle(BACKUP_STYLE);
     });
 
     mapRef.current = map;
@@ -153,7 +159,8 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
       markersRef.current = {};
       popupRef.current?.remove();
       popupRef.current = null;
-      map.off('load', handleLoad);
+      map.off('load', flagMapReady);
+      map.off('idle', flagMapReady);
       map.remove();
       mapRef.current = null;
     };
