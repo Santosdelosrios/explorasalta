@@ -3,6 +3,8 @@
 import {useEffect, useRef} from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import type {POI, Category} from '@/lib/schema';
+import type {Locale} from '@/lib/i18n/config';
 
 const TOUR_POINTS = [
   {name: 'Cafayate', coords: [-65.9767, -26.0733], zoom: 11},
@@ -18,9 +20,27 @@ const TOUR_POINTS = [
 const SALTA_CENTER: [number, number] = [-65.4, -24.8];
 const INITIAL_ZOOM = 6.5;
 
-export default function HeroMapPreview() {
+const CATEGORY_COLORS: Record<Category, string> = {
+  pueblo: '#b45309',
+  mirador: '#0f766e',
+  ruta: '#9333ea',
+  fiesta: '#be123c',
+  museo: '#2563eb',
+  gastronomia: '#b91c1c',
+  sendero: '#15803d',
+  patrimonio: '#7c3aed'
+};
+
+interface HeroMapPreviewProps {
+  pois?: POI[];
+  locale?: Locale;
+  enableTour?: boolean;
+}
+
+export default function HeroMapPreview({pois = [], locale = 'es', enableTour = false}: HeroMapPreviewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
+  const markersRef = useRef<Record<string, maplibregl.Marker>>({});
   const tourIndexRef = useRef(0);
   const tourTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -38,9 +58,9 @@ export default function HeroMapPreview() {
       style: `https://api.maptiler.com/maps/hybrid/style.json?key=${maptilerKey}`,
       center: SALTA_CENTER,
       zoom: INITIAL_ZOOM,
-      pitch: 45,
+      pitch: enableTour ? 45 : 20,
       bearing: 0,
-      interactive: false,
+      interactive: !enableTour,
       attributionControl: false,
       refreshExpiredTiles: false,
     });
@@ -48,7 +68,33 @@ export default function HeroMapPreview() {
     mapRef.current = map;
 
     map.on('load', () => {
-      startAutoTour(map);
+      // Add POI markers if POIs are provided
+      if (pois.length > 0) {
+        pois.forEach((poi) => {
+          const el = document.createElement('button');
+          el.className = 'poi-marker focus:outline-none';
+          el.setAttribute('aria-label', poi.title[locale]);
+          el.style.setProperty('--marker-color', CATEGORY_COLORS[poi.category]);
+
+          const marker = new maplibregl.Marker({element: el, anchor: 'bottom'})
+            .setLngLat([poi.coords.lng, poi.coords.lat])
+            .addTo(map);
+
+          markersRef.current[poi.id] = marker;
+        });
+
+        // If not in tour mode, fit bounds to show all POIs
+        if (!enableTour && pois.length > 0) {
+          const bounds = new maplibregl.LngLatBounds();
+          pois.forEach((poi) => bounds.extend([poi.coords.lng, poi.coords.lat]));
+          map.fitBounds(bounds, {padding: 60, maxZoom: 12.5, duration: 1000});
+        }
+      }
+
+      // Start tour only if enabled
+      if (enableTour) {
+        startAutoTour(map);
+      }
     });
 
     return () => {
@@ -56,10 +102,54 @@ export default function HeroMapPreview() {
         clearTimeout(tourTimeoutRef.current);
       }
 
+      Object.values(markersRef.current).forEach((marker) => {
+        if (marker instanceof maplibregl.Marker) {
+          marker.remove();
+        }
+      });
+      markersRef.current = {};
+
       mapRef.current?.remove();
       mapRef.current = null;
     };
-  }, []);
+  }, [enableTour]);
+
+  // Update markers when POIs change
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !map.loaded()) return;
+
+    // Remove old markers
+    Object.values(markersRef.current).forEach((marker) => {
+      if (marker instanceof maplibregl.Marker) {
+        marker.remove();
+      }
+    });
+    markersRef.current = {};
+
+    // Add new markers if POIs are provided
+    if (pois.length > 0) {
+      pois.forEach((poi) => {
+        const el = document.createElement('button');
+        el.className = 'poi-marker focus:outline-none';
+        el.setAttribute('aria-label', poi.title[locale]);
+        el.style.setProperty('--marker-color', CATEGORY_COLORS[poi.category]);
+
+        const marker = new maplibregl.Marker({element: el, anchor: 'bottom'})
+          .setLngLat([poi.coords.lng, poi.coords.lat])
+          .addTo(map);
+
+        markersRef.current[poi.id] = marker;
+      });
+
+      // If not in tour mode, fit bounds to show all POIs
+      if (!enableTour && pois.length > 0) {
+        const bounds = new maplibregl.LngLatBounds();
+        pois.forEach((poi) => bounds.extend([poi.coords.lng, poi.coords.lat]));
+        map.fitBounds(bounds, {padding: 60, maxZoom: 12.5, duration: 700});
+      }
+    }
+  }, [pois, locale, enableTour]);
 
   const startAutoTour = (map: maplibregl.Map) => {
     const flyToNext = () => {

@@ -1,6 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic';
 import type {Locale} from '@/lib/i18n/config';
+import type {POI} from '@/lib/schema';
 
 const HeroMapPreview = dynamic(() => import('@/components/map/HeroMapPreview'), {
   ssr: false,
@@ -14,6 +15,11 @@ const HeroMapPreview = dynamic(() => import('@/components/map/HeroMapPreview'), 
   )
 });
 
-export default function HeroMapWrapper({locale}: {locale: Locale}) {
-  return <HeroMapPreview />;
+interface HeroMapWrapperProps {
+  locale: Locale;
+  pois: POI[];
+}
+
+export default function HeroMapWrapper({locale, pois}: HeroMapWrapperProps) {
+  return <HeroMapPreview pois={pois} locale={locale} enableTour={false} />;
 }

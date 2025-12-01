@@ -2,7 +2,9 @@ import type {ReactNode} from 'react';
 import Link from 'next/link';
 import HeroMapWrapper from '@/components/map/HeroMapWrapper';
 import CulturaVivaSection from '@/components/sections/CulturaVivaSection';
-import {getEventos, getPOIs, getRegiones} from '@/lib/fetchers';
+import FeaturedExperiencesSection from '@/components/sections/FeaturedExperiencesSection';
+import FeaturedPOIsSection from '@/components/sections/FeaturedPOIsSection';
+import {getEventos, getPOIs, getRegiones, getExperiencias} from '@/lib/fetchers';
 import {CATEGORY_METADATA, getCategoryLabel} from '@/lib/content/categories';
 import type {Locale} from '@/lib/i18n/config';
 import type {POI, Region} from '@/lib/schema';
@@ -82,10 +84,11 @@ const REGIONES_COPY: Record<Locale, {
 export default async function HomePage({ params }: LocalePageProps) {
   const { locale } = await params;
   const copy = HERO_COPY[locale];
-  const [events, regiones, pois] = await Promise.all([
+  const [events, regiones, pois, experiencias] = await Promise.all([
     getEventos(),
     getRegiones(),
-    getPOIs()
+    getPOIs(),
+    getExperiencias()
   ]);
 
   const regionesCopy = REGIONES_COPY[locale];
@@ -118,44 +121,66 @@ export default async function HomePage({ params }: LocalePageProps) {
     <>
       <main
         id="main"
-        className="container mx-auto flex flex-col gap-12 px-3 py-12 md:px-5"
+        className="container mx-auto flex flex-col gap-16 px-3 py-12 md:px-5 lg:gap-20"
       >
-        <section className="flex flex-col items-center gap-4 text-center md:items-start md:text-left">
-          <div className="flex w-full flex-col items-center gap-3 md:flex-row md:items-start md:justify-between md:text-left">
-            <h1 className="max-w-3xl font-heading text-4xl font-extrabold md:text-5xl">
-              {copy.title}
-              <span className="block text-xl font-semibold text-cardon md:text-2xl">
-                {locale === 'es'
-                  ? 'Mapa interactivo y cultura viva'
-                  : 'Interactive map and living culture'}
-              </span>
-            </h1>
-            <div className="flex w-full flex-col items-center gap-3 md:max-w-sm md:items-end">
+        <section className="relative flex flex-col items-center gap-6 text-center md:items-start md:text-left md:gap-8">
+          {/* Background decoration */}
+          <div className="absolute inset-0 -z-10 overflow-hidden">
+            <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-cielo/10 rounded-full blur-3xl" />
+            <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-poncho/5 rounded-full blur-3xl" />
+          </div>
+
+          <div className="flex w-full flex-col items-center gap-6 md:flex-row md:items-start md:justify-between md:text-left">
+            <div className="flex-1 space-y-4">
+              <h1 className="max-w-3xl font-heading text-4xl font-extrabold md:text-5xl lg:text-6xl">
+                {copy.title}
+                <span className="block mt-2 text-xl font-semibold text-cardon md:text-2xl lg:text-3xl">
+                  {locale === 'es'
+                    ? 'Mapa interactivo y cultura viva'
+                    : 'Interactive map and living culture'}
+                </span>
+              </h1>
+              <p className="max-w-2xl text-lg text-ink/80 md:text-xl">{copy.description}</p>
+              
+              {/* Stats */}
+              <div className="flex flex-wrap gap-6 pt-4">
+                <div className="flex flex-col">
+                  <p className="text-3xl font-bold text-poncho">{pois.length}+</p>
+                  <p className="text-sm text-ink/60">{locale === 'es' ? 'Lugares' : 'Places'}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-3xl font-bold text-poncho">{regiones.length}</p>
+                  <p className="text-sm text-ink/60">{locale === 'es' ? 'Regiones' : 'Regions'}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-3xl font-bold text-poncho">{experiencias.length}+</p>
+                  <p className="text-sm text-ink/60">{locale === 'es' ? 'Experiencias' : 'Experiences'}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex w-full flex-col items-center gap-4 md:w-auto md:items-end">
               <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
                 <Link
-                  className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
+                  className="rounded-xl bg-poncho px-6 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90 hover:shadow-xl"
                   href={{pathname: `/${locale}`, hash: 'mapa'}}
                   scroll
                 >
                   {copy.mapCta}
                 </Link>
                 <Link
-                  className="rounded-xl border border-poncho/30 px-5 py-3 font-semibold transition-all hover:border-poncho/50 hover:bg-ink/5"
+                  className="rounded-xl border-2 border-poncho/30 bg-white/80 px-6 py-3 font-semibold text-poncho transition-all hover:border-poncho/50 hover:bg-white"
                   href={`/${locale}/experiencias`}
                 >
                   {copy.experiencesCta}
                 </Link>
               </div>
-              <div className="w-full rounded-2xl border border-poncho/20 bg-white/70 px-4 py-3 text-sm font-semibold text-ink shadow-soft">
-                {locale === 'es' ? 'Espacio publicitario' : 'Promotional placement'}
-              </div>
             </div>
           </div>
-          <p className="max-w-2xl text-lg text-zinc-700 md:text-left">{copy.description}</p>
         </section>
 
         <section className="w-full" id="mapa">
-          <HeroMapWrapper locale={locale} />
+          <HeroMapWrapper locale={locale} pois={pois} />
         </section>
 
         <section
@@ -276,6 +301,10 @@ export default async function HomePage({ params }: LocalePageProps) {
           </div>
         </section>
       </main>
+
+      <FeaturedPOIsSection pois={pois} locale={locale} />
+      
+      <FeaturedExperiencesSection experiencias={experiencias} pois={pois} locale={locale} />
 
       <CulturaVivaSection events={events} locale={locale} />
     </>

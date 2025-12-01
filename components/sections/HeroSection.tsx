@@ -69,7 +69,7 @@ export default function HeroSection() {
           
           {/* Columna derecha: Mapa preview */}
           <div className="relative h-[400px] lg:h-[600px] w-full">
-            <HeroMapPreview />
+            <HeroMapPreview enableTour={true} />
           </div>
           
         </div>
