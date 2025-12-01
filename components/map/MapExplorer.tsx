@@ -7,6 +7,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import type {Category, POI} from '@/lib/schema';
 import type {Locale} from '@/lib/i18n/config';
 import {CATEGORY_METADATA} from '@/lib/content/categories';
+import {getRegionLabel} from '@/lib/content/regions';
 
 const FALLBACK_STYLE = 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB';
 const BACKUP_STYLE = 'https://demotiles.maplibre.org/style.json';
@@ -71,6 +72,7 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const markersRef = useRef<Record<string, maplibregl.Marker>>({});
+  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const fallbackAppliedRef = useRef(false);
   const [mapReady, setMapReady] = useState(false);
 
@@ -241,12 +243,14 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
     const rating = poi.rating?.average;
     const count = poi.rating?.count;
     const ratingCopy = copy.reviews(rating, count);
+    const regionCopy = getRegionLabel(poi.region, locale);
 
     const html = `
       <div class="poi-popup">
         <p class="poi-popup__eyebrow">${CATEGORY_METADATA[poi.category].label[locale]}</p>
         <h3>${poi.title[locale]}</h3>
         <p class="poi-popup__summary">${poi.summary[locale]}</p>
+        <p class="poi-popup__region">${regionCopy}</p>
         <p class="poi-popup__rating">${ratingCopy}</p>
         <a class="poi-popup__button" href="${directionsUrl(poi)}" target="_blank" rel="noopener noreferrer">
           ${copy.directions}
@@ -262,6 +266,28 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
     const currentZoom = map.getZoom();
     map.easeTo({center: [poi.coords.lng, poi.coords.lat], zoom: currentZoom, duration: 600});
   }, [activePoiId, copy, directionsUrl, locale, pois]);
+
+  // Keep the active card visible inside the highlighted list
+  useEffect(() => {
+    if (!activePoiId) return;
+
+    const card = cardRefs.current[activePoiId];
+    if (card) {
+      card.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    }
+  }, [activePoiId]);
+
+  // Emphasize active marker when selection changes
+  useEffect(() => {
+    Object.entries(markersRef.current).forEach(([poiId, marker]) => {
+      const el = marker.getElement();
+      if (poiId === activePoiId) {
+        el.setAttribute('data-active', 'true');
+      } else {
+        el.removeAttribute('data-active');
+      }
+    });
+  }, [activePoiId]);
 
   const toggleCategory = (category: Category) => {
     setActiveCategories((prev) => {
@@ -361,10 +387,14 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
             const active = poi.id === activePoiId;
             const category = CATEGORY_METADATA[poi.category];
             const ratingLabel = copy.reviews(poi.rating?.average, poi.rating?.count);
+            const regionLabel = getRegionLabel(poi.region, locale);
 
             return (
               <article
                 key={poi.id}
+                ref={(node) => {
+                  cardRefs.current[poi.id] = node;
+                }}
                 role="button"
                 tabIndex={0}
                 aria-pressed={active}
@@ -395,6 +425,7 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
                   )}
                 </div>
                 <p className="mt-1 text-sm leading-relaxed text-ink/70">{poi.summary[locale]}</p>
+                <p className="mt-2 text-xs font-semibold text-ink/50">{regionLabel}</p>
                 <p className="mt-3 text-xs font-medium text-ink/60">{ratingLabel}</p>
                 <a
                   href={directionsUrl(poi)}

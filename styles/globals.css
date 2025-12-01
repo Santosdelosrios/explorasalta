@@ -54,6 +54,11 @@ a {
   box-shadow: 0 20px 35px rgba(15, 23, 42, 0.35);
 }
 
+.poi-marker[data-active='true'] {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 24px 40px rgba(15, 23, 42, 0.4);
+}
+
 .poi-popup {
   font-family: var(--font-body), 'Tenor Sans', 'Segoe UI', system-ui, sans-serif;
 }
@@ -77,6 +82,13 @@ a {
   font-size: 0.9rem;
   color: #374151;
   margin-bottom: 0.6rem;
+}
+
+.poi-popup__region {
+  font-size: 0.85rem;
+  color: #475569;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
 }
 
 .poi-popup__rating {
