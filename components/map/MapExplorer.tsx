@@ -8,8 +8,8 @@ import type {Category, POI} from '@/lib/schema';
 import type {Locale} from '@/lib/i18n/config';
 import {CATEGORY_METADATA} from '@/lib/content/categories';
 
-const FALLBACK_STYLE =
-  'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB';
+const FALLBACK_STYLE = 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB';
+const BACKUP_STYLE = 'https://demotiles.maplibre.org/style.json';
 
 const CATEGORY_COLORS: Record<Category, string> = {
   pueblo: '#b45309',
@@ -71,6 +71,7 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const markersRef = useRef<Record<string, maplibregl.Marker>>({});
+  const fallbackAppliedRef = useRef(false);
 
   const [activeCategories, setActiveCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState('');
@@ -124,6 +125,14 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
     map.addControl(new maplibregl.NavigationControl({visualizePitch: true}), 'top-right');
     map.addControl(new maplibregl.ScaleControl({maxWidth: 120, unit: 'metric'}), 'bottom-right');
     map.addControl(new maplibregl.AttributionControl({compact: true}));
+
+    map.on('error', (event) => {
+      if (!fallbackAppliedRef.current && styleUrl !== BACKUP_STYLE) {
+        console.warn('Map style failed to load, falling back to open tiles', event.error);
+        fallbackAppliedRef.current = true;
+        map.setStyle(BACKUP_STYLE);
+      }
+    });
 
     mapRef.current = map;
     popupRef.current = new maplibregl.Popup({
