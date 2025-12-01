@@ -4,6 +4,10 @@ import {useEffect, useRef} from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
+const MAPTILER_STYLE = 'https://api.maptiler.com/maps/hybrid/style.json';
+const OPEN_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
+const DEMO_STYLE = 'https://demotiles.maplibre.org/style.json';
+
 const TOUR_POINTS = [
   {name: 'Cafayate', coords: [-65.9767, -26.0733], zoom: 11},
   {name: 'Cachi', coords: [-66.1667, -25.1167], zoom: 11.5},
@@ -23,19 +27,22 @@ export default function HeroMapPreview() {
   const mapRef = useRef<maplibregl.Map | null>(null);
   const tourIndexRef = useRef(0);
   const tourTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const styleIndexRef = useRef(0);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
     const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY;
-    if (!maptilerKey) {
-      console.error('Falta NEXT_PUBLIC_MAPTILER_KEY para renderizar el mapa.');
-      return;
-    }
+
+    const styleCandidates = [
+      maptilerKey ? `${MAPTILER_STYLE}?key=${maptilerKey}` : OPEN_STYLE,
+      OPEN_STYLE,
+      DEMO_STYLE
+    ];
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: `https://api.maptiler.com/maps/hybrid/style.json?key=${maptilerKey}`,
+      style: styleCandidates[0],
       center: SALTA_CENTER,
       zoom: INITIAL_ZOOM,
       pitch: 45,
@@ -49,6 +56,16 @@ export default function HeroMapPreview() {
 
     map.on('load', () => {
       startAutoTour(map);
+    });
+
+    map.on('error', () => {
+      const nextIndex = styleIndexRef.current + 1;
+      const nextStyle = styleCandidates[nextIndex];
+
+      if (!nextStyle) return;
+
+      styleIndexRef.current = nextIndex;
+      map.setStyle(nextStyle);
     });
 
     return () => {

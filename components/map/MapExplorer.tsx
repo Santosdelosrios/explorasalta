@@ -8,7 +8,8 @@ import type {Category, POI} from '@/lib/schema';
 import type {Locale} from '@/lib/i18n/config';
 import {CATEGORY_METADATA} from '@/lib/content/categories';
 
-const FALLBACK_STYLE = 'https://api.maptiler.com/maps/hybrid/style.json?key=get_your_own_D6rA4zTHduk6KOKTXzGB';
+const MAPTILER_STYLE = 'https://api.maptiler.com/maps/hybrid/style.json';
+const OPEN_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const BACKUP_STYLE = 'https://demotiles.maplibre.org/style.json';
 
 const CATEGORY_COLORS: Record<Category, string> = {
@@ -71,18 +72,20 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const markersRef = useRef<Record<string, maplibregl.Marker>>({});
-  const fallbackAppliedRef = useRef(false);
+  const styleIndexRef = useRef(0);
   const [mapReady, setMapReady] = useState(false);
 
   const [activeCategories, setActiveCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState('');
   const [activePoiId, setActivePoiId] = useState<string | null>(null);
 
-const styleBase = 'https://api.maptiler.com/maps/hybrid/style.json';
-const apiKey = process.env.NEXT_PUBLIC_MAPTILER_KEY ?? 'get_your_own_D6rA4zTHduk6KOKTXzGB';
-
-const styleUrl = `${styleBase}?key=${apiKey}`;
-
+  const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY;
+  const styleCandidates = useMemo(() => {
+    const primaryStyle = maptilerKey ? `${MAPTILER_STYLE}?key=${maptilerKey}` : OPEN_STYLE;
+    return [primaryStyle, OPEN_STYLE, BACKUP_STYLE].filter(
+      (style, index, array) => array.indexOf(style) === index
+    );
+  }, [maptilerKey]);
 
   const copy = COPY[locale];
 
@@ -114,11 +117,11 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
 
   // Initialize map once
   useEffect(() => {
-    if (!mapContainerRef.current || mapRef.current) return;
+    if (!mapContainerRef.current || mapRef.current || !styleCandidates.length) return;
 
     const map = new maplibregl.Map({
       container: mapContainerRef.current,
-      style: styleUrl,
+      style: styleCandidates[0],
       center: [DEFAULT_VIEW.lng, DEFAULT_VIEW.lat],
       zoom: DEFAULT_VIEW.zoom,
       pitch: 20,
@@ -132,12 +135,15 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
     const handleLoad = () => setMapReady(true);
     map.on('load', handleLoad);
 
-    map.on('error', (event) => {
-      if (!fallbackAppliedRef.current && styleUrl !== FALLBACK_STYLE) {
-        console.warn('Map style failed to load, falling back to hybrid demo tiles', event.error);
-        fallbackAppliedRef.current = true;
-        map.setStyle(FALLBACK_STYLE);
-      }
+    map.on('error', () => {
+      const nextIndex = styleIndexRef.current + 1;
+      const nextStyle = styleCandidates[nextIndex];
+
+      if (!nextStyle) return;
+
+      styleIndexRef.current = nextIndex;
+      setMapReady(false);
+      map.setStyle(nextStyle);
     });
 
     mapRef.current = map;
@@ -157,7 +163,7 @@ const styleUrl = `${styleBase}?key=${apiKey}`;
       map.remove();
       mapRef.current = null;
     };
-  }, [styleUrl]);
+  }, [styleCandidates]);
 
   // Render markers based on filtered POIs
   useEffect(() => {
