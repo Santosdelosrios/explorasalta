@@ -14,6 +14,7 @@ export interface POI {
   category: Category;
   region: RegionId;
   coords: { lat: number; lng: number };
+  plusCode?: string;
   images?: string[];
   tags?: string[];
   popularity?: number; // 0..100

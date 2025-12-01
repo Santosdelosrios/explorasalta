@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { promises as fs } from 'node:fs';
 import type { POI, Region, Experiencia, Evento, POIRating } from './schema';
+import { encodePlusCode } from './pluscode';
 
 function deriveRatingFromPopularity(popularity?: number): POIRating {
   const normalized = typeof popularity === 'number'
@@ -14,32 +15,46 @@ function deriveRatingFromPopularity(popularity?: number): POIRating {
   return { average, count };
 }
 
-async function readJson<T = unknown>(rel: string): Promise<T> {
+async function readJson<T>(rel: string, fallback: T): Promise<T> {
   const abs = path.join(process.cwd(), rel);
-  const raw = await fs.readFile(abs, 'utf8');
-  return JSON.parse(raw) as T;
+  try {
+    const raw = await fs.readFile(abs, 'utf8');
+    return JSON.parse(raw) as T;
+  } catch (error) {
+    console.error(`Failed to read JSON file: ${abs}`, error);
+    return fallback;
+  }
 }
 
 export async function getPOIs(): Promise<POI[]> {
-  const pois = await readJson<POI[]>('data/pois.json');
-  return pois.map(poi => {
-    if (poi.rating) {
-      return poi;
-    }
+  const pois = await readJson<POI[]>('data/pois.json', []);
+  const seen = new Set<string>();
 
-    const derived = deriveRatingFromPopularity(poi.popularity);
-    return {
-      ...poi,
-      rating: derived
-    };
-  });
+  return pois
+    .filter((poi) => {
+      if (seen.has(poi.id)) {
+        return false;
+      }
+      seen.add(poi.id);
+      return true;
+    })
+    .map((poi) => {
+      const rating = poi.rating ?? deriveRatingFromPopularity(poi.popularity);
+      const plusCode = poi.plusCode ?? encodePlusCode(poi.coords.lat, poi.coords.lng);
+
+      return {
+        ...poi,
+        rating,
+        plusCode
+      };
+    });
 }
 export async function getRegiones(): Promise<Region[]> {
-  return readJson<Region[]>('data/regiones.json');
+  return readJson<Region[]>('data/regiones.json', []);
 }
 export async function getExperiencias(): Promise<Experiencia[]> {
-  return readJson<Experiencia[]>('data/experiencias.json');
+  return readJson<Experiencia[]>('data/experiencias.json', []);
 }
 export async function getEventos(): Promise<Evento[]> {
-  return readJson<Evento[]>('data/eventos.json');
+  return readJson<Evento[]>('data/eventos.json', []);
 }
