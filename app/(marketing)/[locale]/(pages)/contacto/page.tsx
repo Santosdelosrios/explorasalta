@@ -19,7 +19,7 @@ const COPY: Record<Locale, {
 }> = {
   es: {
     title: 'Contacto',
-    intro: 'Escribinos para sumar destinos, compartir tu evento o recibir asesoramiento turístico.',
+    intro: 'Escribinos si querés publicar en nuestro blog, compartir una actividad o sumar contenido a la página.',
     form: {
       name: 'Nombre y apellido',
       email: 'Correo electrónico',
@@ -27,14 +27,14 @@ const COPY: Record<Locale, {
       submit: 'Enviar mensaje'
     },
     infoTitle: 'Equipo Explorá Salta',
-    infoSubtitle: 'Estamos disponibles de lunes a viernes de 9 a 17 h (UTC-3).',
+    infoSubtitle: 'Página creada por Santos de los Ríos. ¡Sumate si querés escribir en el blog o aportar ideas!',
     emailLabel: 'Correo',
     phoneLabel: 'Teléfono',
     followLabel: 'Seguinos'
   },
   en: {
     title: 'Contact',
-    intro: 'Reach out to share new destinations, cultural events or request travel support.',
+    intro: 'Reach out if you want to contribute to our blog, share an activity, or add content to the site.',
     form: {
       name: 'Full name',
       email: 'Email address',
@@ -42,7 +42,7 @@ const COPY: Record<Locale, {
       submit: 'Send message'
     },
     infoTitle: 'Explorá Salta team',
-    infoSubtitle: 'We are available Monday to Friday from 9am to 5pm (UTC-3).',
+    infoSubtitle: 'Page created by Santos de los Ríos. Join us if you want to write for the blog or share ideas!',
     emailLabel: 'Email',
     phoneLabel: 'Phone',
     followLabel: 'Follow us'
