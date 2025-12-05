@@ -189,22 +189,15 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
     });
   }, [filteredPois, locale, mapReady]);
 
-  const directionsUrl = useCallback(
-    (poi: POI) => {
-      if (poi.plusCode) {
-        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(poi.plusCode)}`;
-      }
+  const directionsUrl = useCallback((poi: POI) => {
+    const destinationCoords = `${poi.coords.lat},${poi.coords.lng}`;
 
-      if (poi.placeId) {
-        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-          poi.title[locale]
-        )}&query_place_id=${poi.placeId}`;
-      }
+    if (poi.placeId) {
+      return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destinationCoords)}&destination_place_id=${poi.placeId}`;
+    }
 
-      return `https://www.google.com/maps/dir/?api=1&destination=${poi.coords.lat},${poi.coords.lng}`;
-    },
-    [locale]
-  );
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destinationCoords)}`;
+  }, []);
 
   // Keep the currently visible markers in view as filters change
   useEffect(() => {
