@@ -98,45 +98,42 @@ export default async function HomePage({ params }: LocalePageProps) {
     <>
       <main
         id="main"
-        className="container mx-auto flex flex-col gap-12 px-3 py-12 md:px-5"
+        className="container mx-auto flex flex-col gap-10 px-3 py-12 md:px-5"
       >
-        <section className="flex flex-col items-center gap-4 text-center md:items-start md:text-left">
-          <div className="flex w-full flex-col items-center gap-3 md:flex-row md:items-start md:justify-between md:text-left">
-            <h1 className="max-w-3xl font-heading text-4xl font-extrabold md:text-5xl">
+        <section className="relative overflow-hidden rounded-3xl shadow-soft" id="mapa">
+          <HeroMapWrapper locale={locale} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/45" aria-hidden />
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 px-6 text-center text-white md:items-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/80">
+              {locale === 'es' ? 'Mapa interactivo y cultura viva' : 'Interactive map and living culture'}
+            </p>
+            <h1 className="max-w-4xl font-heading text-4xl font-extrabold sm:text-5xl md:text-6xl">
               {copy.title}
-              <span className="block text-xl font-semibold text-cardon md:text-2xl">
-                {locale === 'es'
-                  ? 'Mapa interactivo y cultura viva'
-                  : 'Interactive map and living culture'}
-              </span>
             </h1>
-            <div className="flex w-full flex-col items-center gap-3 md:max-w-sm md:items-end">
-              <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
-                <Link
-                  className="rounded-xl bg-poncho px-5 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-poncho/90"
-                  href={{pathname: `/${locale}`, hash: 'mapa'}}
-                  scroll
-                >
-                  {copy.mapCta}
-                </Link>
-                <Link
-                  className="rounded-xl border border-poncho/30 px-5 py-3 font-semibold transition-all hover:border-poncho/50 hover:bg-ink/5"
-                  href={`/${locale}/experiencias`}
-                >
-                  {copy.experiencesCta}
-                </Link>
-              </div>
-              <div className="w-full rounded-2xl border border-poncho/20 bg-white/70 px-4 py-3 text-sm font-semibold text-ink shadow-soft">
-                {locale === 'es' ? 'Espacio publicitario' : 'Promotional placement'}
-              </div>
+            <p className="max-w-3xl text-base font-medium text-white/85 sm:text-lg">
+              {copy.description}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link
+                className="inline-flex items-center gap-2 rounded-2xl bg-poncho px-6 py-3 text-base font-semibold text-white shadow-soft transition hover:bg-poncho/90"
+                href={{pathname: `/${locale}`, hash: 'mapa'}}
+                scroll
+              >
+                {copy.mapCta}
+              </Link>
+              <Link
+                className="inline-flex items-center gap-2 rounded-2xl border border-white/30 px-6 py-3 text-base font-semibold text-white transition hover:border-white/60 hover:bg-white/10"
+                href={`/${locale}/experiencias`}
+              >
+                {copy.experiencesCta}
+              </Link>
             </div>
           </div>
-          <p className="max-w-2xl text-lg text-zinc-700 md:text-left">{copy.description}</p>
         </section>
 
-        <section className="w-full" id="mapa">
-          <HeroMapWrapper locale={locale} />
-        </section>
+        <div className="rounded-2xl border border-poncho/15 bg-white/85 px-4 py-3 text-center text-sm font-semibold text-ink shadow-soft">
+          {locale === 'es' ? 'Espacio publicitario' : 'Promotional placement'}
+        </div>
 
         <section className="space-y-6 rounded-3xl border border-poncho/10 bg-white/80 p-6 shadow-soft" id="regiones">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -170,7 +167,7 @@ export default async function HomePage({ params }: LocalePageProps) {
                   <p className="text-sm text-ink/75">{region.intro[locale]}</p>
                 </div>
 
-                <div className="rounded-2xl border border-dashed border-poncho/20 bg-arena/50 p-3">
+                <div className="rounded-2xl border border-poncho/25 bg-arena/80 p-3 shadow-inner">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cardon/70">
                     {regionesCopy.highlightLabel}
                   </p>
@@ -198,7 +195,7 @@ export default async function HomePage({ params }: LocalePageProps) {
                   </Link>
                   <Link
                     href={`/${locale}/regiones#${region.id}`}
-                    className="inline-flex items-center gap-2 rounded-xl border border-poncho/30 px-4 py-2 text-sm font-semibold text-poncho transition hover:border-poncho/60 hover:bg-arena/60"
+                    className="inline-flex items-center gap-2 rounded-xl border border-poncho px-4 py-2 text-sm font-semibold text-poncho transition hover:border-poncho hover:bg-poncho/5"
                   >
                     {locale === 'es' ? 'Ficha de la región' : 'Region details'}
                   </Link>
