@@ -30,6 +30,7 @@ const COPY: Record<
     searchPlaceholder: string;
     clear: string;
     listTitle: string;
+    listContext: string;
     empty: string;
     ratingLabel: string;
     directions: string;
@@ -41,6 +42,7 @@ const COPY: Record<
     searchPlaceholder: 'Buscar por nombre o descripción…',
     clear: 'Limpiar',
     listTitle: 'Lugares destacados',
+    listContext: 'Lugares encontrados',
     empty: 'Ajustá los filtros para ver resultados.',
     ratingLabel: 'Calificación',
     directions: 'Cómo llegar',
@@ -52,6 +54,7 @@ const COPY: Record<
     searchPlaceholder: 'Search by name or description…',
     clear: 'Reset',
     listTitle: 'Highlighted places',
+    listContext: 'Visible places',
     empty: 'Try different filters to see results.',
     ratingLabel: 'Rating',
     directions: 'Get directions',
@@ -341,6 +344,7 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-ink/40">{copy.listTitle}</p>
             <p className="text-2xl font-semibold text-poncho">{filteredPois.length}</p>
+            <p className="text-xs text-ink/60">{copy.listContext}</p>
           </div>
           <div className="text-right text-xs text-ink/50">
             {filteredPois.length !== pois.length && (
@@ -388,7 +392,7 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
                     {category.icon} {poi.title[locale]}
                   </p>
                   {poi.rating?.average && (
-                    <p className="text-sm font-semibold text-ochre" aria-label={copy.ratingLabel}>
+                    <p className="pr-1.5 text-sm font-semibold text-ochre" aria-label={copy.ratingLabel}>
                       {poi.rating.average.toFixed(1)}★
                     </p>
                   )}

@@ -130,7 +130,7 @@ export default async function HomePage({ params }: LocalePageProps) {
           </div>
         </section>
 
-        <div className="rounded-2xl border border-poncho/15 bg-white/85 px-4 py-3 text-center text-sm font-semibold text-ink shadow-soft">
+        <div className="hidden rounded-2xl border border-poncho/15 bg-white/85 px-4 py-3 text-center text-sm font-semibold text-ink shadow-soft">
           {locale === 'es' ? 'Espacio publicitario' : 'Promotional placement'}
         </div>
 
@@ -159,9 +159,15 @@ export default async function HomePage({ params }: LocalePageProps) {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <h3 className="font-heading text-2xl font-bold text-poncho">{region.name[locale]}</h3>
-                    <span className="rounded-full bg-arena/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-cardon/80">
-                      {poiCount} {locale === 'es' ? 'puntos' : 'spots'}
-                    </span>
+                    {poiCount > 0 ? (
+                      <span className="rounded-full bg-arena/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-cardon/80">
+                        {poiCount} {locale === 'es' ? 'puntos' : 'spots'}
+                      </span>
+                    ) : (
+                      <span className="rounded-full bg-arena/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-ink/60">
+                        {locale === 'es' ? 'Próximamente' : 'Coming soon'}
+                      </span>
+                    )}
                   </div>
                   <p className="text-sm text-ink/75">{region.intro[locale]}</p>
                 </div>

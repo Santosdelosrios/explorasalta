@@ -88,6 +88,18 @@ export default async function ExperienciasPage({ params }: LocalePageProps) {
       <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
         {experiencias.map(experience => {
           const stops = resolveStops(experience, pois, locale);
+          const difficultyColor = (() => {
+            switch (experience.difficulty) {
+              case 'easy':
+                return 'bg-green-500';
+              case 'moderate':
+                return 'bg-yellow-500';
+              case 'hard':
+                return 'bg-red-500';
+              default:
+                return 'bg-stone-400';
+            }
+          })();
           return (
             <article
               key={experience.id}
@@ -99,15 +111,18 @@ export default async function ExperienciasPage({ params }: LocalePageProps) {
                   <p className="text-sm text-ink/70">{experience.overview[locale]}</p>
                 </div>
 
-                <dl className="grid grid-cols-1 gap-2 text-sm text-ink/80">
+                <dl className="grid grid-cols-1 gap-2 text-sm text-stone-800">
                   <div>
                     <dt className="font-semibold uppercase tracking-[0.18em] text-cardon/70">
                       {copy.detailsLabel}
                     </dt>
-                    <dd className="mt-1 space-y-1">
+                    <dd className="mt-1 space-y-2">
                       <p>{copy.durationLabel(experience.durationHours)}</p>
                       <p>{copy.stopsLabel(stops.length)}</p>
-                      <p>{copy.difficultyLabel(experience.difficulty)}</p>
+                      <p className="flex items-center gap-2">
+                        <span className={`h-3 w-3 rounded-full ${difficultyColor}`} aria-hidden />
+                        <span>{copy.difficultyLabel(experience.difficulty)}</span>
+                      </p>
                     </dd>
                   </div>
                 </dl>

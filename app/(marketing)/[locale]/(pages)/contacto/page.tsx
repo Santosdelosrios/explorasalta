@@ -65,7 +65,7 @@ export default async function ContactoPage({ params }: LocalePageProps) {
             <span className="text-sm font-semibold uppercase tracking-[0.18em] text-cardon/70">{copy.form.name}</span>
             <input
               name="name"
-              className="rounded-2xl border border-poncho/20 bg-white/70 px-4 py-3 shadow-sm focus:border-poncho focus:outline-none"
+              className="rounded-2xl border border-stone-300 bg-white px-4 py-3 text-ink shadow-sm focus:border-poncho focus:outline-none"
               required
               autoComplete="name"
             />
@@ -75,7 +75,7 @@ export default async function ContactoPage({ params }: LocalePageProps) {
             <input
               type="email"
               name="email"
-              className="rounded-2xl border border-poncho/20 bg-white/70 px-4 py-3 shadow-sm focus:border-poncho focus:outline-none"
+              className="rounded-2xl border border-stone-300 bg-white px-4 py-3 text-ink shadow-sm focus:border-poncho focus:outline-none"
               required
               autoComplete="email"
             />
@@ -84,7 +84,7 @@ export default async function ContactoPage({ params }: LocalePageProps) {
             <span className="text-sm font-semibold uppercase tracking-[0.18em] text-cardon/70">{copy.form.message}</span>
             <textarea
               name="message"
-              className="min-h-[160px] rounded-2xl border border-poncho/20 bg-white/70 px-4 py-3 shadow-sm focus:border-poncho focus:outline-none"
+              className="min-h-[160px] rounded-2xl border border-stone-300 bg-white px-4 py-3 text-ink shadow-sm focus:border-poncho focus:outline-none"
               required
             />
           </label>
@@ -100,6 +100,26 @@ export default async function ContactoPage({ params }: LocalePageProps) {
       <aside className="md:w-1/3 space-y-6 rounded-3xl border border-poncho/10 bg-white/80 p-6 shadow-soft">
         <h2 className="font-heading text-2xl font-semibold text-poncho">{copy.infoTitle}</h2>
         <p className="text-sm text-ink/70">{copy.infoSubtitle}</p>
+        <div className="flex flex-wrap items-center gap-3 text-sm font-semibold text-poncho">
+          <a
+            href="https://www.linkedin.com/in/santosdelosrios"
+            className="inline-flex items-center gap-1 rounded-full bg-arena/70 px-3 py-1 transition hover:bg-arena/90"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span aria-hidden>in</span>
+            LinkedIn
+          </a>
+          <a
+            href="https://github.com/santosdelosrios"
+            className="inline-flex items-center gap-1 rounded-full bg-arena/70 px-3 py-1 transition hover:bg-arena/90"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span aria-hidden>◆</span>
+            GitHub
+          </a>
+        </div>
       </aside>
     </main>
   );
