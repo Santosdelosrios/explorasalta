@@ -20,7 +20,7 @@ export default function HeroSection() {
           
           {/* Columna izquierda: Contenido */}
           <div className="space-y-6">
-            <h1 className="font-['Montserrat'] font-bold text-5xl md:text-6xl lg:text-7xl text-poncho leading-tight">
+            <h1 className="font-heading font-bold text-5xl md:text-6xl lg:text-7xl text-poncho leading-tight">
               Explorá
               <br />
               <span className="text-cardon">Salta</span>

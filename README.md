@@ -7,7 +7,7 @@ Explora Salta es un sitio de destino turístico construido con Next.js 15 y sopo
 - **Mapa interactivo híbrido** con MapLibre + MapTiler que agrupa miradores, rutas, festivales, gastronomía y patrimonio. Permite activar capas por categoría/región y muestra calificaciones resumidas en los popups. (`components/map`)
 - **Internacionalización completa** mediante `next-intl`, con rutas localizadas bajo `/[locale]` y contenido bilingüe para cada sección. (`app/(marketing)` y `app/(app)`)
 - **Secciones editoriales** para Regiones, Experiencias, Cultura y Blog que consumen datos estructurados desde `data/*.json` y muestran CTA que enlazan al mapa o a formularios de contacto.
-- **Tipografía personalizada** con Lexend Deca para títulos y Tenor Sans para cuerpo definida vía variables CSS en `styles/globals.css`.
+- **Tipografía personalizada** con Cinzel Decorative para títulos y Tenor Sans para cuerpo definida vía variables CSS en `styles/globals.css`.
 
 ## Requisitos
 
