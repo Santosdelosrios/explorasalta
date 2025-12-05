@@ -116,8 +116,7 @@ export default async function HomePage({ params }: LocalePageProps) {
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 className="inline-flex items-center gap-2 rounded-2xl bg-poncho px-6 py-3 text-base font-semibold text-white shadow-soft transition hover:bg-poncho/90"
-                href={{pathname: `/${locale}`, hash: 'mapa'}}
-                scroll
+                href={`/${locale}/mapa`}
               >
                 {copy.mapCta}
               </Link>
