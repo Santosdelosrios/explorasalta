@@ -91,6 +91,9 @@ export default async function CulturaPage({ params }: LocalePageProps) {
   }
 
   const grouped = groupByMonth(upcoming);
+  const groupedEntries = [...grouped.entries()].sort(
+    ([monthA], [monthB]) => new Date(`${monthA}-01T00:00:00`).getTime() - new Date(`${monthB}-01T00:00:00`).getTime()
+  );
 
   return (
     <main id="main" className="container mx-auto flex flex-col gap-12 px-4 py-12">
@@ -100,7 +103,7 @@ export default async function CulturaPage({ params }: LocalePageProps) {
       </header>
 
       <section className="space-y-10" aria-label={copy.scheduleLabel}>
-        {[...grouped.entries()].map(([monthKey, monthEvents]) => {
+        {groupedEntries.map(([monthKey, monthEvents]) => {
           const monthDate = new Date(`${monthKey}-01T00:00:00`);
           return (
             <article key={monthKey} className="space-y-6">
@@ -111,7 +114,7 @@ export default async function CulturaPage({ params }: LocalePageProps) {
                 <div className="mt-1 h-1 w-20 rounded-full bg-cardon/50" aria-hidden />
               </header>
 
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              <div className="columns-1 gap-6 md:columns-2 xl:columns-3">
                 {monthEvents.map(event => {
                   const region = regionMap.get(event.region);
                   const location = event.locationPoiId
@@ -120,7 +123,7 @@ export default async function CulturaPage({ params }: LocalePageProps) {
                   return (
                     <div
                       key={event.id}
-                      className="flex h-full flex-col justify-between rounded-3xl border border-poncho/15 bg-white/80 p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-md"
+                      className="mb-6 break-inside-avoid rounded-3xl border border-poncho/15 bg-white/80 p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-md"
                     >
                       <div className="space-y-3">
                         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cardon/70">

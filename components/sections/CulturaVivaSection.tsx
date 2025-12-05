@@ -75,9 +75,23 @@ function sortEvents(events: Evento[]) {
   });
 }
 
+function groupEventsByYear(events: Evento[]) {
+  return events.reduce<Record<string, Evento[]>>((groups, event) => {
+    const year = new Date(event.dateRange.start).getFullYear().toString();
+    if (!groups[year]) {
+      groups[year] = [];
+    }
+    groups[year].push(event);
+    return groups;
+  }, {});
+}
+
 export default function CulturaVivaSection({ events, locale }: CulturaVivaSectionProps) {
   const copy = SECTION_COPY[locale];
   const sorted = sortEvents(events);
+  const byYear = Object.entries(groupEventsByYear(sorted)).sort(
+    ([yearA], [yearB]) => Number(yearA) - Number(yearB)
+  );
 
   if (sorted.length === 0) {
     return (
@@ -92,8 +106,6 @@ export default function CulturaVivaSection({ events, locale }: CulturaVivaSectio
       </section>
     );
   }
-
-  const featured = sorted.slice(0, 3);
 
   return (
     <section className="relative isolate overflow-hidden bg-arena/40 py-16" aria-labelledby="cultura-viva-title">
@@ -114,44 +126,53 @@ export default function CulturaVivaSection({ events, locale }: CulturaVivaSectio
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {featured.map(event => (
-            <article
-              key={event.id}
-              className="group flex h-full flex-col justify-between rounded-2xl border border-poncho/20 bg-white/80 p-6 shadow-soft backdrop-blur transition hover:-translate-y-1 hover:shadow-xl"
-            >
-              <div className="space-y-3">
-                <p className="text-sm font-medium text-cardon/80">
-                  {formatDateRange(event.dateRange, locale)}
-                </p>
-                <h3 className="text-2xl font-semibold text-poncho">
-                  {event.title[locale]}
-                </h3>
-                <p className="text-sm text-ink/70">
-                  {event.description[locale]}
-                </p>
-              </div>
+        {byYear.map(([year, eventsForYear]) => (
+          <div key={year} className="mt-10 space-y-4">
+            <div className="flex items-center gap-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cardon/70">{year}</p>
+              <div className="h-px flex-1 rounded-full bg-cardon/10" aria-hidden />
+            </div>
 
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-poncho/10 pt-4 text-sm">
-                <span className="inline-flex items-center gap-2 rounded-full bg-cardon/10 px-3 py-1 font-medium text-cardon">
-                  <span className="h-2 w-2 rounded-full bg-cardon" aria-hidden />
-                  {copy.regionLabel(event.region)}
-                </span>
-                {event.website ? (
-                  <Link
-                    href={event.website}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-poncho transition hover:text-cardon"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {copy.websiteLabel}
-                    <span aria-hidden>↗</span>
-                  </Link>
-                ) : null}
-              </div>
-            </article>
-          ))}
-        </div>
+            <div className="columns-1 gap-6 md:columns-2 xl:columns-3">
+              {eventsForYear.map(event => (
+                <article
+                  key={event.id}
+                  className="mb-6 break-inside-avoid rounded-2xl border border-poncho/20 bg-white/80 p-6 shadow-soft backdrop-blur transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="space-y-3">
+                    <p className="text-sm font-medium text-cardon/80">
+                      {formatDateRange(event.dateRange, locale)}
+                    </p>
+                    <h3 className="text-2xl font-semibold text-poncho">
+                      {event.title[locale]}
+                    </h3>
+                    <p className="text-sm text-ink/70">
+                      {event.description[locale]}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-poncho/10 pt-4 text-sm">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-cardon/10 px-3 py-1 font-medium text-cardon">
+                      <span className="h-2 w-2 rounded-full bg-cardon" aria-hidden />
+                      {copy.regionLabel(event.region)}
+                    </span>
+                    {event.website ? (
+                      <Link
+                        href={event.website}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-poncho transition hover:text-cardon"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {copy.websiteLabel}
+                        <span aria-hidden>↗</span>
+                      </Link>
+                    ) : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
