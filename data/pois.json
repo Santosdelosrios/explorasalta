@@ -34,8 +34,8 @@
     "category": "museo",
     "region": "ciudad",
     "coords": {
-      "lat": -24.785,
-      "lng": -65.413611
+      "lat": -24.789813,
+      "lng": -65.410692
     },
     "placeId": "ChIJ3fjSnN5SK5QRyNyEJD7BqXg",
     "tags": [
@@ -102,8 +102,8 @@
     "category": "patrimonio",
     "region": "ciudad",
     "coords": {
-      "lat": -24.785,
-      "lng": -65.413333
+      "lat": -24.788625,
+      "lng": -65.410429
     },
     "placeId": "ChIJR9g2rt5SK5QRZfNcaUVbnVQ",
     "tags": [
@@ -125,8 +125,8 @@
     "category": "mirador",
     "region": "ciudad",
     "coords": {
-      "lat": -24.795,
-      "lng": -65.411
+      "lat": -24.789179,
+      "lng": -65.392321
     },
     "placeId": "ChIJZ1koXLTGK5QRM9RnBbTK1Zs",
     "tags": [
@@ -193,8 +193,8 @@
     "category": "patrimonio",
     "region": "ciudad",
     "coords": {
-      "lat": -24.788056,
-      "lng": -65.413333
+      "lat": -24.790220,
+      "lng": -65.403570
     },
     "tags": [
       "barroco",
@@ -215,8 +215,8 @@
     "category": "gastronomia",
     "region": "ciudad",
     "coords": {
-      "lat": -24.785,
-      "lng": -65.413333
+      "lat": -24.779526,
+      "lng": -65.429091
     },
     "tags": [
       "tradicional",
@@ -237,8 +237,8 @@
     "category": "patrimonio",
     "region": "valles",
     "coords": {
-      "lat": -23.649444,
-      "lng": -66.288611
+      "lat": -24.808989,
+      "lng":  -66.173363
     },
     "tags": [
       "inca",
@@ -281,8 +281,8 @@
     "category": "patrimonio",
     "region": "ciudad",
     "coords": {
-      "lat": -24.785833,
-      "lng": -65.410833
+      "lat": -24.790030,
+      "lng": -65.408295
     },
     "tags": [
       "arquitectura",
@@ -303,8 +303,8 @@
     "category": "patrimonio",
     "region": "valles",
     "coords": {
-      "lat": -25.123056,
-      "lng": -66.166111
+      "lat": -25.119971,
+      "lng": -66.161653
     },
     "tags": [
       "cardon",
@@ -347,8 +347,8 @@
     "category": "patrimonio",
     "region": "ciudad",
     "coords": {
-      "lat": -24.786389,
-      "lng": -65.413333
+      "lat": -24.788974,
+      "lng": -65.410903
     },
     "tags": [
       "arqueologia",
@@ -369,8 +369,8 @@
     "category": "museo",
     "region": "ciudad",
     "coords": {
-      "lat": -24.785,
-      "lng": -65.411944
+      "lat": -24.788846,
+      "lng": -65.409723
     },
     "tags": [
       "arte",
@@ -391,8 +391,8 @@
     "category": "mirador",
     "region": "lerma",
     "coords": {
-      "lat": -25.239444,
-      "lng": -65.416667
+      "lat": -25.283915,
+      "lng": -65.393379
     },
     "tags": [
       "agua",
@@ -413,8 +413,8 @@
     "category": "mirador",
     "region": "valles",
     "coords": {
-      "lat": -25.802222,
-      "lng": -65.7175
+      "lat": -26.004469,
+      "lng": -65.808415
     },
     "tags": [
       "ruta",
@@ -435,8 +435,8 @@
     "category": "mirador",
     "region": "puna",
     "coords": {
-      "lat": -22.8,
-      "lng": -65.233333
+      "lat": -22.799780,
+      "lng": -65.213775
     },
     "tags": [
       "amanecer",
@@ -487,28 +487,6 @@
       "montaña"
     ],
     "popularity": 82
-  },
-  {
-    "id": "mirador-portezuelo",
-    "title": {
-      "es": "Mirador de El Portezuelo",
-      "en": "El Portezuelo Viewpoint"
-    },
-    "summary": {
-      "es": "Acceso arbolado a Salta capital con vistas al Valle de Lerma.",
-      "en": "Tree-lined gateway to Salta city with views over the Lerma Valley."
-    },
-    "category": "mirador",
-    "region": "ciudad",
-    "coords": {
-      "lat": -24.794444,
-      "lng": -65.394444
-    },
-    "tags": [
-      "urbano",
-      "valle"
-    ],
-    "popularity": 77
   },
   {
     "id": "mirador-recta-tin-tin",
@@ -707,50 +685,6 @@
       "interactivo"
     ],
     "popularity": 86
-  },
-  {
-    "id": "patay",
-    "title": {
-      "es": "Patay",
-      "en": "Patay Bread"
-    },
-    "summary": {
-      "es": "Pan seco elaborado con harina de algarroba, legado de las comunidades originarias.",
-      "en": "Dense bread made with carob flour, a legacy of indigenous communities."
-    },
-    "category": "gastronomia",
-    "region": "valles",
-    "coords": {
-      "lat": -25.123056,
-      "lng": -66.166111
-    },
-    "tags": [
-      "tradicional",
-      "algarroba"
-    ],
-    "popularity": 75
-  },
-  {
-    "id": "patrimonio-cabildo",
-    "title": {
-      "es": "Cabildo Histórico (Patrimonio)",
-      "en": "Historic Cabildo (Heritage)"
-    },
-    "summary": {
-      "es": "Uno de los cabildos coloniales mejor conservados del país y Monumento Histórico Nacional.",
-      "en": "One of Argentina's best-preserved colonial cabildos and a National Historic Monument."
-    },
-    "category": "patrimonio",
-    "region": "ciudad",
-    "coords": {
-      "lat": -24.785,
-      "lng": -65.413611
-    },
-    "tags": [
-      "colonial",
-      "historia"
-    ],
-    "popularity": 91
   },
   {
     "id": "portal-san-francisco",
@@ -1001,28 +935,6 @@
     "popularity": 87
   },
   {
-    "id": "senda-cabra-corral",
-    "title": {
-      "es": "Senda del Cabra Corral",
-      "en": "Cabra Corral Path"
-    },
-    "summary": {
-      "es": "Caminatas suaves alrededor del dique para disfrutar del paisaje y actividades en el agua.",
-      "en": "Gentle walks around the reservoir to enjoy the scenery and on-water activities."
-    },
-    "category": "sendero",
-    "region": "lerma",
-    "coords": {
-      "lat": -25.239444,
-      "lng": -65.416667
-    },
-    "tags": [
-      "familia",
-      "agua"
-    ],
-    "popularity": 74
-  },
-  {
     "id": "sendero-condor",
     "title": {
       "es": "Sendero a El Cóndor",
@@ -1157,50 +1069,6 @@
     "popularity": 80
   },
   {
-    "id": "sendero-torreon",
-    "title": {
-      "es": "Trekking Mirador del Torreón",
-      "en": "Torreón Viewpoint Trek"
-    },
-    "summary": {
-      "es": "Recorrido interpretativo que sube desde la selva de yungas hasta los cardones de la Cuesta del Obispo.",
-      "en": "Interpretive hike climbing from Yungas forest to the cardon desert at Cuesta del Obispo."
-    },
-    "category": "sendero",
-    "region": "valles",
-    "coords": {
-      "lat": -25.183333,
-      "lng": -65.75
-    },
-    "tags": [
-      "interpretativo",
-      "montaña"
-    ],
-    "popularity": 79
-  },
-  {
-    "id": "sitio-esteco",
-    "title": {
-      "es": "Sitio Arqueológico Esteco II",
-      "en": "Esteco II Archaeological Site"
-    },
-    "summary": {
-      "es": "Ruinas de la legendaria Talavera de Madrid, una de las ciudades perdidas del Virreinato del Perú.",
-      "en": "Ruins of legendary Talavera de Madrid, one of the lost cities of the Viceroyalty of Peru."
-    },
-    "category": "patrimonio",
-    "region": "anta",
-    "coords": {
-      "lat": -25.433333,
-      "lng": -64.966667
-    },
-    "tags": [
-      "colonial",
-      "leyendas"
-    ],
-    "popularity": 74
-  },
-  {
     "id": "sitio-tastil",
     "title": {
       "es": "Sitio Arqueológico de Tastil",
@@ -1213,8 +1081,8 @@
     "category": "patrimonio",
     "region": "puna",
     "coords": {
-      "lat": -24.713056,
-      "lng": -65.946667
+      "lat": -24.452144,
+      "lng": -65.954925
     },
     "tags": [
       "arqueologia",
@@ -1235,58 +1103,14 @@
     "category": "gastronomia",
     "region": "lerma",
     "coords": {
-      "lat": -25.073056,
-      "lng": -65.523333
+      "lat": -25.102908,
+      "lng": -65.535447
     },
     "tags": [
       "maiz",
       "festivales"
     ],
     "popularity": 88
-  },
-  {
-    "id": "trekking-nubes",
-    "title": {
-      "es": "Trekking de las Nubes",
-      "en": "Clouds Trek"
-    },
-    "summary": {
-      "es": "Travesía de varios días por la Puna salteña conectando San Antonio de los Cobres con Nazareno.",
-      "en": "Multi-day expedition across Salta's Puna linking San Antonio de los Cobres with Nazareno."
-    },
-    "category": "sendero",
-    "region": "puna",
-    "coords": {
-      "lat": -24.231389,
-      "lng": -66.322778
-    },
-    "tags": [
-      "expedicion",
-      "alta-montana"
-    ],
-    "popularity": 75
-  },
-  {
-    "id": "trekking-tastil",
-    "title": {
-      "es": "Trekking a Santa Rosa de Tastil",
-      "en": "Santa Rosa de Tastil Trek"
-    },
-    "summary": {
-      "es": "Sendero de altura que conduce al sitio arqueológico de Tastil con vistas de la Quebrada del Toro.",
-      "en": "High-altitude trek leading to the Tastil archaeological site with views of Quebrada del Toro."
-    },
-    "category": "sendero",
-    "region": "puna",
-    "coords": {
-      "lat": -24.713056,
-      "lng": -65.946667
-    },
-    "tags": [
-      "arqueologia",
-      "trekking"
-    ],
-    "popularity": 77
   },
   {
     "id": "tren-a-las-nubes",
@@ -1301,8 +1125,8 @@
     "category": "ruta",
     "region": "puna",
     "coords": {
-      "lat": -24.258611,
-      "lng": -66.392222
+      "lat": -24.226234,
+      "lng": -66.316504
     },
     "tags": [
       "ferrocarril",
@@ -1318,14 +1142,14 @@
       "en": "High-Altitude Wines"
     },
     "summary": {
-      "es": "Vinos Torrontés cultivados a más de 1700 msnm en Cafayate con aromas florales intensos.",
-      "en": "Torrontés wines grown above 1,700 m in Cafayate with intensely floral aromas."
+      "es": "Vinos Torrontés cultivados a más de 1700 msnm con aromas florales intensos.",
+      "en": "Torrontés wines grown above 1,700 m with intensely floral aromas."
     },
     "category": "gastronomia",
     "region": "valles",
     "coords": {
-      "lat": -25.894167,
-      "lng": -65.98
+      "lat": -25.508525,
+      "lng": -66.392098
     },
     "tags": [
       "torrontes",
@@ -1368,8 +1192,8 @@
     "category": "pueblo",
     "region": "valles",
     "coords": {
-      "lat": -25.1207,
-      "lng": -66.1656
+      "lat": -25.119704,
+      "lng": -66.162134
     },
     "tags": [
       "colonial",
@@ -1378,32 +1202,10 @@
     "popularity": 86
   },
   {
-    "id": "parque-sarmiento-tastil",
-    "title": {
-      "es": "Parque Sarmiento de Tastil",
-      "en": "Tastil Sarmiento Park"
-    },
-    "summary": {
-      "es": "Mirador cercano a las ruinas de Santa Rosa de Tastil y la Quebrada del Toro.",
-      "en": "Viewpoint near the Santa Rosa de Tastil ruins and the Quebrada del Toro."
-    },
-    "category": "mirador",
-    "region": "puna",
-    "coords": {
-      "lat": -24.713,
-      "lng": -65.946
-    },
-    "tags": [
-      "arqueologia",
-      "mirador"
-    ],
-    "popularity": 72
-  },
-  {
     "id": "quebrada-del-obispo",
     "title": {
-      "es": "Quebrada del Obispo",
-      "en": "Quebrada del Obispo"
+      "es": "Cuesta del Obispo",
+      "en": "Cuesta del Obispo"
     },
     "summary": {
       "es": "Curvas de cornisa hacia Piedra del Molino con vistas al Valle Encantado y cardones.",
@@ -1412,8 +1214,8 @@
     "category": "mirador",
     "region": "valles",
     "coords": {
-      "lat": -25.0967,
-      "lng": -65.8117
+      "lat": -25.178221,
+      "lng": -65.852778
     },
     "tags": [
       "cuesta",
@@ -1434,8 +1236,8 @@
     "category": "ruta",
     "region": "valles",
     "coords": {
-      "lat": -25.1667,
-      "lng": -65.8167
+      "lat": -25.232552,
+      "lng": -65.952823
     },
     "tags": [
       "cardones",
