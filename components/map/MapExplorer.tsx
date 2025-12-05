@@ -192,13 +192,13 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   const directionsUrl = useCallback(
     (poi: POI) => {
       if (poi.plusCode) {
-        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(poi.plusCode)}`;
+        return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(poi.plusCode)}`;
       }
 
       if (poi.placeId) {
-        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
           poi.title[locale]
-        )}&query_place_id=${poi.placeId}`;
+        )}&destination_place_id=${poi.placeId}`;
       }
 
       return `https://www.google.com/maps/dir/?api=1&destination=${poi.coords.lat},${poi.coords.lng}`;
