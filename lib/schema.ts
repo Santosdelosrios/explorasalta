@@ -1,5 +1,14 @@
 export type RegionId = 'valles' | 'puna' | 'yungas' | 'ciudad' | 'lerma' | 'anta' | 'orán';
-export type Category = 'pueblo' | 'mirador' | 'ruta' | 'fiesta' | 'museo' | 'gastronomia' | 'sendero' | 'patrimonio';
+export type Category =
+  | 'pueblo'
+  | 'mirador'
+  | 'ruta'
+  | 'fiesta'
+  | 'museo'
+  | 'gastronomia'
+  | 'sendero'
+  | 'patrimonio'
+  | 'paisaje';
 export type Translated<T> = { es: T; en: T };
 
 export interface POIRating {

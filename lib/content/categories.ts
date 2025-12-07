@@ -36,6 +36,10 @@ export const CATEGORY_METADATA: Record<
   patrimonio: {
     icon: '🏺',
     label: {es: 'Patrimonio', en: 'Heritage'}
+  },
+  paisaje: {
+    icon: '🏞️',
+    label: {es: 'Paisajes', en: 'Landscapes'}
   }
 };
 

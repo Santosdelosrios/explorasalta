@@ -20,7 +20,8 @@ const CATEGORY_COLORS: Record<Category, string> = {
   museo: '#2563eb',
   gastronomia: '#b91c1c',
   sendero: '#15803d',
-  patrimonio: '#7c3aed'
+  patrimonio: '#7c3aed',
+  paisaje: '#0ea5e9'
 };
 
 const COPY: Record<
