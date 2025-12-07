@@ -1033,7 +1033,7 @@
       "en": "Group of over a hundred pre-Hispanic pictographs on rock shelters reached by a short walking trail."
     },
     "category": "patrimonio",
-    "region": "valles",
+    "region": "lerma",
     "coords": {
       "lat": -25.705381,
       "lng": -65.510893
@@ -1079,7 +1079,7 @@
       "en": "Lush trail along the San Lorenzo stream with viewpoints, boardwalks, and birds typical of the yungas forest near the city."
     },
     "category": "sendero",
-    "region": "valles",
+    "region": "yungas",
     "coords": {
       "lat": -24.722731,
       "lng": -65.504368
