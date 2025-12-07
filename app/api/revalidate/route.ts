@@ -4,6 +4,7 @@ import { revalidateTag } from 'next/cache';
 export async function POST(req: NextRequest) {
   const { tag } = await req.json();
   if (!tag) return NextResponse.json({ ok: false, error: 'Missing tag' }, { status: 400 });
-  revalidateTag(tag);
+  const revalidate = revalidateTag as (tag: string) => void;
+  revalidate(tag);
   return NextResponse.json({ ok: true });
 }
