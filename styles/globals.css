@@ -40,8 +40,8 @@ a {
 
 /* Map markers & popups */
 .poi-marker {
-  width: 34px;
-  height: 34px;
+  width: 26px;
+  height: 26px;
   border-radius: 999px;
   border: 2px solid #fff;
   background: var(--marker-color, #2563eb);

@@ -75,6 +75,8 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const markersRef = useRef<Record<string, maplibregl.Marker>>({});
+  const listRef = useRef<HTMLDivElement>(null);
+  const userClearedRef = useRef(false);
   const styleIndexRef = useRef(0);
   const [mapReady, setMapReady] = useState(false);
 
@@ -113,10 +115,37 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
       return;
     }
 
-    if (!activePoiId || !filteredPois.some((poi) => poi.id === activePoiId)) {
+    const activePoiExists = activePoiId && filteredPois.some((poi) => poi.id === activePoiId);
+
+    if (!activePoiId && !userClearedRef.current) {
+      setActivePoiId(filteredPois[0].id);
+      return;
+    }
+
+    if (!activePoiExists && !userClearedRef.current) {
       setActivePoiId(filteredPois[0].id);
     }
   }, [activePoiId, filteredPois]);
+
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!activePoiId) return;
+
+      const listElement = listRef.current;
+      const popupElement = popupRef.current?.getElement();
+      const target = event.target as Node | null;
+
+      if (target && (listElement?.contains(target) || popupElement?.contains(target))) {
+        return;
+      }
+
+      userClearedRef.current = true;
+      setActivePoiId(null);
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, [activePoiId]);
 
   // Initialize map once
   useEffect(() => {
@@ -182,7 +211,10 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
       el.setAttribute('aria-label', poi.title[locale]);
       el.style.setProperty('--marker-color', CATEGORY_COLORS[poi.category]);
 
-      el.addEventListener('click', () => setActivePoiId(poi.id));
+      el.addEventListener('click', () => {
+        userClearedRef.current = false;
+        setActivePoiId(poi.id);
+      });
 
       const marker = new maplibregl.Marker({element: el, anchor: 'bottom'})
         .setLngLat([poi.coords.lng, poi.coords.lat])
@@ -339,7 +371,10 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
         />
       </div>
 
-      <aside className="rounded-3xl border border-white/40 bg-white/80 p-4 shadow backdrop-blur">
+      <aside
+        ref={listRef}
+        className="rounded-3xl border border-white/40 bg-white/80 p-4 shadow backdrop-blur"
+      >
         <div className="mb-4 flex items-center justify-between gap-2">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-ink/40">{copy.listTitle}</p>
@@ -371,10 +406,14 @@ export default function MapExplorer({pois, locale}: MapExplorerProps) {
                 role="button"
                 tabIndex={0}
                 aria-pressed={active}
-                onClick={() => setActivePoiId(poi.id)}
+                onClick={() => {
+                  userClearedRef.current = false;
+                  setActivePoiId(poi.id);
+                }}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();
+                    userClearedRef.current = false;
                     setActivePoiId(poi.id);
                   }
                 }}
