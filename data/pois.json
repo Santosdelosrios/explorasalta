@@ -22,6 +22,29 @@
     "popularity": 76
   },
   {
+    "id": "dique-el-tunal",
+    "title": {
+      "es": "Dique El Tunal",
+      "en": "El Tunal Dam"
+    },
+    "summary": {
+      "es": "Embalse sobre el río Juramento rodeado de monte chaqueño, ideal para pesca y paseos en lancha.",
+      "en": "Reservoir on the Juramento River surrounded by Chaco woodlands, ideal for fishing and boat rides."
+    },
+    "category": "mirador",
+    "region": "anta",
+    "coords": {
+      "lat": -25.250862,
+      "lng": -64.473008
+    },
+    "tags": [
+      "embalse",
+      "pesca",
+      "nautica"
+    ],
+    "popularity": 77
+  },
+  {
     "id": "cabildo-historico",
     "title": {
       "es": "Cabildo Histórico de Salta",
@@ -996,6 +1019,121 @@
     "tags": [
       "cardones",
       "ruta"
+    ],
+    "popularity": 80
+  },
+  {
+    "id": "pinturas-rupestres-guachipas",
+    "title": {
+      "es": "Pinturas Rupestres de Guachipas",
+      "en": "Guachipas Rock Paintings"
+    },
+    "summary": {
+      "es": "Conjunto de más de un centenar de pictografías prehispánicas en abrigos rocosos accesibles por un sendero breve.",
+      "en": "Group of over a hundred pre-Hispanic pictographs on rock shelters reached by a short walking trail."
+    },
+    "category": "patrimonio",
+    "region": "valles",
+    "coords": {
+      "lat": -25.705381,
+      "lng": -65.510893
+    },
+    "tags": [
+      "arqueologia",
+      "senderismo",
+      "arte rupestre"
+    ],
+    "popularity": 82
+  },
+  {
+    "id": "tolar-grande",
+    "title": {
+      "es": "Tolar Grande",
+      "en": "Tolar Grande"
+    },
+    "summary": {
+      "es": "Pueblo puneño rodeado de salares y formaciones rojas, base para visitar el Cono de Arita y Ojos de Mar.",
+      "en": "High-altitude village ringed by salt flats and red formations, base to visit Cono de Arita and Ojos de Mar."
+    },
+    "category": "pueblo",
+    "region": "puna",
+    "coords": {
+      "lat": -24.589793,
+      "lng": -67.396801
+    },
+    "tags": [
+      "puna",
+      "astronomia",
+      "salar"
+    ],
+    "popularity": 84
+  },
+  {
+    "id": "quebrada-san-lorenzo",
+    "title": {
+      "es": "Quebrada de San Lorenzo",
+      "en": "San Lorenzo Gorge"
+    },
+    "summary": {
+      "es": "Sendero selvático junto al arroyo San Lorenzo con miradores, pasarelas y aves que habitan el yungas cercano a la ciudad.",
+      "en": "Lush trail along the San Lorenzo stream with viewpoints, boardwalks, and birds typical of the yungas forest near the city."
+    },
+    "category": "sendero",
+    "region": "valles",
+    "coords": {
+      "lat": -24.722731,
+      "lng": -65.504368
+    },
+    "tags": [
+      "senderismo",
+      "arroyo",
+      "yungas"
+    ],
+    "popularity": 83
+  },
+  {
+    "id": "salinas-grandes",
+    "title": {
+      "es": "Salinas Grandes",
+      "en": "Salinas Grandes Salt Flats"
+    },
+    "summary": {
+      "es": "Inmenso salar a más de 3.400 msnm con piscinas turquesas y horizonte infinito, famoso por sus paisajes fotográficos.",
+      "en": "Vast salt flat over 3,400 masl with turquoise pools and endless horizon, famed for striking photo scenes."
+    },
+    "category": "paisaje",
+    "region": "puna",
+    "coords": {
+      "lat": -23.778450,
+      "lng": -66.036130
+    },
+    "tags": [
+      "salar",
+      "fotografia",
+      "ruta"
+    ],
+    "popularity": 90
+  },
+  {
+    "id": "termas-rosario-de-la-frontera",
+    "title": {
+      "es": "Termas de Rosario de la Frontera",
+      "en": "Rosario de la Frontera Hot Springs"
+    },
+    "summary": {
+      "es": "Complejo termal histórico con aguas mineromedicinales, hotel y spa en el sur de la provincia.",
+      "en": "Historic thermal complex in southern Salta featuring mineral-rich waters, a hotel, and spa services."
+    },
+    "category": "paisaje",
+    "region": "valles",
+    "coords": {
+      "lat": -25.835065,
+      "lng": -64.945727
+    },
+    "tags": [
+      "termas",
+      "bienestar",
+      "relax"
     ],
     "popularity": 80
   }
